@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafíos de Programación en Java</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A192F; /* Azul oscuro tecnológico */
+            color: #E0E0E0; /* Gris claro para texto */
+        }
+        .orbitron-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .card {
+            background-color: #1E293B; /* Azul más claro para tarjetas */
+            border-left: 4px solid #FFD700; /* Borde amarillo */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+        }
+        .card-title {
+            color: #FFD700; /* Amarillo para títulos de tarjeta */
+        }
+        .btn-primary {
+            background-color: #FFD700;
+            color: #0A192F;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0A192F;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+        .section-title-highlight {
+            background: linear-gradient(90deg, #FFD700, #FCA5A5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        /* Animación sutil para el fondo */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient-bg {
+            background: linear-gradient(-45deg, #0A192F, #172A46, #0A192F, #1E3A8A);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        .code-snippet-bg {
+            background-color: #0d1117; /* Similar a GitHub dark */
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            border: 1px solid #30363d;
+        }
+        .code-comment {
+            color: #8b949e; /* Gris para comentarios */
+        }
+        .code-keyword {
+            color: #ff7b72; /* Rosa/Rojo para keywords */
+        }
+        .code-class {
+            color: #d2a8ff; /* Púrpura para nombres de clase */
+        }
+        .code-string {
+            color: #a5d6ff; /* Azul claro para strings */
+        }
+        .code-number {
+            color: #79c0ff; /* Azul para números */
+        }
+    </style>
+</head>
+<body class="animated-gradient-bg">
+
+    <header class="py-12 bg-opacity-50 bg-black">
+        <div class="container mx-auto px-6 text-center">
+            <svg class="w-20 h-20 mx-auto mb-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <h1 class="text-4xl md:text-5xl font-bold orbitron-font">
+                <span class="section-title-highlight">Desafíos Java</span>: Potencia Tu Lógica
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-blue-200">
+                Pon a prueba tus habilidades con estos ejercicios de programación. ¡A programar se aprende programando!
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="card rounded-lg shadow-xl p-6 flex flex-col">
+                <div class="flex-grow">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-yellow-400 text-blue-900 text-sm font-bold px-3 py-1 rounded-full mr-3">1</span>
+                        <h2 class="text-2xl font-semibold card-title orbitron-font">Suma de Pares</h2>
+                    </div>
+                    <p class="text-blue-100 mb-4">
+                        Escribe un programa en Java que solicite al usuario un número entero N y calcule la suma de todos los números pares desde 1 hasta N.
+                    </p>
+                    <div class="code-snippet-bg text-sm">
+                        <span class="code-comment">// Ejemplo de entrada/salida</span><br>
+                        <span class="code-keyword">Si</span> N = <span class="code-number">10</span>, <span class="code-keyword">la salida debe ser</span>: <span class="code-number">30</span> <span class="code-comment">(2+4+6+8+10)</span><br>
+                        <span class="code-keyword">Si</span> N = <span class="code-number">7</span>, <span class="code-keyword">la salida debe ser</span>: <span class="code-number">12</span> <span class="code-comment">(2+4+6)</span>
+                    </div>
+                </div>
+                <button class="mt-6 btn-primary font-semibold py-2 px-4 rounded-lg w-full self-start">Ver Solución (Próximamente)</button>
+            </div>
+
+            <div class="card rounded-lg shadow-xl p-6 flex flex-col">
+                <div class="flex-grow">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-yellow-400 text-blue-900 text-sm font-bold px-3 py-1 rounded-full mr-3">2</span>
+                        <h2 class="text-2xl font-semibold card-title orbitron-font">Verificador de Palíndromos</h2>
+                    </div>
+                    <p class="text-blue-100 mb-4">
+                        Crea un programa en Java que pida al usuario ingresar una cadena de texto y determine si es un palíndromo (se lee igual de izquierda a derecha que de derecha a izquierda), ignorando mayúsculas, minúsculas y espacios.
+                    </p>
+                    <div class="code-snippet-bg text-sm">
+                        <span class="code-comment">// Ejemplo de entrada/salida</span><br>
+                        <span class="code-keyword">Entrada</span>: <span class="code-string">"Anita lava la tina"</span>, <span class="code-keyword">Salida</span>: Es palíndromo<br>
+                        <span class="code-keyword">Entrada</span>: <span class="code-string">"Java"</span>, <span class="code-keyword">Salida</span>: No es palíndromo
+                    </div>
+                </div>
+                <button class="mt-6 btn-primary font-semibold py-2 px-4 rounded-lg w-full self-start">Ver Solución (Próximamente)</button>
+            </div>
+
+            <div class="card rounded-lg shadow-xl p-6 flex flex-col">
+                <div class="flex-grow">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-yellow-400 text-blue-900 text-sm font-bold px-3 py-1 rounded-full mr-3">3</span>
+                        <h2 class="text-2xl font-semibold card-title orbitron-font">Calculadora de Factorial</h2>
+                    </div>
+                    <p class="text-blue-100 mb-4">
+                        Desarrolla una función en Java que calcule el factorial de un número entero no negativo. El factorial de N (N!) es el producto de todos los enteros positivos menores o iguales a N. (0! = 1)
+                    </p>
+                     <div class="code-snippet-bg text-sm">
+                        <span class="code-comment">// Ejemplo de entrada/salida</span><br>
+                        <span class="code-keyword">Si</span> N = <span class="code-number">5</span>, <span class="code-keyword">N! debe ser</span>: <span class="code-number">120</span> <span class="code-comment">(5*4*3*2*1)</span><br>
+                        <span class="code-keyword">Si</span> N = <span class="code-number">0</span>, <span class="code-keyword">N! debe ser</span>: <span class="code-number">1</span>
+                    </div>
+                </div>
+                <button class="mt-6 btn-primary font-semibold py-2 px-4 rounded-lg w-full self-start">Ver Solución (Próximamente)</button>
+            </div>
+
+            <div class="card rounded-lg shadow-xl p-6 flex flex-col">
+                <div class="flex-grow">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-yellow-400 text-blue-900 text-sm font-bold px-3 py-1 rounded-full mr-3">4</span>
+                        <h2 class="text-2xl font-semibold card-title orbitron-font">Gestión de Contactos</h2>
+                    </div>
+                    <p class="text-blue-100 mb-4">
+                        Implementa una clase <code class="code-class">Contacto</code> en Java con atributos para nombre, teléfono y email. Luego, crea un programa que permita al usuario agregar (máx. 5) y mostrar contactos. Usar arrays o ArrayList.
+                    </p>
+                    <div class="code-snippet-bg text-sm">
+                        <span class="code-comment">// Funcionalidades clave</span><br>
+                        <span class="code-keyword">public class</span> <span class="code-class">Contacto</span> { <span class="code-comment">...</span> }<br>
+                        <span class="code-comment">// - Agregar contacto</span><br>
+                        <span class="code-comment">// - Mostrar todos los contactos</span>
+                    </div>
+                </div>
+                <button class="mt-6 btn-primary font-semibold py-2 px-4 rounded-lg w-full self-start">Ver Solución (Próximamente)</button>
+            </div>
+            
+            <div class="card rounded-lg shadow-xl p-6 flex flex-col">
+                <div class="flex-grow">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-yellow-400 text-blue-900 text-sm font-bold px-3 py-1 rounded-full mr-3">5</span>
+                        <h2 class="text-2xl font-semibold card-title orbitron-font">Conversor de Temperatura</h2>
+                    </div>
+                    <p class="text-blue-100 mb-4">
+                        Escribe un programa en Java que permita convertir temperaturas entre Celsius y Fahrenheit. El usuario debe poder elegir la dirección de la conversión e ingresar el valor.
+                    </p>
+                    <div class="code-snippet-bg text-sm">
+                        <span class="code-comment">// Fórmulas:</span><br>
+                        <span class="code-comment">// C a F: (C * 9/5) + 32</span><br>
+                        <span class="code-comment">// F a C: (F - 32) * 5/9</span>
+                    </div>
+                </div>
+                <button class="mt-6 btn-primary font-semibold py-2 px-4 rounded-lg w-full self-start">Ver Solución (Próximamente)</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-12 text-center bg-opacity-30 bg-black">
+        <div class="container mx-auto px-6">
+            <p class="text-blue-300">
+                &copy; <span id="currentYear"></span> Desafíos de Programación Java.
+                <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+            </p>
+            <p class="mt-2 text-sm text-yellow-400 orbitron-font">
+                ¡El aprendizaje es un viaje, no un destino!
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
