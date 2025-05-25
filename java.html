@@ -3,336 +3,645 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recursos Didácticos - U.E. "Dr. Camilo Gallegos Domínguez"</title>
+    <title>Descubre Java - El Lenguaje que Cambió el Mundo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --amarillo: #FFD700;
-            --azul: #0056b3;
-            --azul-oscuro: #003366;
-            --blanco: #ffffff;
-            --gris-claro: #f5f5f5;
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --accent: #00A5E0;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --success: #6BBF59;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            background-color: var(--gris-claro);
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
-
+        
         header {
-            background: linear-gradient(135deg, var(--azul), var(--azul-oscuro));
-            color: var(--blanco);
-            padding: 20px 0;
+            color: white;
+            padding: 2rem 1rem;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
         }
-
-        header::before {
-            content: "";
+        
+        header::after {
+            content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23FFFFFF20" stroke-width="0.5"/></svg>');
-            opacity: 0.3;
+            height: 10px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--success) 100%);
         }
-
+        
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
             position: relative;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            padding-bottom: 0.5rem;
+            font-size: 1.8rem;
         }
-
-        .logo-container {
-            margin: 30px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: pulse 2s infinite;
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
         }
-
-        .logo-container img {
-            max-width: 200px;
-            height: auto;
+        
+        h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight {
+            background-color: rgba(255, 107, 53, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .code-block {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .code-block::before {
+            content: 'Java';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 0 0 0 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .info-box {
+            background-color: rgba(0, 165, 224, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            border: 5px solid var(--amarillo);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            transition: transform 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
         }
-
-        .logo-container img:hover {
-            transform: scale(1.05) rotate(5deg);
+        
+        .success-box {
+            background-color: rgba(107, 191, 89, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            position: relative;
         }
-
-        .modules {
+        
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--success);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .check-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .check-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--success);
+            position: absolute;
+            left: 0;
+        }
+        
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+            gap: 2rem;
+            margin: 2rem 0;
         }
-
-        .module-card {
-            background: var(--blanco);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
-            position: relative;
-            border-top: 5px solid var(--amarillo);
+            text-align: center;
+            border-top: 4px solid var(--accent);
         }
-
-        .module-card:hover {
+        
+        .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
-
-        .module-card::after {
-            content: "";
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 78, 137, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .process-steps {
+            position: relative;
+            padding-left: 50px;
+            margin: 2rem 0;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .step {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: -50px;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--accent);
+        }
+        
+        /* Estilos para el video */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: #000;
+        }
+        
+        .video-container video {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--azul);
-        }
-
-        .module-image {
-            height: 180px;
-            overflow: hidden;
-        }
-
-        .module-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+            border: none;
         }
-
-        .module-card:hover .module-image img {
-            transform: scale(1.1);
-        }
-
-        .module-content {
-            padding: 20px;
-        }
-
-        .module-content h2 {
-            color: var(--azul);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .module-content p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--azul);
-            color: var(--blanco);
-            padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 2px solid var(--azul);
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-
-        .btn:hover {
-            background: transparent;
-            color: var(--azul);
-        }
-
-        .btn-java {
-            background: #f89820;
-            border-color: #f89820;
-        }
-
-        .btn-java:hover {
-            background: transparent;
-            color: #f89820;
-        }
-
-        .links-container {
-            margin-top: 15px;
-        }
-
-        footer {
-            background: linear-gradient(135deg, var(--azul), var(--azul-oscuro));
-            color: var(--blanco);
+        
+        .video-caption {
             text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #666;
         }
-
-        footer p {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
-        .school-name {
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: var(--amarillo);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
             
-            .modules {
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .grid {
                 grid-template-columns: 1fr;
             }
             
-            .logo-container img {
-                max-width: 150px;
+            .process-steps {
+                padding-left: 30px;
+            }
+            
+            .step-number {
+                left: -30px;
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
             }
         }
-
-        /* Efectos tecnológicos */
-        .tech-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            background: 
-                radial-gradient(circle at 20% 30%, var(--amarillo), transparent 20%),
-                radial-gradient(circle at 80% 70%, var(--azul), transparent 20%);
+        
+        /* Animaciones adicionales */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
         }
-
-        .binary-code {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.1);
-            font-family: monospace;
-            font-size: 12px;
-            user-select: none;
-            animation: float 20s linear infinite;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100vh) translateX(20px); }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <div class="tech-bg"></div>
-    
-    <!-- Efecto de código binario flotante -->
-    <div id="binary-container"></div>
-
-    <header>
-        <div class="container">
-            <h1>Recursos Didácticos Tecnológicos</h1>
-            <p>Materiales de apoyo para el aprendizaje en áreas tecnológicas</p>
-        </div>
+    <header class="gradient-bg">
+        <h1 class="pulse">Descubre Java</h1>
+        <p class="tagline">El lenguaje que cambió el mundo de la informática</p>
     </header>
-
+    
     <div class="container">
-        <div class="logo-container">
-            <img src="sello.jpg" alt="Sello Institucional">
+        <div class="card fade-in">
+            <h2>¡Bienvenido al mundo de Java!</h2>
+            <p>Hola a todos. Hoy vamos a descubrir un lenguaje de programación que ha cambiado el mundo de la informática: Java.</p>
+            <p>¿Alguna vez te has preguntado cómo se hacen las apps de Android, los videojuegos o los programas de escritorio? Pues muchos de ellos usan Java. ¡Acompáñame y te lo explico paso a paso!</p>
         </div>
-
-        <div class="modules">
-            <div class="module-card">
-                <div class="module-image">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Programación y Bases de Datos">
-                </div>
-                <div class="module-content">
-                    <h2><i class="fas fa-code"></i> Programación y Bases de Datos</h2>
-                    <p>Recursos para aprender lenguajes de programación, algoritmos y diseño de bases de datos relacionales y no relacionales.</p>
-                    
-                    <div class="links-container">
-                        <a href="#" class="btn">Acceder</a>
-                        <a href="java.html" class="btn btn-java"><i class="fab fa-java"></i> Java</a>
+        
+        <!-- Nueva sección de video añadida aquí -->
+        <div class="card fade-in">
+            <h2><i class="fas fa-video"></i> Introducción a Java</h2>
+            <p>Mira este video introductorio para entender los conceptos básicos de Java:</p>
+            
+            <div class="video-container">
+                <video controls poster="java-poster.jpg"> <!-- Añade una imagen de poster si lo deseas -->
+                    <source src="java.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+            <p class="video-caption">Video tutorial: Fundamentos de programación en Java</p>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>¿Qué es Java?</h2>
+            <p>Java es un lenguaje de programación <span class="highlight">orientado a objetos</span>, creado en 1995 por la empresa Sun Microsystems, y ahora es mantenido por Oracle.</p>
+            
+            <div class="info-box">
+                <h3>El lema de Java</h3>
+                <p>"Escribe una vez, ejecútalo en cualquier lugar". Esto significa que, si tú escribes un programa en Java, puede funcionar en cualquier sistema operativo: Windows, Mac, Linux... sin cambiar nada.</p>
+            </div>
+            
+            <h3>¿Dónde se usa Java?</h3>
+            <div class="grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
+                    <h3>Aplicaciones móviles</h3>
+                    <p>Android está basado en Java. Millones de apps usan Java como lenguaje principal.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Software de escritorio</h3>
+                    <p>Desde editores de texto hasta complejos sistemas de diseño asistido por computadora.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Aplicaciones web</h3>
+                    <p>Sitios dinámicos con tecnologías como Java EE, Spring y muchos frameworks más.</p>
                 </div>
             </div>
-
-            <div class="module-card">
-                <div class="module-image">
-                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Sistemas Operativos y Redes">
+        </div>
+        
+        <div class="card fade-in">
+            <h2>¿Cómo funciona Java?</h2>
+            <p>Java no se ejecuta directamente en el sistema operativo como otros lenguajes. Sigue un proceso especial:</p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Archivo .java</h3>
+                    <p>Tú escribes tu programa en un archivo con extensión <span class="highlight">.java</span> que contiene el código fuente.</p>
                 </div>
-                <div class="module-content">
-                    <h2><i class="fas fa-network-wired"></i> Sistemas Operativos y Redes</h2>
-                    <p>Materiales sobre administración de sistemas operativos, configuración de redes y protocolos de comunicación.</p>
-                    <a href="#" class="btn">Acceder</a>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Compilación</h3>
+                    <p>El compilador <span class="highlight">javac</span> traduce tu código a un lenguaje intermedio llamado <span class="highlight">bytecode</span>.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Archivo .class</h3>
+                    <p>El bytecode se guarda en un archivo <span class="highlight">.class</span>, que no es entendible por humanos pero es portable entre sistemas.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Ejecución</h3>
+                    <p>La <span class="highlight">JVM (Java Virtual Machine)</span> interpreta el bytecode y lo ejecuta en cualquier sistema operativo.</p>
                 </div>
             </div>
-
-            <div class="module-card">
-                <div class="module-image">
-                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9aabf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Soporte Técnico">
+            
+            <div class="success-box">
+                <h3>Ventaja clave</h3>
+                <p>Gracias al bytecode y la JVM, los programas Java pueden funcionar en Windows, Linux, Mac o incluso en teléfonos Android, <strong>sin cambiar una sola línea de código</strong>.</p>
+            </div>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>¿Qué puedes hacer con Java?</h2>
+            <p>Java es tan versátil que lo puedes usar en casi cualquier área de desarrollo:</p>
+            
+            <ul class="check-list">
+                <li><strong>Aplicaciones móviles:</strong> Android está basado en Java.</li>
+                <li><strong>Aplicaciones de escritorio:</strong> como editores de texto, calculadoras, etc.</li>
+                <li><strong>Aplicaciones web:</strong> sitios dinámicos con Java EE o Spring</li>
+                <li><strong>Videojuegos:</strong> muchos juegos 2D y 3D utilizan Java o librerías como LibGDX.</li>
+                <li><strong>Programación de hardware:</strong> por ejemplo, con Raspberry Pi</li>
+                <li><strong>Sistemas empresariales complejos:</strong> como los bancos y aseguradoras.</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>Comunidad y recursos</h3>
+                <p>Java tiene una gran comunidad global, muchos recursos para aprender y una enorme cantidad de librerías y frameworks que facilitan el trabajo.</p>
+            </div>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>Tu primer programa en Java</h2>
+            <p>Vamos a escribir el clásico "Hola Mundo" para que veas lo sencillo que puede ser:</p>
+            
+            <div class="code-block">
+                public class HolaMundo {<br>
+                &nbsp;&nbsp;public static void main(String[] args) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("¡Hola, mundo Java!");<br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+            
+            <p>Para ejecutarlo:</p>
+            <ol>
+                <li>Guarda el código en un archivo llamado <span class="highlight">HolaMundo.java</span></li>
+                <li>Compílalo con: <span class="highlight">javac HolaMundo.java</span></li>
+                <li>Ejecútalo con: <span class="highlight">java HolaMundo</span></li>
+            </ol>
+            
+            <a href="#" class="btn">¡Quiero aprender más!</a>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>¿Por qué aprender Java?</h2>
+            <p>Java es uno de los lenguajes más importantes del mundo. Si aprendes Java:</p>
+            
+            <div class="grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Oportunidades laborales</h3>
+                    <p>Java es uno de los lenguajes más demandados en el mercado tecnológico.</p>
                 </div>
-                <div class="module-content">
-                    <h2><i class="fas fa-tools"></i> Soporte Técnico</h2>
-                    <p>Guías y manuales para mantenimiento de hardware, solución de problemas y atención al usuario.</p>
-                    <a href="#" class="btn">Acceder</a>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Fundamentos sólidos</h3>
+                    <p>Aprendes conceptos de programación que aplican a otros lenguajes.</p>
                 </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Ecosistema robusto</h3>
+                    <p>Accedes a miles de librerías y frameworks para todo tipo de proyectos.</p>
+                </div>
+            </div>
+            
+            <div class="success-box">
+                <h3>¡Comienza hoy!</h3>
+                <p>Java no solo te enseña a programar, está abriendo las puertas a un mundo lleno de oportunidades tecnológicas. ¿Qué esperas para comenzar?</p>
+                <a href="#" class="btn btn-outline">Comenzar el aprendizaje</a>
             </div>
         </div>
     </div>
-
+    
     <footer>
-        <div class="container">
-            <p><span class="school-name">UNIDAD EDUCATIVA "DR. CAMILO GALLEGOS DOMINGUEZ"</span></p>
-            <p>Formando líderes tecnológicos para el futuro</p>
-            <p>© 2023 - Todos los derechos reservados</p>
+        <div class="footer-content">
+            <h2>¿Listo para dominar Java?</h2>
+            <p>Sigue explorando el mundo de la programación con Java y abre un mundo de posibilidades.</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+            
+            <p>© 2023 Aprende Java - Para la nueva generación de programadores</p>
         </div>
     </footer>
-
-    <script>
-        // Efecto de código binario flotante
-        document.addEventListener('DOMContentLoaded', function() {
-            const binaryContainer = document.getElementById('binary-container');
-            const binaryChars = ['0', '1'];
-            const count = 50;
-            
-            for (let i = 0; i < count; i++) {
-                const binary = document.createElement('div');
-                binary.className = 'binary-code';
-                binary.textContent = Array(20).fill(0).map(() => 
-                    binaryChars[Math.floor(Math.random() * binaryChars.length)]).join(' ');
-                
-                binary.style.left = `${Math.random() * 100}%`;
-                binary.style.top = `${Math.random() * 100}%`;
-                binary.style.animationDuration = `${10 + Math.random() * 20}s`;
-                binary.style.animationDelay = `${Math.random() * 5}s`;
-                
-                binaryContainer.appendChild(binary);
-            }
-        });
-    </script>
 </body>
 </html>
