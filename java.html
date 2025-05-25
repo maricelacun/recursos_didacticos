@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubre Java - El Lenguaje que Cambió el Mundo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --accent: #00A5E0;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --success: #6BBF59;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        header {
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--success) 100%);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight {
+            background-color: rgba(255, 107, 53, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .code-block {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .code-block::before {
+            content: 'Java';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 0 0 0 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .info-box {
+            background-color: rgba(0, 165, 224, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .info-box::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .success-box {
+            background-color: rgba(107, 191, 89, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .success-box::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--success);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .check-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .check-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--success);
+            position: absolute;
+            left: 0;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 78, 137, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .process-steps {
+            position: relative;
+            padding-left: 50px;
+            margin: 2rem 0;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .step {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: -50px;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--accent);
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                padding-left: 30px;
+            }
+            
+            .step-number {
+                left: -30px;
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Animaciones adicionales */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <header class="gradient-bg">
+        <h1 class="pulse">Descubre Java</h1>
+        <p class="tagline">El lenguaje que cambió el mundo de la informática</p>
+    </header>
+    
+    <div class="container">
+        <div class="card fade-in">
+            <h2>¡Bienvenido al mundo de Java!</h2>
+            <p>Hola a todos. Hoy vamos a descubrir un lenguaje de programación que ha cambiado el mundo de la informática: Java.</p>
+            <p>¿Alguna vez te has preguntado cómo se hacen las apps de Android, los videojuegos o los programas de escritorio? Pues muchos de ellos usan Java. ¡Acompáñame y te lo explico paso a paso!</p>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>¿Qué es Java?</h2>
+            <p>Java es un lenguaje de programación <span class="highlight">orientado a objetos</span>, creado en 1995 por la empresa Sun Microsystems, y ahora es mantenido por Oracle.</p>
+            
+            <div class="info-box">
+                <h3>El lema de Java</h3>
+                <p>"Escribe una vez, ejecútalo en cualquier lugar". Esto significa que, si tú escribes un programa en Java, puede funcionar en cualquier sistema operativo: Windows, Mac, Linux... sin cambiar nada.</p>
+            </div>
+            
+            <h3>¿Dónde se usa Java?</h3>
+            <div class="grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Aplicaciones móviles</h3>
+                    <p>Android está basado en Java. Millones de apps usan Java como lenguaje principal.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Software de escritorio</h3>
+                    <p>Desde editores de texto hasta complejos sistemas de diseño asistido por computadora.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Aplicaciones web</h3>
+                    <p>Sitios dinámicos con tecnologías como Java EE, Spring y muchos frameworks más.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>¿Cómo funciona Java?</h2>
+            <p>Java no se ejecuta directamente en el sistema operativo como otros lenguajes. Sigue un proceso especial:</p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Archivo .java</h3>
+                    <p>Tú escribes tu programa en un archivo con extensión <span class="highlight">.java</span> que contiene el código fuente.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Compilación</h3>
+                    <p>El compilador <span class="highlight">javac</span> traduce tu código a un lenguaje intermedio llamado <span class="highlight">bytecode</span>.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Archivo .class</h3>
+                    <p>El bytecode se guarda en un archivo <span class="highlight">.class</span>, que no es entendible por humanos pero es portable entre sistemas.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Ejecución</h3>
+                    <p>La <span class="highlight">JVM (Java Virtual Machine)</span> interpreta el bytecode y lo ejecuta en cualquier sistema operativo.</p>
+                </div>
+            </div>
+            
+            <div class="success-box">
+                <h3>Ventaja clave</h3>
+                <p>Gracias al bytecode y la JVM, los programas Java pueden funcionar en Windows, Linux, Mac o incluso en teléfonos Android, <strong>sin cambiar una sola línea de código</strong>.</p>
+            </div>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>¿Qué puedes hacer con Java?</h2>
+            <p>Java es tan versátil que lo puedes usar en casi cualquier área de desarrollo:</p>
+            
+            <ul class="check-list">
+                <li><strong>Aplicaciones móviles:</strong> Android está basado en Java.</li>
+                <li><strong>Aplicaciones de escritorio:</strong> como editores de texto, calculadoras, etc.</li>
+                <li><strong>Aplicaciones web:</strong> sitios dinámicos con Java EE o Spring</li>
+                <li><strong>Videojuegos:</strong> muchos juegos 2D y 3D utilizan Java o librerías como LibGDX.</li>
+                <li><strong>Programación de hardware:</strong> por ejemplo, con Raspberry Pi</li>
+                <li><strong>Sistemas empresariales complejos:</strong> como los bancos y aseguradoras.</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>Comunidad y recursos</h3>
+                <p>Java tiene una gran comunidad global, muchos recursos para aprender y una enorme cantidad de librerías y frameworks que facilitan el trabajo.</p>
+            </div>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>Tu primer programa en Java</h2>
+            <p>Vamos a escribir el clásico "Hola Mundo" para que veas lo sencillo que puede ser:</p>
+            
+            <div class="code-block">
+                public class HolaMundo {<br>
+                &nbsp;&nbsp;public static void main(String[] args) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;System.out.println("¡Hola, mundo Java!");<br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+            
+            <p>Para ejecutarlo:</p>
+            <ol>
+                <li>Guarda el código en un archivo llamado <span class="highlight">HolaMundo.java</span></li>
+                <li>Compílalo con: <span class="highlight">javac HolaMundo.java</span></li>
+                <li>Ejecútalo con: <span class="highlight">java HolaMundo</span></li>
+            </ol>
+            
+            <a href="#" class="btn">¡Quiero aprender más!</a>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>¿Por qué aprender Java?</h2>
+            <p>Java es uno de los lenguajes más importantes del mundo. Si aprendes Java:</p>
+            
+            <div class="grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Oportunidades laborales</h3>
+                    <p>Java es uno de los lenguajes más demandados en el mercado tecnológico.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Fundamentos sólidos</h3>
+                    <p>Aprendes conceptos de programación que aplican a otros lenguajes.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Ecosistema robusto</h3>
+                    <p>Accedes a miles de librerías y frameworks para todo tipo de proyectos.</p>
+                </div>
+            </div>
+            
+            <div class="success-box">
+                <h3>¡Comienza hoy!</h3>
+                <p>Java no solo te enseña a programar, está abriendo las puertas a un mundo lleno de oportunidades tecnológicas. ¿Qué esperas para comenzar?</p>
+                <a href="#" class="btn btn-outline">Comenzar el aprendizaje</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <h2>¿Listo para dominar Java?</h2>
+            <p>Sigue explorando el mundo de la programación con Java y abre un mundo de posibilidades.</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+            
+            <p>© 2023 Aprende Java - Para la nueva generación de programadores</p>
+        </div>
+    </footer>
+</body>
+</html>
