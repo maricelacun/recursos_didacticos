@@ -1,174 +1,924 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Componentes Electrónicos - Activos y Pasivos</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f2f2f2;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componentes Electrónicos | Activos y Pasivos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-primario: #0056b3;
+            --azul-oscuro: #003366;
+            --amarillo: #FFD700;
+            --amarillo-oscuro: #FFC000;
+            --blanco: #ffffff;
+            --gris-claro: #f5f5f5;
+            --negro: #333333;
+        }
 
-    header {
-      background-color: #0057B8;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
+        body {
+            background-color: var(--gris-claro);
+            color: var(--negro);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    .intro {
-      background-color: #FFD700;
-      padding: 20px;
-      text-align: center;
-    }
+        /* Header estilizado */
+        header {
+            background: linear-gradient(135deg, var(--azul-primario), var(--azul-oscuro));
+            color: var(--blanco);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
 
-    .intro p {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(0, 86, 179, 0.1) 0%, transparent 20%);
+            z-index: 1;
+        }
 
-    .contenido {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
 
-    .contenido h2 {
-      color: #0057B8;
-      margin-bottom: 10px;
-    }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--amarillo), var(--blanco));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shine 3s infinite alternate;
+        }
 
-    .contenido ul {
-      padding-left: 20px;
-    }
+        @keyframes shine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
 
-    .card {
-      background-color: #fff;
-      border-left: 6px solid #FFD700;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+        /* Navegación */
+        nav {
+            background-color: var(--azul-oscuro);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    table, th, td {
-      border: 1px solid #ccc;
-    }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
 
-    th {
-      background-color: #0057B8;
-      color: white;
-      padding: 10px;
-    }
+        .nav-links a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
 
-    td {
-      background-color: #fff;
-      padding: 10px;
-    }
+        .nav-links a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: var(--amarillo);
+        }
 
-    footer {
-      background-color: #0057B8;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      margin-top: 40px;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--amarillo);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.5em;
-      }
-      .intro p {
-        font-size: 1em;
-      }
-    }
-  </style>
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 51, 102, 0.8)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--blanco);
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--amarillo);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--amarillo);
+            color: var(--azul-oscuro);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid var(--amarillo);
+            margin: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--amarillo);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--amarillo);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--amarillo);
+            color: var(--azul-oscuro);
+        }
+
+        /* Secciones */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--azul-oscuro);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--amarillo);
+        }
+
+        /* Tarjetas de componentes */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .component-card {
+            background-color: var(--blanco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border-top: 4px solid var(--amarillo);
+        }
+
+        .component-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .component-card.active {
+            border-top-color: var(--azul-primario);
+        }
+
+        .component-card.passive {
+            border-top-color: var(--amarillo-oscuro);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--azul-primario), var(--azul-oscuro));
+            color: var(--blanco);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--amarillo);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-body p {
+            margin-bottom: 1.5rem;
+            color: var(--negro);
+        }
+
+        .card-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .examples {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #ddd;
+        }
+
+        .examples h4 {
+            color: var(--azul-primario);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .examples ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .examples li {
+            margin-bottom: 0.3rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .examples li::before {
+            content: '•';
+            color: var(--amarillo);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+
+        /* Sección de comparación */
+        .comparison {
+            background-color: var(--blanco);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: var(--azul-primario);
+            color: var(--blanco);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(0, 86, 179, 0.05);
+        }
+
+        .comparison-table tr:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Galería interactiva */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 200px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: var(--blanco);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--azul-primario), var(--azul-oscuro));
+            color: var(--blanco);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--amarillo);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--amarillo);
+        }
+
+        .footer-column p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style-type: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--blanco);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--amarillo);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--blanco);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--amarillo);
+            color: var(--azul-oscuro);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Efectos tecnológicos */
+        .tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--amarillo), transparent 20%),
+                radial-gradient(circle at 80% 70%, var(--azul-primario), transparent 20%);
+        }
+
+        .circuit-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .circuit-line {
+            position: absolute;
+            background-color: var(--azul-primario);
+        }
+
+        .horizontal-line {
+            height: 1px;
+            width: 100%;
+            animation: circuitFlow 20s linear infinite;
+        }
+
+        .vertical-line {
+            width: 1px;
+            height: 100%;
+            animation: circuitFlow 15s linear infinite reverse;
+        }
+
+        @keyframes circuitFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .components-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison {
+                padding: 1.5rem;
+                overflow-x: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <header>
-    <h1>Componentes Electrónicos</h1>
-    <p>Activos y Pasivos</p>
-  </header>
-
-  <div class="intro">
-    <p>¡Explora el fascinante mundo de la electrónica con este resumen educativo!</p>
-  </div>
-
-  <section class="contenido">
-
-    <div class="card">
-      <h2>¿Qué son los componentes electrónicos?</h2>
-      <p>Son los elementos básicos que se usan para construir circuitos electrónicos. Se dividen principalmente en dos tipos: <strong>activos</strong> y <strong>pasivos</strong>.</p>
+    <div class="tech-bg"></div>
+    
+    <!-- Efecto de líneas de circuito -->
+    <div class="circuit-lines">
+        <div class="circuit-line horizontal-line" style="top: 20%;"></div>
+        <div class="circuit-line horizontal-line" style="top: 40%;"></div>
+        <div class="circuit-line horizontal-line" style="top: 60%;"></div>
+        <div class="circuit-line horizontal-line" style="top: 80%;"></div>
+        <div class="circuit-line vertical-line" style="left: 25%;"></div>
+        <div class="circuit-line vertical-line" style="left: 50%;"></div>
+        <div class="circuit-line vertical-line" style="left: 75%;"></div>
     </div>
 
-    <div class="card">
-      <h2>Componentes Pasivos</h2>
-      <ul>
-        <li><strong>Resistencias:</strong> Limitan el flujo de corriente.</li>
-        <li><strong>Capacitores:</strong> Almacenan energía temporalmente en forma de campo eléctrico.</li>
-        <li><strong>Inductores:</strong> Almacenan energía en forma de campo magnético.</li>
-      </ul>
+    <header>
+        <div class="header-content">
+            <h1>Componentes Electrónicos</h1>
+            <p>Explora el fascinante mundo de los componentes activos y pasivos</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <span>ElectroLearn</span>
+            </div>
+            <div class="nav-links">
+                <a href="#activos">Componentes Activos</a>
+                <a href="#pasivos">Componentes Pasivos</a>
+                <a href="#comparacion">Comparación</a>
+                <a href="#galeria">Galería</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h2>Domina los fundamentos de la electrónica</h2>
+            <p>Descubre cómo funcionan los componentes básicos que hacen posible todos los dispositivos electrónicos modernos. Aprende a distinguir entre componentes activos y pasivos, sus características y aplicaciones.</p>
+            <a href="#activos" class="btn">Comenzar Aprendizaje</a>
+            <a href="#comparacion" class="btn btn-outline">Ver Comparación</a>
+        </section>
+
+        <section id="activos">
+            <div class="section-title">
+                <h2>Componentes Activos</h2>
+            </div>
+            
+            <div class="components-grid">
+                <div class="component-card active">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Transistores</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Dispositivos semiconductores que pueden amplificar o conmutar señales electrónicas. Son los componentes fundamentales de la electrónica moderna.</p>
+                        <div class="examples">
+                            <h4>Tipos comunes:</h4>
+                            <ul>
+                                <li>BJT (Bipolar Junction Transistor)</li>
+                                <li>FET (Field-Effect Transistor)</li>
+                                <li>MOSFET (Metal-Oxide-Semiconductor FET)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline">Aprender más</a>
+                    </div>
+                </div>
+                
+                <div class="component-card active">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3>Diodos</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Dispositivos que permiten el flujo de corriente en una sola dirección. Esenciales para la rectificación de corriente alterna a continua.</p>
+                        <div class="examples">
+                            <h4>Variantes importantes:</h4>
+                            <ul>
+                                <li>Diodos rectificadores</li>
+                                <li>LEDs (Diodos Emisores de Luz)</li>
+                                <li>Diodos Zener</li>
+                                <li>Diodos Schottky</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline">Aprender más</a>
+                    </div>
+                </div>
+                
+                <div class="component-card active">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-chess-board"></i>
+                        </div>
+                        <h3>Circuitos Integrados</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Conjuntos complejos de componentes electrónicos miniaturizados en un pequeño chip de semiconductor. La base de la electrónica digital moderna.</p>
+                        <div class="examples">
+                            <h4>Ejemplos clave:</h4>
+                            <ul>
+                                <li>Microprocesadores</li>
+                                <li>Amplificadores operacionales</li>
+                                <li>Reguladores de voltaje</li>
+                                <li>Memorias digitales</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline">Aprender más</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pasivos">
+            <div class="section-title">
+                <h2>Componentes Pasivos</h2>
+            </div>
+            
+            <div class="components-grid">
+                <div class="component-card passive">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <h3>Resistencias</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Componentes que se oponen al flujo de corriente eléctrica. Controlan el voltaje y la corriente en un circuito.</p>
+                        <div class="examples">
+                            <h4>Tipos principales:</h4>
+                            <ul>
+                                <li>Resistencias fijas</li>
+                                <li>Potenciómetros (variables)</li>
+                                <li>Termistores (dependientes de temperatura)</li>
+                                <li>LDR (dependientes de luz)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline">Aprender más</a>
+                    </div>
+                </div>
+                
+                <div class="component-card passive">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-coil"></i>
+                        </div>
+                        <h3>Inductores</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Componentes que almacenan energía en un campo magnético cuando circula corriente a través de ellos. Opuestos a los cambios en la corriente.</p>
+                        <div class="examples">
+                            <h4>Aplicaciones comunes:</h4>
+                            <ul>
+                                <li>Filtros de frecuencia</li>
+                                <li>Transformadores</li>
+                                <li>Circuitos resonantes</li>
+                                <li>Almacenamiento de energía</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline">Aprender más</a>
+                    </div>
+                </div>
+                
+                <div class="component-card passive">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-battery-three-quarters"></i>
+                        </div>
+                        <h3>Condensadores</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Dispositivos que almacenan energía eléctrica en un campo electrostático. Filtran señales y estabilizan fuentes de alimentación.</p>
+                        <div class="examples">
+                            <h4>Variantes importantes:</h4>
+                            <ul>
+                                <li>Cerámicos</li>
+                                <li>Electrolíticos</li>
+                                <li>De tantalio</li>
+                                <li>De poliéster</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline">Aprender más</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparacion" class="comparison">
+            <div class="section-title">
+                <h2>Comparación: Activos vs. Pasivos</h2>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Componentes Activos</th>
+                        <th>Componentes Pasivos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Amplificación de señal</td>
+                        <td><i class="fas fa-check" style="color: var(--amarillo);"></i> Sí pueden amplificar</td>
+                        <td><i class="fas fa-times" style="color: #ff6b6b;"></i> No pueden amplificar</td>
+                    </tr>
+                    <tr>
+                        <td>Fuente de energía</td>
+                        <td>Requieren fuente externa</td>
+                        <td>No requieren fuente externa</td>
+                    </tr>
+                    <tr>
+                        <td>Control de corriente</td>
+                        <td>Pueden controlar activamente</td>
+                        <td>Solo limitan o almacenan</td>
+                    </tr>
+                    <tr>
+                        <td>No linealidad</td>
+                        <td>Comportamiento no lineal</td>
+                        <td>Comportamiento lineal</td>
+                    </tr>
+                    <tr>
+                        <td>Ejemplos comunes</td>
+                        <td>Transistores, diodos, CI</td>
+                        <td>Resistencias, condensadores, inductores</td>
+                    </tr>
+                    <tr>
+                        <td>Función principal</td>
+                        <td>Amplificar, conmutar, procesar</td>
+                        <td>Resistir, almacenar, filtrar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="galeria">
+            <div class="section-title">
+                <h2>Galería de Componentes</h2>
+            </div>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80" alt="Circuitos integrados" class="gallery-img">
+                    <div class="gallery-caption">Circuitos Integrados</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1603732551658-5fabbafa84eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Transistores" class="gallery-img">
+                    <div class="gallery-caption">Transistores</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Resistencias" class="gallery-img">
+                    <div class="gallery-caption">Resistencias</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1603732551657-175a68d361a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Condensadores" class="gallery-img">
+                    <div class="gallery-caption">Condensadores</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Placa de circuitos" class="gallery-img">
+                    <div class="gallery-caption">Placa de Circuitos</div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div class="card">
-      <h2>Componentes Activos</h2>
-      <ul>
-        <li><strong>Diodos:</strong> Permiten el paso de la corriente en una sola dirección.</li>
-        <li><strong>Transistores:</strong> Actúan como interruptores o amplificadores.</li>
-        <li><strong>CI (Circuitos Integrados):</strong> Contienen muchos componentes activos y pasivos en un solo chip.</li>
-      </ul>
-    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>ElectroLearn</h3>
+                <p>Plataforma educativa dedicada a la enseñanza de electrónica básica y avanzada.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#activos"><i class="fas fa-arrow-right"></i> Componentes Activos</a></li>
+                    <li><a href="#pasivos"><i class="fas fa-arrow-right"></i> Componentes Pasivos</a></li>
+                    <li><a href="#comparacion"><i class="fas fa-arrow-right"></i> Tabla Comparativa</a></li>
+                    <li><a href="#galeria"><i class="fas fa-arrow-right"></i> Galería Visual</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Recursos Adicionales</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-book"></i> Guía de Inicio</a></li>
+                    <li><a href="#"><i class="fas fa-video"></i> Tutoriales en Video</a></li>
+                    <li><a href="#"><i class="fas fa-project-diagram"></i> Simulador de Circuitos</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 ElectroLearn. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-    <div class="card">
-      <h2>Comparación</h2>
-      <table>
-        <tr>
-          <th>Componente</th>
-          <th>Activo</th>
-          <th>Pasivo</th>
-        </tr>
-        <tr>
-          <td>Resistencia</td>
-          <td>No</td>
-          <td>Sí</td>
-        </tr>
-        <tr>
-          <td>Transistor</td>
-          <td>Sí</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>Diodo</td>
-          <td>Sí</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>Capacitor</td>
-          <td>No</td>
-          <td>Sí</td>
-        </tr>
-      </table>
-    </div>
-
-  </section>
-
-  <footer>
-    © 2025 | Proyecto Educativo - Electrónica Básica
-  </footer>
-
+    <script>
+        // Efecto de líneas de circuito dinámicas
+        document.addEventListener('DOMContentLoaded', function() {
+            const circuitLines = document.querySelector('.circuit-lines');
+            
+            // Crear líneas horizontales adicionales
+            for (let i = 0; i < 5; i++) {
+                const line = document.createElement('div');
+                line.className = 'circuit-line horizontal-line';
+                line.style.top = `${10 + Math.random() * 80}%`;
+                line.style.animationDuration = `${15 + Math.random() * 20}s`;
+                line.style.animationDelay = `${Math.random() * 5}s`;
+                circuitLines.appendChild(line);
+            }
+            
+            // Crear líneas verticales adicionales
+            for (let i = 0; i < 5; i++) {
+                const line = document.createElement('div');
+                line.className = 'circuit-line vertical-line';
+                line.style.left = `${10 + Math.random() * 80}%`;
+                line.style.animationDuration = `${10 + Math.random() * 15}s`;
+                line.style.animationDelay = `${Math.random() * 5}s`;
+                circuitLines.appendChild(line);
+            }
+            
+            // Efecto de aparición suave al cargar
+            const elements = document.querySelectorAll('.component-card, .gallery-item, .comparison-table tr');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
 </body>
 </html>
