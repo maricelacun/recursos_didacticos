@@ -979,4 +979,108 @@
                     <img src="https://images.unsplash.com/photo-1603732551657-175a68d361a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Condensadores" class="gallery-img">
                     <div class="gallery-caption">Condensadores</div>
                 </div>
-                <div class="g
+                        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80" alt="Circuitos integrados" class="gallery-img">
+                <div class="gallery-caption">Circuitos Integrados</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1603732551658-5fabbafa84eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Transistores" class="gallery-img">
+                <div class="gallery-caption">Transistores</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Resistencias" class="gallery-img">
+                <div class="gallery-caption">Resistencias</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1603732551657-175a68d361a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Condensadores" class="gallery-img">
+                <div class="gallery-caption">Condensadores</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1622495546323-5dac33dedb01?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Diodos LED" class="gallery-img">
+                <div class="gallery-caption">Diodos LED</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1603732551660-43d3b560e539?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Placas de circuito" class="gallery-img">
+                <div class="gallery-caption">Placas de Circuito</div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>ElectroLearn</h3>
+            <p>Plataforma educativa dedicada a la enseñanza de electrónica básica y avanzada para estudiantes y aficionados.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3>Enlaces Rápidos</h3>
+            <ul class="footer-links">
+                <li><a href="#introduccion"><i class="fas fa-chevron-right"></i> Introducción</a></li>
+                <li><a href="#activos"><i class="fas fa-chevron-right"></i> Componentes Activos</a></li>
+                <li><a href="#pasivos"><i class="fas fa-chevron-right"></i> Componentes Pasivos</a></li>
+                <li><a href="#comparacion"><i class="fas fa-chevron-right"></i> Comparación</a></li>
+                <li><a href="#galeria"><i class="fas fa-chevron-right"></i> Galería</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Recursos Adicionales</h3>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-book"></i> Libros Recomendados</a></li>
+                <li><a href="#"><i class="fas fa-tools"></i> Herramientas</a></li>
+                <li><a href="#"><i class="fas fa-video"></i> Tutoriales en Video</a></li>
+                <li><a href="#"><i class="fas fa-project-diagram"></i> Proyectos Prácticos</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contacto</h3>
+            <p><i class="fas fa-envelope"></i> info@electrolearn.com</p>
+            <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Calle Electrónica, Ciudad Tecnológica</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2023 ElectroLearn. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<script>
+    // Efecto de scroll suave para los enlaces de navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Animación para las tarjetas al aparecer en el viewport
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.component-card, .concept-card').forEach(card => {
+        observer.observe(card);
+    });
+
+    // Efecto de paralaje para el fondo tecnológico
+    window.addEventListener('scroll', function() {
+        const techBg = document.querySelector('.tech-bg');
+        const scrollPosition = window.pageYOffset;
+        techBg.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+    });
+</script>
+</body>
+</html>
