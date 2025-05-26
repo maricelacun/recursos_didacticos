@@ -197,6 +197,107 @@
             color: var(--azul-oscuro);
         }
 
+        /* Introducción */
+        .intro-section {
+            background-color: var(--blanco);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--amarillo) 0%, transparent 70%);
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .intro-section h2 {
+            color: var(--azul-oscuro);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-section p {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .concept-card {
+            background-color: var(--gris-claro);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--amarillo);
+            transition: all 0.3s ease;
+        }
+
+        .concept-card.active {
+            border-left-color: var(--azul-primario);
+        }
+
+        .concept-card.passive {
+            border-left-color: var(--amarillo-oscuro);
+        }
+
+        .concept-card h3 {
+            color: var(--azul-oscuro);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-card h3 i {
+            color: var(--amarillo);
+        }
+
+        .concept-card.active h3 i {
+            color: var(--azul-primario);
+        }
+
+        /* Video Section */
+        .video-section {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* Secciones */
         .section-title {
             text-align: center;
@@ -557,6 +658,10 @@
                 font-size: 1.8rem;
             }
             
+            .intro-section {
+                padding: 2rem 1.5rem;
+            }
+            
             .components-grid {
                 grid-template-columns: 1fr;
             }
@@ -596,6 +701,7 @@
                 <span>ElectroLearn</span>
             </div>
             <div class="nav-links">
+                <a href="#introduccion">Introducción</a>
                 <a href="#activos">Componentes Activos</a>
                 <a href="#pasivos">Componentes Pasivos</a>
                 <a href="#comparacion">Comparación</a>
@@ -608,8 +714,40 @@
         <section class="hero">
             <h2>Domina los fundamentos de la electrónica</h2>
             <p>Descubre cómo funcionan los componentes básicos que hacen posible todos los dispositivos electrónicos modernos. Aprende a distinguir entre componentes activos y pasivos, sus características y aplicaciones.</p>
-            <a href="#activos" class="btn">Comenzar Aprendizaje</a>
-            <a href="#comparacion" class="btn btn-outline">Ver Comparación</a>
+            <a href="#introduccion" class="btn">Comenzar Aprendizaje</a>
+            <a href="#video" class="btn btn-outline">Ver Video Explicativo</a>
+        </section>
+
+        <section id="introduccion" class="intro-section">
+            <h2>Introducción a los Componentes Electrónicos</h2>
+            <p>Los componentes electrónicos son los elementos básicos que constituyen los circuitos electrónicos. Estos dispositivos pueden ser conectados entre sí para controlar el flujo de electrones y así realizar funciones específicas como amplificación, conmutación, procesamiento de señales y almacenamiento de energía.</p>
+            
+            <p>En electrónica, todos los circuitos están formados por combinaciones de estos componentes, que pueden clasificarse en dos grandes categorías: <strong>componentes activos</strong> y <strong>componentes pasivos</strong>. Esta clasificación se basa en su capacidad para amplificar señales y en su comportamiento dentro de un circuito eléctrico.</p>
+            
+            <div class="concept-grid">
+                <div class="concept-card active">
+                    <h3><i class="fas fa-bolt"></i> Componentes Activos</h3>
+                    <p>Los componentes activos son aquellos que pueden controlar el flujo de corriente eléctrica mediante otra señal eléctrica. Tienen la capacidad de <strong>amplificar</strong> señales (aumentar su potencia) y requieren una fuente de energía externa para funcionar.</p>
+                    <p>Estos dispositivos pueden introducir energía en un circuito y su comportamiento es generalmente <strong>no lineal</strong>, lo que significa que su respuesta no es directamente proporcional a la señal de entrada.</p>
+                </div>
+                
+                <div class="concept-card passive">
+                    <h3><i class="fas fa-wave-square"></i> Componentes Pasivos</h3>
+                    <p>Los componentes pasivos son aquellos que <strong>no pueden amplificar</strong> señales ni introducir energía en un circuito. Su función principal es resistir, almacenar o filtrar energía eléctrica.</p>
+                    <p>A diferencia de los activos, los componentes pasivos tienen un comportamiento <strong>lineal</strong> (en condiciones normales) y no requieren una fuente de energía externa para realizar su función básica.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="video" class="video-section">
+            <div class="section-title">
+                <h2>Video Explicativo</h2>
+                <p>Aprende más sobre componentes electrónicos con este video educativo</p>
+            </div>
+            
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/IJQDR_Xfx-k?si=_gaUZMdR7oXDi27f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
         </section>
 
         <section id="activos">
@@ -841,84 +979,4 @@
                     <img src="https://images.unsplash.com/photo-1603732551657-175a68d361a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Condensadores" class="gallery-img">
                     <div class="gallery-caption">Condensadores</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Placa de circuitos" class="gallery-img">
-                    <div class="gallery-caption">Placa de Circuitos</div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>ElectroLearn</h3>
-                <p>Plataforma educativa dedicada a la enseñanza de electrónica básica y avanzada.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h3>Enlaces Rápidos</h3>
-                <ul class="footer-links">
-                    <li><a href="#activos"><i class="fas fa-arrow-right"></i> Componentes Activos</a></li>
-                    <li><a href="#pasivos"><i class="fas fa-arrow-right"></i> Componentes Pasivos</a></li>
-                    <li><a href="#comparacion"><i class="fas fa-arrow-right"></i> Tabla Comparativa</a></li>
-                    <li><a href="#galeria"><i class="fas fa-arrow-right"></i> Galería Visual</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Recursos Adicionales</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-book"></i> Guía de Inicio</a></li>
-                    <li><a href="#"><i class="fas fa-video"></i> Tutoriales en Video</a></li>
-                    <li><a href="#"><i class="fas fa-project-diagram"></i> Simulador de Circuitos</a></li>
-                    <li><a href="#"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2023 ElectroLearn. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Efecto de líneas de circuito dinámicas
-        document.addEventListener('DOMContentLoaded', function() {
-            const circuitLines = document.querySelector('.circuit-lines');
-            
-            // Crear líneas horizontales adicionales
-            for (let i = 0; i < 5; i++) {
-                const line = document.createElement('div');
-                line.className = 'circuit-line horizontal-line';
-                line.style.top = `${10 + Math.random() * 80}%`;
-                line.style.animationDuration = `${15 + Math.random() * 20}s`;
-                line.style.animationDelay = `${Math.random() * 5}s`;
-                circuitLines.appendChild(line);
-            }
-            
-            // Crear líneas verticales adicionales
-            for (let i = 0; i < 5; i++) {
-                const line = document.createElement('div');
-                line.className = 'circuit-line vertical-line';
-                line.style.left = `${10 + Math.random() * 80}%`;
-                line.style.animationDuration = `${10 + Math.random() * 15}s`;
-                line.style.animationDelay = `${Math.random() * 5}s`;
-                circuitLines.appendChild(line);
-            }
-            
-            // Efecto de aparición suave al cargar
-            const elements = document.querySelectorAll('.component-card, .gallery-item, .comparison-table tr');
-            elements.forEach((el, index) => {
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, 100 * index);
-            });
-        });
-    </script>
-</body>
-</html>
+                <div class="g
