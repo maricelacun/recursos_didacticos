@@ -145,7 +145,7 @@
             <h2 class="text-3xl section-title mb-8">Tu Guía Visual: Introducción a Java</h2>
             <p class="text-lg mb-6">Este organizador gráfico te ayudará a tener una visión general de los conceptos clave y herramientas en Java.</p>
             <div class="flex justify-center mb-6">
-                <img id="grafico.png" src="Introducción a Java_ Requisitos, Conceptos Clave y Recursos para Desarrolladores.png" alt="Organizador Gráfico de Java" class="rounded-lg shadow-xl max-w-full md:max-w-2xl h-auto cursor-pointer" onclick="openModal('organizerModal')">
+                <img id="organizerImage" src="grafico.png" alt="Organizador Gráfico de Java" class="rounded-lg shadow-xl max-w-full md:max-w-2xl h-auto cursor-pointer" onclick="openModal('organizerModal')">
             </div>
             <button onclick="openModal('organizerModal')" class="btn btn-primary">
                 Ver Organizador en Grande
@@ -156,7 +156,7 @@
             <div class="modal-content">
                 <span class="close-button" onclick="closeModal('organizerModal')">×</span>
                 <h3 class="text-2xl font-semibold mb-4 text-sky-700">Organizador Gráfico: Java</h3>
-                <img src="Introducción a Java_ Requisitos, Conceptos Clave y Recursos para Desarrolladores.png" alt="Organizador Gráfico de Java en grande">
+                <img src="grafico.png" alt="Organizador Gráfico de Java en grande">
             </div>
         </div>
 
@@ -543,19 +543,19 @@ Documentación:
             }
         }
 
-        // Simple fallback for image errors, e.g., if the uploaded image path is wrong
+        // Simple fallback for image errors
         const organizerImg = document.getElementById('organizerImage');
         if (organizerImg) {
             organizerImg.onerror = function() {
-                this.alt = "Error al cargar el organizador gráfico. Asegúrate que el archivo 'Introducción a Java_ Requisitos, Conceptos Clave y Recursos para Desarrolladores.png' está disponible.";
-                this.src = 'https://placehold.co/800x600/f87171/ffffff?text=Error+cargando+imagen&font=poppins';
+                this.alt = "Error al cargar el organizador gráfico. Asegúrate que el archivo 'grafico.png' está disponible en la misma carpeta que este HTML.";
+                this.src = 'https://placehold.co/800x600/f87171/ffffff?text=Error+cargando+grafico.png&font=poppins';
             };
         }
         const organizerModalImg = document.querySelector('#organizerModal img');
-         if (organizerModalImg && organizerModalImg.src.includes('Introducción a Java_ Requisitos')) {
+         if (organizerModalImg) { // Check if the element exists before setting onerror
             organizerModalImg.onerror = function() {
-                this.alt = "Error al cargar el organizador gráfico.";
-                this.src = 'https://placehold.co/800x600/f87171/ffffff?text=Error+cargando+imagen+del+organizador&font=poppins';
+                this.alt = "Error al cargar el organizador gráfico en el modal.";
+                this.src = 'https://placehold.co/800x600/f87171/ffffff?text=Error+cargando+grafico.png+en+modal&font=poppins';
             };
         }
 
