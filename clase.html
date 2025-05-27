@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorando Java: ¡Tu Aventura de Programación!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff; /* Light sky blue background */
+        }
+        .header-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh; /* Max height for the modal content */
+            overflow-y: auto; /* Scroll if content is too long */
+        }
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
+            text-decoration: none;
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #2563eb; /* Blue-600 */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #1d4ed8; /* Blue-700 */
+        }
+        .btn-secondary {
+            background-color: #fb923c; /* Orange-400 */
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #f97316; /* Orange-500 */
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #1e3a8a; /* Blue-800 */
+        }
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f9ff;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #93c5fd; /* Blue-300 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #60a5fa; /* Blue-400 */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-gradient-to-r from-sky-500 to-indigo-600 text-white py-12 shadow-lg">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl header-title mb-4">🚀 Explorando Java: ¡Tu Aventura de Programación! 🚀</h1>
+            <p class="text-lg md:text-xl text-sky-100">Descubre el poder de Java y comienza a crear aplicaciones increíbles.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="intro" class="mb-16">
+            <h2 class="text-3xl section-title mb-6 text-center">¿Qué es Java y por qué aprenderlo?</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-lg mb-4 leading-relaxed">
+                        Java es un lenguaje de programación <strong class="text-sky-600">versátil y poderoso</strong>, utilizado por millones de desarrolladores en todo el mundo. Desde aplicaciones móviles hasta complejos sistemas empresariales y juegos, ¡Java está en todas partes!
+                    </p>
+                    <p class="text-lg mb-4 leading-relaxed">
+                        Aprender Java te abrirá puertas a un vasto mundo de oportunidades en el desarrollo de software. Es conocido por su filosofía <strong class="text-indigo-600">"Write Once, Run Anywhere" (WORA)</strong>, lo que significa que el código Java puede ejecutarse en cualquier plataforma que tenga una Máquina Virtual Java (JVM).
+                    </p>
+                    <ul class="list-disc list-inside text-lg space-y-2">
+                        <li><strong class="text-emerald-600">Multiplataforma:</strong> Funciona en Windows, macOS, Linux, etc.</li>
+                        <li><strong class="text-emerald-600">Orientado a Objetos:</strong> Facilita la creación de software modular y reutilizable.</li>
+                        <li><strong class="text-emerald-600">Gran Comunidad:</strong> Millones de desarrolladores y recursos disponibles.</li>
+                        <li><strong class="text-emerald-600">Amplio Uso:</strong> Aplicaciones web, móviles, de escritorio, juegos, Big Data, y más.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="https://placehold.co/600x400/3b82f6/ffffff?text=¡Hola+Java!&font=poppins" alt="Ilustración de Java" class="rounded-lg shadow-xl w-full h-auto">
+                </div>
+            </div>
+        </section>
+
+        <section id="organizer" class="mb-16 text-center">
+            <h2 class="text-3xl section-title mb-8">Tu Guía Visual: Introducción a Java</h2>
+            <p class="text-lg mb-6">Este organizador gráfico te ayudará a tener una visión general de los conceptos clave y herramientas en Java.</p>
+            <div class="flex justify-center mb-6">
+                <img id="organizerImage" src="Introducción a Java_ Requisitos, Conceptos Clave y Recursos para Desarrolladores.png" alt="Organizador Gráfico de Java" class="rounded-lg shadow-xl max-w-full md:max-w-2xl h-auto cursor-pointer" onclick="openModal('organizerModal')">
+            </div>
+            <button onclick="openModal('organizerModal')" class="btn btn-primary">
+                Ver Organizador en Grande
+            </button>
+        </section>
+
+        <div id="organizerModal" class="modal" onclick="closeModalOutside(event, 'organizerModal')">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('organizerModal')">×</span>
+                <h3 class="text-2xl font-semibold mb-4 text-sky-700">Organizador Gráfico: Java</h3>
+                <img src="Introducción a Java_ Requisitos, Conceptos Clave y Recursos para Desarrolladores.png" alt="Organizador Gráfico de Java en grande">
+            </div>
+        </div>
+
+        <section id="concepts" class="mb-16">
+            <h2 class="text-3xl section-title mb-8 text-center">Conceptos Clave de Java 💡</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6">
+                    <img src="https://placehold.co/100x100/0ea5e9/ffffff?text=Sintaxis&font=poppins" alt="Icono Sintaxis" class="mx-auto mb-4 rounded-full">
+                    <h3 class="text-xl font-semibold mb-3 text-sky-700 text-center">Sintaxis Básica</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        La base de Java: variables, tipos de datos, operadores, estructuras de control (if, for, while). Es como aprender el alfabeto y la gramática antes de escribir una historia.
+                    </p>
+                    <button onclick="showCodeExample('sintaxis')" class="btn btn-secondary w-full">Ver Ejemplo</button>
+                </div>
+                <div class="card p-6">
+                    <img src="https://placehold.co/100x100/10b981/ffffff?text=OOP&font=poppins" alt="Icono Clases y Objetos" class="mx-auto mb-4 rounded-full">
+                    <h3 class="text-xl font-semibold mb-3 text-emerald-700 text-center">Clases y Objetos</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        Java es Orientado a Objetos. Las clases son como planos para crear objetos, que son instancias de esas clases con sus propios atributos y comportamientos.
+                    </p>
+                    <button onclick="showCodeExample('clases')" class="btn btn-secondary w-full">Ver Ejemplo</button>
+                </div>
+                <div class="card p-6">
+                    <img src="https://placehold.co/100x100/8b5cf6/ffffff?text=Herencia&font=poppins" alt="Icono Herencia" class="mx-auto mb-4 rounded-full">
+                    <h3 class="text-xl font-semibold mb-3 text-violet-700 text-center">Herencia</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        Permite que una clase (subclase) herede atributos y métodos de otra clase (superclase). Fomenta la reutilización de código y crea jerarquías lógicas.
+                    </p>
+                    <button onclick="showCodeExample('herencia')" class="btn btn-secondary w-full">Ver Ejemplo</button>
+                </div>
+                <div class="card p-6">
+                    <img src="https://placehold.co/100x100/ec4899/ffffff?text=Interfaces&font=poppins" alt="Icono Interfaces" class="mx-auto mb-4 rounded-full">
+                    <h3 class="text-xl font-semibold mb-3 text-pink-700 text-center">Interfaces</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        Definen un contrato de lo que una clase puede hacer, sin especificar cómo lo hace. Permiten la abstracción y el polimorfismo.
+                    </p>
+                    <button onclick="showCodeExample('interfaces')" class="btn btn-secondary w-full">Ver Ejemplo</button>
+                </div>
+                <div class="card p-6">
+                    <img src="https://placehold.co/100x100/f59e0b/ffffff?text=Errores&font=poppins" alt="Icono Excepciones" class="mx-auto mb-4 rounded-full">
+                    <h3 class="text-xl font-semibold mb-3 text-amber-700 text-center">Manejo de Excepciones</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        Mecanismo para controlar errores y situaciones inesperadas durante la ejecución del programa (ej. división por cero, archivo no encontrado).
+                    </p>
+                    <button onclick="showCodeExample('excepciones')" class="btn btn-secondary w-full">Ver Ejemplo</button>
+                </div>
+                 <div class="card p-6">
+                    <img src="https://placehold.co/100x100/6366f1/ffffff?text=Proyectos&font=poppins" alt="Icono Desarrollo de Proyectos" class="mx-auto mb-4 rounded-full">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700 text-center">Desarrollo de Proyectos</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                        Aprende sobre planificación, estructura de carpetas, pruebas unitarias y documentación para crear proyectos robustos y mantenibles.
+                    </p>
+                     <button onclick="showCodeExample('proyectosInfo')" class="btn btn-secondary w-full">Más Info</button>
+                </div>
+            </div>
+        </section>
+
+        <div id="codeModal" class="modal" onclick="closeModalOutside(event, 'codeModal')">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('codeModal')">×</span>
+                <h3 id="codeModalTitle" class="text-2xl font-semibold mb-4 text-sky-700">Ejemplo de Código</h3>
+                <div id="codeModalContent" class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto">
+                    <pre><code class="language-java"></code></pre>
+                </div>
+                <p id="codeModalExplanation" class="mt-4 text-gray-700"></p>
+            </div>
+        </div>
+        
+        <section id="tools" class="mb-16 bg-sky-100 py-12 rounded-lg shadow-md">
+            <h2 class="text-3xl section-title mb-8 text-center">Herramientas del Desarrollador Java 🛠️</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
+                <div class="card p-6 text-center">
+                    <img src="https://placehold.co/80x80/facc15/1f2937?text=JDK&font=poppins" alt="JDK Icon" class="mx-auto mb-3">
+                    <h3 class="text-xl font-semibold mb-2 text-yellow-600">JDK (Java Development Kit)</h3>
+                    <p class="text-gray-600 text-sm mb-3">Esencial para desarrollar. Incluye el compilador, la JVM y librerías estándar.</p>
+                    <a href="https://www.oracle.com/java/technologies/downloads/" target="_blank" class="text-sky-600 hover:text-sky-800 font-semibold">Descargar JDK →</a>
+                </div>
+                <div class="card p-6 text-center">
+                     <img src="https://placehold.co/80x80/34d399/1f2937?text=IDE&font=poppins" alt="IDE Icon" class="mx-auto mb-3">
+                    <h3 class="text-xl font-semibold mb-2 text-emerald-600">IDEs (Entornos de Desarrollo)</h3>
+                    <p class="text-gray-600 text-sm mb-3">Facilitan la escritura, depuración y ejecución de código. Populares: IntelliJ IDEA, Eclipse.</p>
+                    <a href="https://www.jetbrains.com/idea/" target="_blank" class="text-sky-600 hover:text-sky-800 font-semibold mr-2">IntelliJ IDEA</a> |
+                    <a href="https://www.eclipse.org/downloads/" target="_blank" class="text-sky-600 hover:text-sky-800 font-semibold ml-2">Eclipse</a>
+                </div>
+                <div class="card p-6 text-center">
+                    <img src="https://placehold.co/80x80/fb7185/1f2937?text=Build&font=poppins" alt="Build Tools Icon" class="mx-auto mb-3">
+                    <h3 class="text-xl font-semibold mb-2 text-rose-600">Herramientas de Build</h3>
+                    <p class="text-gray-600 text-sm mb-3">Automatizan la compilación y gestión de dependencias. Comunes: Maven, Gradle.</p>
+                     <a href="https://maven.apache.org/" target="_blank" class="text-sky-600 hover:text-sky-800 font-semibold mr-2">Maven</a> |
+                    <a href="https://gradle.org/" target="_blank" class="text-sky-600 hover:text-sky-800 font-semibold ml-2">Gradle</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="video" class="mb-16">
+            <h2 class="text-3xl section-title mb-8 text-center">¡Java en Acción! 🎬</h2>
+            <p class="text-lg mb-6 text-center text-gray-700">Mira este video para una introducción rápida y entretenida a Java en español.</p>
+            <div class="aspect-w-16 aspect-h-9 rounded-lg shadow-xl overflow-hidden max-w-3xl mx-auto">
+                <iframe src="https://www.youtube.com/embed/coK4jM5wvko" title="Curso Java. Vídeo 1. Introducción. ¿Qué es Java?. JDK. JRE. IDE. Eclipse. NetBeans." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="resources" class="mb-16">
+            <h2 class="text-3xl section-title mb-8 text-center">Sigue Aprendiendo: Recursos Útiles 📚</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-sky-700">Documentación Oficial y Tutoriales</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li><a href="https://docs.oracle.com/en/java/" target="_blank" class="hover:text-sky-500">Documentación Oficial de Java</a></li>
+                        <li><a href="https://dev.java/learn/" target="_blank" class="hover:text-sky-500">Portal de Aprendizaje de Java (Oracle)</a></li>
+                        <li><a href="https://www.w3schools.com/java/" target="_blank" class="hover:text-sky-500">W3Schools Java Tutorial</a> (Contenido mayormente en inglés, pero útil)</li>
+                        <li><a href="https://www.geeksforgeeks.org/java/" target="_blank" class="hover:text-sky-500">GeeksforGeeks Java</a> (Contenido en inglés)</li>
+                        <li><a href="https://pildorasinformaticas.es/course/java-desde-cero-gratuito/" target="_blank" class="hover:text-sky-500">Píldoras Informáticas - Curso Java</a> (Español)</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-emerald-700">Comunidades y Foros (Mayormente en Inglés)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li><a href="https://stackoverflow.com/questions/tagged/java" target="_blank" class="hover:text-emerald-500">Stack Overflow (Java)</a></li>
+                        <li><a href="https://www.reddit.com/r/java/" target="_blank" class="hover:text-emerald-500">Reddit r/java</a></li>
+                        <li><a href="https://discord.gg/java" target="_blank" class="hover:text-emerald-500">Comunidad de Java en Discord</a></li>
+                        <li><a href="http://www.forosdelweb.com/f45/" target="_blank" class="hover:text-emerald-500">Foros del Web - Java</a> (Español)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+        <p>© <span id="currentYear"></span> Exploradores de Java. ¡Feliz codificación!</p>
+        <p class="text-sm">Creado con ❤️ para futuros desarrolladores.</p>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore background scrolling
+        }
+        
+        function closeModalOutside(event, modalId) {
+            const modal = document.getElementById(modalId);
+            if (event.target === modal) {
+                closeModal(modalId);
+            }
+        }
+
+        // Code examples data
+        const codeExamples = {
+            sintaxis: {
+                title: "Ejemplo: Sintaxis Básica",
+                code: `
+public class HolaMundo {
+    public static void main(String[] args) {
+        // Esto es un comentario
+        String mensaje = "¡Hola, Java Explorers!"; // Declarar una variable String
+        int numero = 10; // Declarar una variable int
+
+        if (numero > 5) {
+            System.out.println(mensaje);
+        } else {
+            System.out.println("El número no es mayor a 5.");
+        }
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Iteración número: " + (i + 1));
+        }
+    }
+}`,
+                explanation: "Este ejemplo muestra cómo declarar variables (mensaje, numero), usar una estructura condicional 'if-else' y un bucle 'for'. 'System.out.println' se usa para imprimir en la consola."
+            },
+            clases: {
+                title: "Ejemplo: Clases y Objetos",
+                code: `
+// Definición de la clase 'Perro'
+class Perro {
+    // Atributos
+    String nombre;
+    String raza;
+
+    // Constructor
+    public Perro(String nombre, String raza) {
+        this.nombre = nombre;
+        this.raza = raza;
+    }
+
+    // Método
+    public void ladrar() {
+        System.out.println(nombre + " dice: ¡Guau guau!");
+    }
+}
+
+public class DemoClases {
+    public static void main(String[] args) {
+        // Creación de un objeto (instancia) de la clase Perro
+        Perro miPerro = new Perro("Fido", "Labrador");
+        Perro otroPerro = new Perro("Luna", "Husky");
+
+        // Acceder a atributos y llamar a métodos
+        System.out.println(miPerro.nombre + " es un " + miPerro.raza);
+        miPerro.ladrar();
+        
+        System.out.println(otroPerro.nombre + " es un " + otroPerro.raza);
+        otroPerro.ladrar();
+    }
+}`,
+                explanation: "La clase 'Perro' define un plano con atributos (nombre, raza) y un método (ladrar). Luego, creamos dos objetos 'Perro': 'miPerro' y 'otroPerro', cada uno con sus propios datos."
+            },
+            herencia: {
+                title: "Ejemplo: Herencia",
+                code: `
+// Superclase o clase padre
+class Animal {
+    String nombre;
+    public Animal(String nombre) {
+        this.nombre = nombre;
+    }
+    public void comer() {
+        System.out.println(nombre + " está comiendo.");
+    }
+}
+
+// Subclase o clase hija que hereda de Animal
+class Gato extends Animal {
+    public Gato(String nombre) {
+        super(nombre); // Llama al constructor de la superclase
+    }
+
+    public void maullar() {
+        System.out.println(nombre + " dice: ¡Miau!");
+    }
+}
+
+public class DemoHerencia {
+    public static void main(String[] args) {
+        Gato miGato = new Gato("Mishi");
+        miGato.comer();  // Método heredado de Animal
+        miGato.maullar(); // Método propio de Gato
+    }
+}`,
+                explanation: "La clase 'Gato' hereda de 'Animal'. Esto significa que 'Gato' tiene acceso al atributo 'nombre' y al método 'comer()' de 'Animal', además de sus propios métodos como 'maullar()'."
+            },
+            interfaces: {
+                title: "Ejemplo: Interfaces",
+                code: `
+// Definición de la interfaz 'Volador'
+interface Volador {
+    void despegar(); // Métodos abstractos (sin implementación)
+    void volar();
+    void aterrizar();
+}
+
+// Clase que implementa la interfaz 'Volador'
+class Avion implements Volador {
+    String modelo;
+
+    public Avion(String modelo) {
+        this.modelo = modelo;
+    }
+
+    @Override
+    public void despegar() {
+        System.out.println("El avión " + modelo + " está despegando.");
+    }
+
+    @Override
+    public void volar() {
+        System.out.println("El avión " + modelo + " está volando alto.");
+    }
+
+    @Override
+    public void aterrizar() {
+        System.out.println("El avión " + modelo + " ha aterrizado.");
+    }
+}
+
+public class DemoInterfaces {
+    public static void main(String[] args) {
+        Avion miAvion = new Avion("Boeing 747");
+        miAvion.despegar();
+        miAvion.volar();
+        miAvion.aterrizar();
+    }
+}`,
+                explanation: "La interfaz 'Volador' define un contrato con los métodos 'despegar', 'volar' y 'aterrizar'. La clase 'Avion' implementa esta interfaz, proporcionando la lógica específica para cada método."
+            },
+            excepciones: {
+                title: "Ejemplo: Manejo de Excepciones",
+                code: `
+public class DemoExcepciones {
+    public static void main(String[] args) {
+        try {
+            int resultado = dividir(10, 0);
+            System.out.println("Resultado: " + resultado);
+        } catch (ArithmeticException e) {
+            System.err.println("Error: No se puede dividir por cero.");
+            // e.printStackTrace(); // Para ver más detalles del error
+        } finally {
+            System.out.println("Este bloque 'finally' siempre se ejecuta.");
+        }
+        System.out.println("El programa continúa después del try-catch.");
+    }
+
+    public static int dividir(int a, int b) {
+        if (b == 0) {
+            // Lanzar una excepción si se intenta dividir por cero
+            throw new ArithmeticException("Intento de división por cero");
+        }
+        return a / b;
+    }
+}`,
+                explanation: "El bloque 'try' contiene código que podría generar un error (división por cero). Si ocurre una 'ArithmeticException', el bloque 'catch' la maneja. El bloque 'finally' se ejecuta siempre, haya o no error."
+            },
+            proyectosInfo: {
+                title: "Info: Desarrollo de Proyectos en Java",
+                code: `
+// Esto no es código ejecutable, sino una guía conceptual.
+
+/*
+Planificación del Proyecto:
+- Definir objetivos y alcance.
+- Identificar requisitos funcionales y no funcionales.
+- Estimar tiempos y recursos.
+
+Estructura de Carpetas (Ejemplo Maven/Gradle):
+  mi-proyecto/
+  ├── src/
+  │   ├── main/
+  │   │   ├── java/      // Código fuente Java
+  │   │   │   └── com/ejemplo/miaplicacion/
+  │   │   └── resources/ // Archivos de configuración, imágenes, etc.
+  │   └── test/
+  │       ├── java/      // Pruebas unitarias
+  │       └── resources/ // Recursos para pruebas
+  ├── pom.xml            // (Maven) o build.gradle (Gradle) - Configuración del build
+  └── README.md          // Documentación del proyecto
+
+Pruebas Unitarias:
+- Usar frameworks como JUnit o TestNG.
+- Escribir pruebas para verificar pequeñas unidades de código (métodos, clases).
+- Asegurar que el código funciona como se espera y detectar regresiones.
+  Ejemplo (JUnit):
+  @Test
+  void testSuma() {
+      Calculadora calc = new Calculadora();
+      assertEquals(5, calc.sumar(2, 3));
+  }
+
+Documentación:
+- Comentarios en el código: Explicar lógica compleja.
+- Javadoc: Generar documentación API a partir de comentarios especiales.
+  /**
+   * Esta clase representa una Calculadora simple.
+   * @author TuNombre
+   * @version 1.0
+   */
+  public class Calculadora { ... }
+- README.md: Instrucciones de cómo compilar, ejecutar y contribuir al proyecto.
+*/`,
+                explanation: "Desarrollar un proyecto en Java implica más que solo escribir código. Es crucial planificar, organizar bien los archivos, escribir pruebas para asegurar la calidad y documentar el trabajo para que otros (y tu yo futuro) puedan entenderlo y mantenerlo."
+            }
+        };
+
+        function showCodeExample(conceptKey) {
+            const example = codeExamples[conceptKey];
+            if (example) {
+                document.getElementById('codeModalTitle').textContent = example.title;
+                const codeBlock = document.querySelector('#codeModalContent pre code');
+                codeBlock.textContent = example.code.trim(); // .trim() para quitar espacios extra
+                // Re-highlight if using a syntax highlighter library, not strictly needed for <pre><code>
+                if (window.hljs) { // Check if highlight.js is loaded (it's not in this example)
+                     hljs.highlightElement(codeBlock);
+                }
+                document.getElementById('codeModalExplanation').textContent = example.explanation;
+                openModal('codeModal');
+            }
+        }
+
+        // Simple fallback for image errors, e.g., if the uploaded image path is wrong
+        const organizerImg = document.getElementById('organizerImage');
+        if (organizerImg) {
+            organizerImg.onerror = function() {
+                this.alt = "Error al cargar el organizador gráfico. Asegúrate que el archivo 'Introducción a Java_ Requisitos, Conceptos Clave y Recursos para Desarrolladores.png' está disponible.";
+                this.src = 'https://placehold.co/800x600/f87171/ffffff?text=Error+cargando+imagen&font=poppins';
+            };
+        }
+        const organizerModalImg = document.querySelector('#organizerModal img');
+         if (organizerModalImg && organizerModalImg.src.includes('Introducción a Java_ Requisitos')) {
+            organizerModalImg.onerror = function() {
+                this.alt = "Error al cargar el organizador gráfico.";
+                this.src = 'https://placehold.co/800x600/f87171/ffffff?text=Error+cargando+imagen+del+organizador&font=poppins';
+            };
+        }
+
+    </script>
+</body>
+</html>
