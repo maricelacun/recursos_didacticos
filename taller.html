@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Programación en Java - Nivel Básico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        .author {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        .objective, .activities, .recommendations {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .exercise {
+            background-color: #e8f4fc;
+            padding: 10px 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        .code {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .download-btn {
+            display: block;
+            width: 200px;
+            background-color: #2ecc71;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin: 30px auto;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .download-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧠 Taller de Programación en Java - Nivel Básico</h1>
+    
+    <div class="author">
+        <p><strong>Tema:</strong> Operaciones básicas, entrada por teclado y condicionales</p>
+        <p><strong>Duración estimada:</strong> 2 horas</p>
+        <p><strong>Autor:</strong> [Nombre del docente]</p>
+    </div>
+    
+    <div class="objective">
+        <h2>📌 Objetivo del Taller</h2>
+        <p>Aplicar los conocimientos básicos de programación en Java:</p>
+        <ul>
+            <li>Uso de la clase <code>Scanner</code></li>
+            <li>Entrada y salida de datos</li>
+            <li>Operaciones matemáticas básicas</li>
+            <li>Condicionales simples (<code>if</code>)</li>
+        </ul>
+    </div>
+    
+    <div class="activities">
+        <h2>✍️ Actividades del Taller</h2>
+        
+        <div class="exercise">
+            <h3>🟢 Ejercicio 1: Suma de dos números</h3>
+            <p><strong>Enunciado:</strong> Pide al usuario que ingrese dos números enteros por teclado y muestra su suma.</p>
+            <p><strong>Ejemplo de salida esperada:</strong></p>
+            <pre>
+Ingrese el primer número: 8  
+Ingrese el segundo número: 5  
+La suma es: 13</pre>
+        </div>
+        
+        <div class="exercise">
+            <h3>🟢 Ejercicio 2: Mayor o menor</h3>
+            <p><strong>Enunciado:</strong> Pide dos números y muestra cuál es el mayor. Si son iguales, indícalo.</p>
+            <p><strong>Ejemplo de salida esperada:</strong></p>
+            <pre>
+Ingrese el primer número: 7  
+Ingrese el segundo número: 10  
+El número mayor es: 10</pre>
+        </div>
+        
+        <div class="exercise">
+            <h3>🟢 Ejercicio 3: Área de un rectángulo</h3>
+            <p><strong>Enunciado:</strong> Solicita al usuario la base y la altura de un rectángulo y calcula el área.</p>
+            <p><strong>Fórmula:</strong> Área = base × altura</p>
+        </div>
+        
+        <div class="exercise">
+            <h3>🟢 Ejercicio 4: Edad</h3>
+            <p><strong>Enunciado:</strong> Pide el año de nacimiento del estudiante y calcula su edad (considera que estamos en el año 2025).</p>
+        </div>
+        
+        <div class="exercise">
+            <h3>🟢 Ejercicio 5: Número par o impar</h3>
+            <p><strong>Enunciado:</strong> Pide un número entero al usuario y muestra si es par o impar.</p>
+        </div>
+        
+        <h3>🧩 Plantilla para usar en cada ejercicio</h3>
+        <div class="code">
+            import java.util.Scanner;
+
+            public class EjercicioX {
+                public static void main(String[] args) {
+                    Scanner sc = new Scanner(System.in);
+
+                    // Aquí va tu código...
+
+                    sc.close();
+                }
+            }
+        </div>
+    </div>
+    
+    <div class="recommendations">
+        <h2>✅ Recomendaciones para los estudiantes</h2>
+        <ul>
+            <li>Escribe cada ejercicio en un archivo diferente (Ejercicio1.java, Ejercicio2.java, etc.)</li>
+            <li>Compila y ejecuta cada uno para probar su funcionamiento.</li>
+            <li>Si te da error, revisa los mensajes y ajusta tu código.</li>
+            <li>Entrega un archivo <code>.zip</code> con los 5 programas.</li>
+            <li>Incluye capturas de pantalla mostrando que el programa funciona.</li>
+        </ul>
+    </div>
+    
+    <a href="taller_java_basico.docx" class="download-btn" download>Descargar en Word</a>
+    
+    <script>
+        // Este script generaría el documento Word dinámicamente si se implementara en un servidor
+        // En este ejemplo, necesitarías tener el archivo "taller_java_basico.docx" en el mismo directorio
+        document.querySelector('.download-btn').addEventListener('click', function() {
+            alert('Descargando taller... Si no funciona, asegúrate de tener el archivo taller_java_basico.docx disponible.');
+        });
+    </script>
+</body>
+</html>
