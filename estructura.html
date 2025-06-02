@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendiendo Java con Dr. Camilo Gallegos Domínguez</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #007bff 30%, #ffd700 100%); /* Gradiente circular azul y amarillo */
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para el encabezado */
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        header img {
+            width: 100px; /* Ajusta el tamaño según sea necesario */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            color: #0056b3; /* Azul oscuro para el nombre del colegio */
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px; /* Ancho máximo para el contenido principal */
+            margin: 20px auto;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente para el contenido */
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #007bff; /* Azul para los títulos de sección */
+            border-bottom: 3px solid #ffd700; /* Línea amarilla debajo del título */
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-size: 2em; /* Tamaño de fuente más grande para los títulos */
+        }
+
+        h3 {
+            color: #0056b3; /* Azul oscuro para subtítulos */
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+
+        p, li {
+            font-size: 1.1em; /* Tamaño de fuente ligeramente más grande para el texto */
+            text-align: left; /* Alineación a la izquierda para mejor lectura */
+        }
+
+        .code-block {
+            background-color: #282c34; /* Fondo oscuro para bloques de código */
+            color: #abb2bf; /* Color de texto claro para código */
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto; /* Para scroll horizontal si el código es muy largo */
+        }
+
+        .code-block .keyword { color: #c678dd; font-weight: bold; } /* Morado para palabras clave */
+        .code-block .comment { color: #5c6370; font-style: italic; } /* Gris para comentarios */
+        .code-block .string { color: #98c379; } /* Verde para strings */
+        .code-block .number { color: #d19a66; } /* Naranja para números */
+        .code-block .class-name { color: #e5c07b; } /* Amarillo claro para nombres de clase */
+
+        .exercise {
+            background-color: #e9ecef; /* Fondo gris claro para ejercicios */
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 5px solid #007bff; /* Borde azul a la izquierda */
+        }
+
+        .exercise h4 {
+            margin-top: 0;
+            color: #0056b3; /* Azul oscuro para el título del ejercicio */
+        }
+
+        .multimedia {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .multimedia img, .multimedia iframe {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background-color: #ffd700; /* Amarillo para botones */
+            color: #333;
+            border: none;
+            padding: 12px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #ffc107; /* Amarillo más oscuro al pasar el mouse */
+            transform: translateY(-2px); /* Efecto de elevación */
+        }
+
+        /* Estilos específicos para las secciones de ejemplos interactivos */
+        .interactive-example {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .interactive-example label, .interactive-example input, .interactive-example select {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0f7fa; /* Fondo azul claro para salida */
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap; /* Para mantener saltos de línea y espacios */
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 15px;
+            font-size: 0.9em;
+            color: #fff; /* Texto blanco para el pie de página */
+            width: 100%;
+            background-color: rgba(0, 86, 179, 0.7); /* Azul oscuro semi-transparente */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="sello.jpg" alt="Sello del Colegio">
+        <h1>Institución Educativa Dr. Camilo Gallegos Domínguez</h1>
+    </header>
+
+    <div class="container">
+        <h2>¡Bienvenido a tu Aventura en Java! 🚀</h2>
+        <p>¡Hola, futuro programador! En esta página exploraremos dos herramientas fundamentales en Java: las <strong>estructuras de selección múltiple</strong> y las <strong>estructuras repetitivas</strong>. ¡Prepárate para darle superpoderes a tus programas!</p>
+
+        <hr style="border: 1px solid #ffd700; margin: 30px 0;">
+
+        <section id="seleccion-multiple">
+            <h2>Estructura de Selección Múltiple (<code>switch</code>) 🚦</h2>
+            <p>Imagina que tienes muchos caminos y debes elegir uno según una condición específica. ¡Para eso sirve el <code>switch</code>! Te permite seleccionar un bloque de código a ejecutar entre varias opciones, basándose en el valor de una variable o expresión.</p>
+
+            <div class="multimedia">
+                <p>🎬 <strong>Visualiza cómo funciona el <code>switch</code>:</strong></p>
+                <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW55d2d0eHoyajFrOHZ1NnJicmZldWlhcDlmbGlmdXR0Z2d4NnUybiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7btPCcdNni11PySY/giphy.gif" alt="Diagrama animado de switch case" style="max-width: 350px;">
+            </div>
+
+            <h3>Sintaxis Mágica ✨:</h3>
+            <pre class="code-block">
+<span class="keyword">int</span> opcion = <span class="number">2</span>;
+<span class="keyword">String</span> mensaje;
+
+<span class="keyword">switch</span> (opcion) {
+    <span class="keyword">case</span> <span class="number">1</span>:
+        mensaje = <span class="string">"Elegiste la opción 1: ¡Hola!"</span>;
+        <span class="keyword">break</span>; <span class="comment">// ¡No olvides el break! Evita que se ejecuten los siguientes casos.</span>
+    <span class="keyword">case</span> <span class="number">2</span>:
+        mensaje = <span class="string">"Elegiste la opción 2: ¡Adiós!"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">3</span>:
+        mensaje = <span class="string">"Elegiste la opción 3: ¿Qué tal?"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>: <span class="comment">// Si ninguna opción coincide</span>
+        mensaje = <span class="string">"Opción no válida."</span>;
+        <span class="keyword">break</span>;
+}
+<span class="class-name">System</span>.out.println(mensaje);
+            </pre>
+            <p>En este ejemplo, como <code>opcion</code> es <code>2</code>, el mensaje será "Elegiste la opción 2: ¡Adiós!".</p>
+
+            <div class="interactive-example">
+                <h3>¡Prueba el Switch! 🧪</h3>
+                <label for="diaSemana">Elige un número del 1 al 7 para ver el día de la semana:</label>
+                <input type="number" id="diaSemanaInput" min="1" max="7" value="1">
+                <button onclick="mostrarDia()">Ver Día</button>
+                <div class="output" id="outputSwitch">El día aparecerá aquí.</div>
+            </div>
+
+            <div class="exercise">
+                <h4>✏️ ¡Tu Turno! Ejercicio Sencillo:</h4>
+                <p>Crea un programa en Java que use un <code>switch</code>. Pide al usuario que ingrese una vocal (a, e, i, o, u) y muestra un mensaje divertido o una característica de esa vocal. Si no es una vocal, muestra "Eso no es una vocal."</p>
+                <button onclick="toggleSolucion('solucionSwitch')">Ver Pista/Solución</button>
+                <div id="solucionSwitch" style="display:none;" class="code-block">
+<span class="comment">// Pista: Puedes usar una variable char para la vocal.</span>
+<span class="comment">// Recuerda el caso 'default'.</span>
+
+<span class="keyword">char</span> vocal = <span class="string">'a'</span>; <span class="comment">// Imagina que el usuario ingresó 'a'</span>
+<span class="keyword">String</span> resultadoVocal;
+
+<span class="keyword">switch</span> (vocal) {
+    <span class="keyword">case</span> <span class="string">'a'</span>:
+        resultadoVocal = <span class="string">"La 'a' es la primera y siempre aventurera!"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">'e'</span>:
+        resultadoVocal = <span class="string">"La 'e' es elegante y enérgica!"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">'i'</span>:
+        resultadoVocal = <span class="string">"La 'i' es inteligente e intrépida!"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">'o'</span>:
+        resultadoVocal = <span class="string">"La 'o' es optimista y original!"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">'u'</span>:
+        resultadoVocal = <span class="string">"La 'u' es única y universal!"</span>;
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        resultadoVocal = <span class="string">"Eso no es una vocal."</span>;
+        <span class="keyword">break</span>;
+}
+<span class="class-name">System</span>.out.println(resultadoVocal);
+                </div>
+            </div>
+        </section>
+
+        <hr style="border: 1px solid #ffd700; margin: 30px 0;">
+
+        <section id="estructuras-repetitivas">
+            <h2>Estructuras Repetitivas (Bucles) 🔄</h2>
+            <p>¿Necesitas hacer algo una y otra vez? ¡Los bucles son tus mejores amigos! Permiten ejecutar un bloque de código múltiples veces hasta que se cumpla (o deje de cumplirse) una condición.</p>
+
+            <div class="multimedia">
+                 <p>🎬 <strong>Así funcionan los bucles:</strong></p>
+                <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20230403161430/For-Loop-Java.gif" alt="Animación de bucle for" style="max-width: 300px; margin-right:15px;">
+                <img src="https://i.stack.imgur.com/5wpT6.gif" alt="Animación de bucle while" style="max-width: 250px;">
+            </div>
+
+            <h3>1. Bucle <code>for</code> (El Contador Estrella ⭐)</h3>
+            <p>Ideal cuando sabes cuántas veces quieres repetir una acción. Es como decir "haz esto X veces".</p>
+            <pre class="code-block">
+<span class="comment">// Imprimir números del 1 al 5</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">5</span>; i++) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Número: "</span> + i);
+}
+<span class="comment">// Salida:</span>
+<span class="comment">// Número: 1</span>
+<span class="comment">// Número: 2</span>
+<span class="comment">// Número: 3</span>
+<span class="comment">// Número: 4</span>
+<span class="comment">// Número: 5</span>
+            </pre>
+
+            <div class="interactive-example">
+                <h3>¡Prueba el For! 🔢</h3>
+                <label for="limiteFor">Contar hasta:</label>
+                <input type="number" id="limiteForInput" min="1" max="20" value="5">
+                <button onclick="ejecutarFor()">Ejecutar Bucle For</button>
+                <div class="output" id="outputFor">Los números contados aparecerán aquí.</div>
+            </div>
+
+             <div class="exercise">
+                <h4>✏️ ¡Tu Turno! Ejercicio con <code>for</code>:</h4>
+                <p>Escribe un programa en Java que use un bucle <code>for</code> para mostrar la tabla de multiplicar del número 3 (del 3x1 al 3x10).</p>
+                <button onclick="toggleSolucion('solucionFor')">Ver Pista/Solución</button>
+                <div id="solucionFor" style="display:none;" class="code-block">
+<span class="keyword">int</span> tablaDel = <span class="number">3</span>;
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">10</span>; i++) {
+    <span class="class-name">System</span>.out.println(tablaDel + <span class="string">" x "</span> + i + <span class="string">" = "</span> + (tablaDel * i));
+}
+                </div>
+            </div>
+
+            <h3>2. Bucle <code>while</code> (El Guardián Condicional 🛡️)</h3>
+            <p>Se ejecuta MIENTRAS una condición sea verdadera. Primero verifica la condición y, si es cierta, ejecuta el código. Si no, no entra al bucle.</p>
+            <pre class="code-block">
+<span class="keyword">int</span> contador = <span class="number">0</span>;
+<span class="keyword">while</span> (contador < <span class="number">3</span>) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Contador va en: "</span> + contador);
+    contador++; <span class="comment">// ¡Importante! Actualizar la variable de control para evitar bucles infinitos.</span>
+}
+<span class="comment">// Salida:</span>
+<span class="comment">// Contador va en: 0</span>
+<span class="comment">// Contador va en: 1</span>
+<span class="comment">// Contador va en: 2</span>
+            </pre>
+
+            <div class="interactive-example">
+                <h3>¡Prueba el While! ⏳</h3>
+                <p>Este bucle se ejecutará mientras un número aleatorio (entre 0 y 9) no sea 5. ¡Haz clic para probar!</p>
+                <button onclick="ejecutarWhile()">Ejecutar Bucle While</button>
+                <div class="output" id="outputWhile">Los intentos aparecerán aquí.</div>
+            </div>
+
+            <div class="exercise">
+                <h4>✏️ ¡Tu Turno! Ejercicio con <code>while</code>:</h4>
+                <p>Crea un programa en Java que pida al usuario adivinar un número secreto (por ejemplo, el 7). Usa un bucle <code>while</code> para seguir pidiendo un número hasta que el usuario adivine correctamente. Muestra un mensaje de "¡Adivinaste!" al final.</p>
+                 <button onclick="toggleSolucion('solucionWhile')">Ver Pista/Solución</button>
+                <div id="solucionWhile" style="display:none;" class="code-block">
+<span class="comment">// Necesitarás una forma de leer la entrada del usuario, por ejemplo, con la clase Scanner.</span>
+<span class="keyword">import</span> java.util.Scanner;
+
+<span class="comment">// ... dentro de tu método main ...</span>
+<span class="keyword">int</span> numeroSecreto = <span class="number">7</span>;
+<span class="keyword">int</span> numeroUsuario = <span class="number">0</span>;
+<span class="class-name">Scanner</span> scanner = <span class="keyword">new</span> <span class="class-name">Scanner</span>(<span class="class-name">System</span>.in);
+
+<span class="keyword">while</span> (numeroUsuario != numeroSecreto) {
+    <span class="class-name">System</span>.out.print(<span class="string">"Adivina el número secreto (1-10): "</span>);
+    numeroUsuario = scanner.nextInt();
+}
+<span class="class-name">System</span>.out.println(<span class="string">"¡Felicidades! Adivinaste el número secreto."</span>);
+scanner.close();
+                </div>
+            </div>
+
+            <h3>3. Bucle <code>do-while</code> (El Ejecutor Garantizado ✅)</h3>
+            <p>Similar al <code>while</code>, pero con una diferencia clave: el bloque de código se ejecuta AL MENOS UNA VEZ, y luego se verifica la condición para seguir repitiendo.</p>
+            <pre class="code-block">
+<span class="keyword">int</span> i = <span class="number">5</span>;
+<span class="keyword">do</span> {
+    <span class="class-name">System</span>.out.println(<span class="string">"El valor de i es: "</span> + i); <span class="comment">// Esto se ejecuta al menos una vez</span>
+    i++;
+} <span class="keyword">while</span> (i < <span class="number">5</span>); <span class="comment">// La condición (i < 5) es falsa, pero el bloque ya se ejecutó.</span>
+
+<span class="comment">// Salida:</span>
+<span class="comment">// El valor de i es: 5</span>
+            </pre>
+
+            <div class="interactive-example">
+                <h3>¡Prueba el Do-While! 🎬</h3>
+                <p>Este bucle te pedirá confirmar. Siempre se ejecutará al menos una vez.</p>
+                <button onclick="ejecutarDoWhile()">Ejecutar Bucle Do-While</button>
+                <div class="output" id="outputDoWhile">El resultado aparecerá aquí.</div>
+            </div>
+
+            <div class="exercise">
+                <h4>✏️ ¡Tu Turno! Ejercicio con <code>do-while</code>:</h4>
+                <p>Desarrolla un programa en Java que presente un menú simple con opciones (ej: 1. Saludar, 2. Despedir, 0. Salir). Usa un bucle <code>do-while</code> para mostrar el menú y procesar la opción del usuario hasta que elija "0. Salir".</p>
+                 <button onclick="toggleSolucion('solucionDoWhile')">Ver Pista/Solución</button>
+                <div id="solucionDoWhile" style="display:none;" class="code-block">
+<span class="keyword">import</span> java.util.Scanner;
+
+<span class="comment">// ... dentro de tu método main ...</span>
+<span class="class-name">Scanner</span> scanner = <span class="keyword">new</span> <span class="class-name">Scanner</span>(<span class="class-name">System</span>.in);
+<span class="keyword">int</span> opcionMenu;
+
+<span class="keyword">do</span> {
+    <span class="class-name">System</span>.out.println(<span class="string">"\n--- MENÚ ---"</span>);
+    <span class="class-name">System</span>.out.println(<span class="string">"1. Saludar"</span>);
+    <span class="class-name">System</span>.out.println(<span class="string">"2. Despedir"</span>);
+    <span class="class-name">System</span>.out.println(<span class="string">"0. Salir"</span>);
+    <span class="class-name">System</span>.out.print(<span class="string">"Elige una opción: "</span>);
+    opcionMenu = scanner.nextInt();
+
+    <span class="keyword">switch</span> (opcionMenu) {
+        <span class="keyword">case</span> <span class="number">1</span>:
+            <span class="class-name">System</span>.out.println(<span class="string">"¡Hola, estudiante!"</span>);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">2</span>:
+            <span class="class-name">System</span>.out.println(<span class="string">"¡Hasta pronto!"</span>);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="number">0</span>:
+            <span class="class-name">System</span>.out.println(<span class="string">"Saliendo del programa..."</span>);
+            <span class="keyword">break</span>;
+        <span class="keyword">default</span>:
+            <span class="class-name">System</span>.out.println(<span class="string">"Opción no válida. Intenta de nuevo."</span>);
+    }
+} <span class="keyword">while</span> (opcionMenu != <span class="number">0</span>);
+
+scanner.close();
+                </div>
+            </div>
+        </section>
+
+        <hr style="border: 1px solid #ffd700; margin: 30px 0;">
+
+        <section id="conclusion">
+            <h2>¡Excelente Trabajo! 🎉</h2>
+            <p>Has aprendido sobre las estructuras de selección múltiple y repetitivas en Java. ¡Sigue practicando y verás cómo te conviertes en un experto!</p>
+            <p>Recuerda: la clave está en entender cómo fluye el control en tu programa. ¡No dudes en experimentar con los ejemplos y ejercicios!</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Institución Educativa Dr. Camilo Gallegos Domínguez - Curso de Java Creativo</p>
+    </footer>
+
+    <script>
+        function toggleSolucion(id) {
+            const elemento = document.getElementById(id);
+            if (elemento.style.display === "none") {
+                elemento.style.display = "block";
+            } else {
+                elemento.style.display = "none";
+            }
+        }
+
+        function mostrarDia() {
+            const inputVal = parseInt(document.getElementById('diaSemanaInput').value);
+            const outputDiv = document.getElementById('outputSwitch');
+            let dia = "";
+            switch (inputVal) {
+                case 1: dia = "Lunes 😴 ¡Inicio de semana!"; break;
+                case 2: dia = "Martes 💪 ¡Con energía!"; break;
+                case 3: dia = "Miércoles 🤔 ¡Mitad de semana!"; break;
+                case 4: dia = "Jueves 🎉 ¡Casi viernes!"; break;
+                case 5: dia = "Viernes 😎 ¡A disfrutar!"; break;
+                case 6: dia = "Sábado 🎈 ¡Día libre!"; break;
+                case 7: dia = "Domingo ☀️ ¡A recargar pilas!"; break;
+                default: dia = "Número no válido. Ingresa un número del 1 al 7.";
+            }
+            outputDiv.textContent = dia;
+        }
+
+        function ejecutarFor() {
+            const limite = parseInt(document.getElementById('limiteForInput').value);
+            const outputDiv = document.getElementById('outputFor');
+            let resultado = "Contando con 'for':\n";
+            if (limite > 20) {
+                outputDiv.textContent = "Por favor, elige un límite menor o igual a 20 para este ejemplo.";
+                return;
+            }
+            for (let i = 1; i <= limite; i++) {
+                resultado += "Número: " + i + "\n";
+            }
+            outputDiv.textContent = resultado;
+        }
+
+        function ejecutarWhile() {
+            const outputDiv = document.getElementById('outputWhile');
+            let intentos = 0;
+            let numeroAleatorio;
+            let resultado = "Ejecutando 'while' (buscando el número 5):\n";
+            do {
+                numeroAleatorio = Math.floor(Math.random() * 10); // Número entre 0 y 9
+                intentos++;
+                resultado += `Intento ${intentos}: Salió el ${numeroAleatorio}\n`;
+                if (intentos > 20) { // Prevenir bucles muy largos en la demo
+                    resultado += "Demasiados intentos, ¡el 5 se esconde bien!\n";
+                    break;
+                }
+            } while (numeroAleatorio !== 5);
+
+            if (numeroAleatorio === 5) {
+                resultado += `¡Encontramos el 5 en el intento ${intentos}!\n`;
+            }
+            outputDiv.textContent = resultado;
+        }
+
+        function ejecutarDoWhile() {
+            const outputDiv = document.getElementById('outputDoWhile');
+            let confirmacion;
+            let contador = 0;
+            let resultado = "Ejecutando 'do-while':\n";
+             do {
+                contador++;
+                if (contador === 1) {
+                    resultado += "Este mensaje se muestra al menos una vez.\n";
+                } else {
+                     resultado += `Ejecución ${contador}. ¿Continuar? (simulado)\n`;
+                }
+                // En una app real, aquí pedirías confirmación al usuario.
+                // Para la demo, simulamos que continúa una vez y luego para.
+                confirmacion = (contador < 2); // Ejecuta dos veces para mostrar el efecto
+            } while (confirmacion);
+             resultado += "Bucle 'do-while' terminado después de " + contador + " ejecuciones.";
+            outputDiv.textContent = resultado;
+        }
+
+        // Pequeña animación para el título al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            const headerTitle = document.querySelector('header h1');
+            headerTitle.style.opacity = '0';
+            headerTitle.style.transition = 'opacity 1s ease-in-out';
+            setTimeout(() => {
+                headerTitle.style.opacity = '1';
+            }, 100);
+
+            // Efecto de entrada para las secciones
+            const sections = document.querySelectorAll('.container section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
