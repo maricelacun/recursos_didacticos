@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende Circuitos Electrónicos</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease;
+        }
+        
+        .circuit-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: scale(1.03);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .interactive {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .simulator {
+            width: 100%;
+            height: 400px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .component {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: move;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            user-select: none;
+        }
+        
+        .component img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .wire {
+            position: absolute;
+            background-color: #e74c3c;
+            height: 4px;
+            transform-origin: left center;
+            z-index: 1;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .quiz {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .options {
+            margin-left: 1.5rem;
+        }
+        
+        .option {
+            margin-bottom: 0.5rem;
+        }
+        
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+            padding: 0 1rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Aprende Circuitos Electrónicos</h1>
+            <p class="subtitle">Descubre el fascinante mundo de la electrónica de forma interactiva</p>
+        </div>
+        <canvas id="circuitAnimation" class="circuit-animation"></canvas>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ElectroLearn</div>
+            <ul class="nav-links">
+                <li><a href="#conceptos">Conceptos Básicos</a></li>
+                <li><a href="#componentes">Componentes</a></li>
+                <li><a href="#simulador">Simulador</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="conceptos" class="section">
+            <h2>Conceptos Básicos</h2>
+            <p>Los circuitos electrónicos son caminos interconectados que permiten el flujo de corriente eléctrica para realizar funciones específicas. Comprender estos conceptos fundamentales es esencial para trabajar con electrónica.</p>
+            
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Wc8qXyWlkUY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Corriente eléctrica" class="card-img">
+                    <div class="card-content">
+                        <h3>Corriente Eléctrica</h3>
+                        <p>Flujo de carga eléctrica a través de un conductor. Se mide en amperios (A) y puede ser continua (DC) o alterna (AC).</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Voltaje" class="card-img">
+                    <div class="card-content">
+                        <h3>Voltaje</h3>
+                        <p>Diferencia de potencial eléctrico entre dos puntos. Es la "fuerza" que impulsa la corriente y se mide en voltios (V).</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Resistencia" class="card-img">
+                    <div class="card-content">
+                        <h3>Resistencia</h3>
+                        <p>Oposición al flujo de corriente. Se mide en ohmios (Ω) y está descrita por la Ley de Ohm: V = I × R.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="componentes" class="section">
+            <h2>Componentes Electrónicos</h2>
+            <p>Los circuitos electrónicos están compuestos por diversos elementos que cumplen funciones específicas. Conócelos y aprende cómo interactúan entre sí.</p>
+            
+            <div class="interactive">
+                <h3>Explora los componentes</h3>
+                <p>Haz clic en cada componente para aprender más sobre él:</p>
+                
+                <div class="grid" style="margin-top: 1rem;">
+                    <div class="card" onclick="showComponentInfo('resistor')">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028018_640.png" alt="Resistor" class="card-img">
+                        <div class="card-content">
+                            <h3>Resistencia</h3>
+                            <p>Limita el flujo de corriente en un circuito.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card" onclick="showComponentInfo('capacitor')">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028019_640.png" alt="Capacitor" class="card-img">
+                        <div class="card-content">
+                            <h3>Capacitor</h3>
+                            <p>Almacena energía en un campo eléctrico.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card" onclick="showComponentInfo('diode')">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028023_640.png" alt="Diodo" class="card-img">
+                        <div class="card-content">
+                            <h3>Diodo</h3>
+                            <p>Permite el flujo de corriente en una sola dirección.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card" onclick="showComponentInfo('transistor')">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028024_640.png" alt="Transistor" class="card-img">
+                        <div class="card-content">
+                            <h3>Transistor</h3>
+                            <p>Amplifica o conmuta señales electrónicas.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="componentInfo" style="display: none; margin-top: 2rem; padding: 1.5rem; background-color: white; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                    <h3 id="infoTitle">Información del Componente</h3>
+                    <p id="infoDescription">Selecciona un componente para ver su información detallada.</p>
+                    <img id="infoSymbol" src="" alt="Símbolo" style="max-width: 100px; margin: 1rem 0;">
+                    <div id="infoDetails"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="simulador" class="section">
+            <h2>Simulador de Circuitos</h2>
+            <p>Experimenta con nuestro simulador interactivo. Arrastra componentes y conéctalos para crear tus propios circuitos.</p>
+            
+            <div class="interactive">
+                <div class="simulator" id="circuitSimulator">
+                    <!-- Los componentes se añadirán con JavaScript -->
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button onclick="addComponent('resistor')">Añadir Resistencia</button>
+                    <button onclick="addComponent('battery')">Añadir Batería</button>
+                    <button onclick="addComponent('led')">Añadir LED</button>
+                    <button onclick="clearCircuit()">Limpiar</button>
+                </div>
+                
+                <div style="margin-top: 1rem;">
+                    <p><strong>Instrucciones:</strong> Arrastra los componentes y conéctalos haciendo clic y arrastrando entre los puntos de conexión.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="proyectos" class="section">
+            <h2>Proyectos Prácticos</h2>
+            <p>Aplica lo aprendido con estos proyectos prácticos que puedes realizar en casa con componentes básicos.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Circuito simple" class="card-img">
+                    <div class="card-content">
+                        <h3>Circuito Básico con LED</h3>
+                        <p>Aprende a conectar una batería, resistencia y LED para crear tu primer circuito funcional.</p>
+                        <button onclick="showProjectDetails('led')">Ver Instrucciones</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Interruptor" class="card-img">
+                    <div class="card-content">
+                        <h3>Interruptor con Transistor</h3>
+                        <p>Construye un circuito que pueda encender y apagar un LED usando un transistor como interruptor.</p>
+                        <button onclick="showProjectDetails('transistor')">Ver Instrucciones</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sensor de luz" class="card-img">
+                    <div class="card-content">
+                        <h3>Sensor de Luz</h3>
+                        <p>Crea un circuito que active un LED cuando detecte oscuridad, usando una fotorresistencia.</p>
+                        <button onclick="showProjectDetails('sensor')">Ver Instrucciones</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="recursos" class="section">
+            <h2>Recursos Adicionales</h2>
+            <p>Amplía tus conocimientos con estos recursos seleccionados para seguir aprendiendo sobre electrónica.</p>
+            
+            <div class="quiz">
+                <h3>Test de Conocimientos</h3>
+                <p>Pon a prueba lo que has aprendido con este breve cuestionario:</p>
+                
+                <div class="question">
+                    <p>1. ¿Qué ley relaciona voltaje, corriente y resistencia en un circuito?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q1" id="q1a"> <label for="q1a">Ley de Ohm</label></div>
+                        <div class="option"><input type="radio" name="q1" id="q1b"> <label for="q1b">Ley de Kirchhoff</label></div>
+                        <div class="option"><input type="radio" name="q1" id="q1c"> <label for="q1c">Ley de Faraday</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>2. ¿Qué componente permite el flujo de corriente en una sola dirección?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q2" id="q2a"> <label for="q2a">Resistencia</label></div>
+                        <div class="option"><input type="radio" name="q2" id="q2b"> <label for="q2b">Capacitor</label></div>
+                        <div class="option"><input type="radio" name="q2" id="q2c"> <label for="q2c">Diodo</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>3. ¿Qué hace un transistor en un circuito?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q3" id="q3a"> <label for="q3a">Amplifica o conmuta señales</label></div>
+                        <div class="option"><input type="radio" name="q3" id="q3b"> <label for="q3b">Almacena energía</label></div>
+                        <div class="option"><input type="radio" name="q3" id="q3c"> <label for="q3c">Genera luz</label></div>
+                    </div>
+                </div>
+                
+                <button onclick="checkQuiz()">Comprobar Respuestas</button>
+                <div id="quizResult" style="margin-top: 1rem; font-weight: bold;"></div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <h3>Enlaces Recomendados</h3>
+                <ul style="margin-top: 1rem; list-style-position: inside;">
+                    <li><a href="https://veinteexperimentos.wordpress.com/2013/07/05/veinte-nuevos-experimentos-en-un-protoboard/" target="_blank">Veinte experimento con el protoboard</a></li>
+                    <li><a href="https://www.electronics-tutorials.ws/" target="_blank">Electronics Tutorials - Guías completas</a></li>
+                    <li><a href="https://www.circuito.io/" target="_blank">Circuito.io - Diseñador de circuitos</a></li>
+                    <li><a href="https://www.tinkercad.com/circuits" target="_blank">Tinkercad Circuits - Simulador online</a></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ElectroLearn</h3>
+                <p>Aprende electrónica de forma interactiva y divertida. Recursos para principiantes y entusiastas.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#conceptos">Conceptos Básicos</a></li>
+                    <li><a href="#componentes">Componentes</a></li>
+                    <li><a href="#simulador">Simulador</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>Email: info@electrolearn.com</li>
+                    <li>Teléfono: +123 456 7890</li>
+                    <li>Redes Sociales: @ElectroLearn</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>&copy; 2023 ElectroLearn. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Animación del encabezado
+        const canvas = document.getElementById('circuitAnimation');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = 300;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = 300;
+            drawCircuit();
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        
+        function drawCircuit() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar líneas de circuito
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 2;
+            
+            // Patrón de circuito
+            const gridSize = 40;
+            const cols = Math.ceil(canvas.width / gridSize) + 1;
+            const rows = Math.ceil(canvas.height / gridSize) + 1;
+            
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    const x = i * gridSize;
+                    const y = j * gridSize;
+                    
+                    // Dibujar conexiones horizontales y verticales aleatorias
+                    if (Math.random() > 0.3) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(x + gridSize, y);
+                        ctx.stroke();
+                    }
+                    
+                    if (Math.random() > 0.3) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(x, y + gridSize);
+                        ctx.stroke();
+                    }
+                    
+                    // Dibujar componentes aleatorios
+                    if (Math.random() > 0.8) {
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                        ctx.beginPath();
+                        ctx.arc(x, y, 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            }
+            
+            // Animar pequeños puntos que parecen electrones moviéndose
+            if (!window.electronPoints) {
+                window.electronPoints = [];
+                for (let i = 0; i < 20; i++) {
+                    window.electronPoints.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        speed: 1 + Math.random() * 3,
+                        path: []
+                    });
+                }
+            }
+            
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            window.electronPoints.forEach(point => {
+                // Mover el punto a lo largo de las líneas del circuito
+                point.x += point.speed;
+                if (point.x > canvas.width) {
+                    point.x = 0;
+                    point.y = Math.random() * canvas.height;
+                }
+                
+                // Dibujar el punto
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Dibujar una pequeña estela
+                point.path.push({x: point.x, y: point.y});
+                if (point.path.length > 5) point.path.shift();
+                
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                ctx.beginPath();
+                point.path.forEach((p, i) => {
+                    if (i === 0) ctx.moveTo(p.x, p.y);
+                    else ctx.lineTo(p.x, p.y);
+                });
+                ctx.stroke();
+            });
+            
+            requestAnimationFrame(drawCircuit);
+        }
+        
+        drawCircuit();
+        
+        // Mostrar información de componentes
+        const componentData = {
+            resistor: {
+                title: "Resistencia",
+                description: "Un resistor o resistencia es un componente pasivo que reduce la corriente eléctrica en un circuito. Se mide en ohmios (Ω).",
+                symbol: "https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028018_640.png",
+                details: "<p><strong>Función:</strong> Limitar el flujo de corriente, dividir voltajes, disipar potencia.</p><p><strong>Código de colores:</strong> Las resistencias usan bandas de colores para indicar su valor.</p>"
+            },
+            capacitor: {
+                title: "Capacitor",
+                description: "Un capacitor o condensador almacena energía en un campo eléctrico. Se mide en faradios (F).",
+                symbol: "https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028019_640.png",
+                details: "<p><strong>Función:</strong> Almacenar carga, filtrar señales, acoplar etapas de circuitos.</p><p><strong>Tipos:</strong> Electrolíticos, cerámicos, de tantalio, etc.</p>"
+            },
+            diode: {
+                title: "Diodo",
+                description: "Un diodo es un componente semiconductor que permite el flujo de corriente en una sola dirección.",
+                symbol: "https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028023_640.png",
+                details: "<p><strong>Función:</strong> Rectificar corriente, proteger contra polaridad inversa, generar luz (LEDs).</p><p><strong>Tipos:</strong> Diodos rectificadores, Zener, LED, fotodiodos.</p>"
+            },
+            transistor: {
+                title: "Transistor",
+                description: "Un transistor es un dispositivo semiconductor utilizado para amplificar o conmutar señales electrónicas.",
+                symbol: "https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028024_640.png",
+                details: "<p><strong>Función:</strong> Amplificación, conmutación, regulación de voltaje.</p><p><strong>Tipos:</strong> BJT, FET, MOSFET, etc.</p>"
+            }
+        };
+        
+        function showComponentInfo(component) {
+            const info = componentData[component];
+            document.getElementById('infoTitle').textContent = info.title;
+            document.getElementById('infoDescription').textContent = info.description;
+            document.getElementById('infoSymbol').src = info.symbol;
+            document.getElementById('infoDetails').innerHTML = info.details;
+            document.getElementById('componentInfo').style.display = 'block';
+            
+            // Desplazarse suavemente a la información
+            document.getElementById('componentInfo').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Simulador de circuitos
+        let components = [];
+        let wires = [];
+        let isDragging = false;
+        let draggedComponent = null;
+        let startPos = { x: 0, y: 0 };
+        let isCreatingWire = false;
+        let wireStart = null;
+        
+        const simulator = document.getElementById('circuitSimulator');
+        
+        function addComponent(type) {
+            const component = document.createElement('div');
+            component.className = 'component';
+            component.dataset.type = type;
+            
+            // Posición aleatoria dentro del simulador
+            const simRect = simulator.getBoundingClientRect();
+            const x = Math.random() * (simRect.width - 100) + 20;
+            const y = Math.random() * (simRect.height - 100) + 20;
+            
+            component.style.left = `${x}px`;
+            component.style.top = `${y}px`;
+            
+            // Crear imagen según el tipo de componente
+            const img = document.createElement('img');
+            switch(type) {
+                case 'resistor':
+                    img.src = 'https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028018_640.png';
+                    img.alt = 'Resistor';
+                    break;
+                case 'battery':
+                    img.src = 'https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028020_640.png';
+                    img.alt = 'Battery';
+                    break;
+                case 'led':
+                    img.src = 'https://cdn.pixabay.com/photo/2017/01/31/23/42/electronics-2028022_640.png';
+                    img.alt = 'LED';
+                    break;
+            }
+            
+            component.appendChild(img);
+            
+            // Añadir puntos de conexión
+            const conn1 = document.createElement('div');
+            conn1.className = 'connection';
+            conn1.style.left = '0px';
+            conn1.style.top = '50%';
+            conn1.style.transform = 'translate(-50%, -50%)';
+            component.appendChild(conn1);
+            
+            const conn2 = document.createElement('div');
+            conn2.className = 'connection';
+            conn2.style.right = '0px';
+            conn2.style.top = '50%';
+            conn2.style.transform = 'translate(50%, -50%)';
+            component.appendChild(conn2);
+            
+            // Eventos para arrastrar
+            component.addEventListener('mousedown', startDrag);
+            
+            // Eventos para crear cables
+            conn1.addEventListener('mousedown', startWire);
+            conn2.addEventListener('mousedown', startWire);
+            
+            simulator.appendChild(component);
+            components.push(component);
+        }
+        
+        function startDrag(e) {
+            if (e.target.classList.contains('connection')) return;
+            
+            isDragging = true;
+            draggedComponent = e.currentTarget;
+            startPos = {
+                x: e.clientX - draggedComponent.getBoundingClientRect().left,
+                y: e.clientY - draggedComponent.getBoundingClientRect().top
+            };
+            
+            document.addEventListener('mousemove', dragComponent);
+            document.addEventListener('mouseup', stopDrag);
+        }
+        
+        function dragComponent(e) {
+            if (!isDragging) return;
+            
+            const simRect = simulator.getBoundingClientRect();
+            let x = e.clientX - simRect.left - startPos.x;
+            let y = e.clientY - simRect.top - startPos.y;
+            
+            // Mantener dentro de los límites
+            x = Math.max(0, Math.min(simRect.width - 60, x));
+            y = Math.max(0, Math.min(simRect.height - 60, y));
+            
+            draggedComponent.style.left = `${x}px`;
+            draggedComponent.style.top = `${y}px`;
+        }
+        
+        function stopDrag() {
+            isDragging = false;
+            draggedComponent = null;
+            
+            document.removeEventListener('mousemove', dragComponent);
+            document.removeEventListener('mouseup', stopDrag);
+        }
+        
+        function startWire(e) {
+            e.stopPropagation();
+            isCreatingWire = true;
+            wireStart = e.target;
+            
+            const wire = document.createElement('div');
+            wire.className = 'wire';
+            simulator.appendChild(wire);
+            wires.push(wire);
+            
+            document.addEventListener('mousemove', drawWire);
+            document.addEventListener('mouseup', finishWire);
+        }
+        
+        function drawWire(e) {
+            if (!isCreatingWire) return;
+            
+            const wire = wires[wires.length - 1];
+            const startRect = wireStart.getBoundingClientRect();
+            const simRect = simulator.getBoundingClientRect();
+            
+            const startX = startRect.left - simRect.left + startRect.width / 2;
+            const startY = startRect.top - simRect.top + startRect.height / 2;
+            const endX = e.clientX - simRect.left;
+            const endY = e.clientY - simRect.top;
+            
+            const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+            const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+            
+            wire.style.width = `${length}px`;
+            wire.style.left = `${startX}px`;
+            wire.style.top = `${startY}px`;
+            wire.style.transform = `rotate(${angle}deg)`;
+        }
+        
+        function finishWire(e) {
+            if (!isCreatingWire) return;
+            
+            const wire = wires[wires.length - 1];
+            const endElement = document.elementFromPoint(e.clientX, e.clientY);
+            
+            if (endElement && endElement.classList.contains('connection')) {
+                // Conexión válida
+                const endRect = endElement.getBoundingClientRect();
+                const simRect = simulator.getBoundingClientRect();
+                
+                const endX = endRect.left - simRect.left + endRect.width / 2;
+                const endY = endRect.top - simRect.top + endRect.height / 2;
+                
+                const startRect = wireStart.getBoundingClientRect();
+                const startX = startRect.left - simRect.left + startRect.width / 2;
+                const startY = startRect.top - simRect.top + startRect.height / 2;
+                
+                const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+                const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+                
+                wire.style.width = `${length}px`;
+                wire.style.transform = `rotate(${angle}deg)`;
+            } else {
+                // Conexión no válida, eliminar cable
+                simulator.removeChild(wire);
+                wires.pop();
+            }
+            
+            isCreatingWire = false;
+            wireStart = null;
+            
+            document.removeEventListener('mousemove', drawWire);
+            document.removeEventListener('mouseup', finishWire);
+        }
+        
+        function clearCircuit() {
+            components.forEach(comp => simulator.removeChild(comp));
+            wires.forEach(wire => simulator.removeChild(wire));
+            components = [];
+            wires = [];
+        }
+        
+        // Mostrar detalles de proyectos
+        function showProjectDetails(project) {
+            let details = '';
+            
+            switch(project) {
+                case 'led':
+                    details = `
+                        <h3>Circuito Básico con LED</h3>
+                        <p><strong>Materiales necesarios:</strong></p>
+                        <ul>
+                            <li>1 LED</li>
+                            <li>1 Resistencia de 220Ω</li>
+                            <li>1 Batería de 9V</li>
+                            <li>Cables de conexión</li>
+                            <li>Protoboard (opcional)</li>
+                        </ul>
+                        <p><strong>Pasos:</strong></p>
+                        <ol>
+                            <li>Conecta el terminal positivo de la batería a una pata de la resistencia.</li>
+                            <li>Conecta la otra pata de la resistencia al ánodo del LED (pata más larga).</li>
+                            <li>Conecta el cátodo del LED (pata más corta) al terminal negativo de la batería.</li>
+                            <li>El LED debería encenderse. Si no lo hace, verifica las conexiones.</li>
+                        </ol>
+                        <p><strong>Explicación:</strong> La resistencia limita la corriente para proteger el LED. Sin ella, el LED podría quemarse por exceso de corriente.</p>
+                    `;
+                    break;
+                case 'transistor':
+                    details = `
+                        <h3>Interruptor con Transistor</h3>
+                        <p><strong>Materiales necesarios:</strong></p>
+                        <ul>
+                            <li>1 Transistor NPN (ej. 2N3904)</li>
+                            <li>1 LED</li>
+                            <li>1 Resistencia de 220Ω</li>
+                            <li>1 Resistencia de 10kΩ</li>
+                            <li>1 Batería de 9V</li>
+                            <li>Cables de conexión</li>
+                            <li>Protoboard</li>
+                        </ul>
+                        <p><strong>Pasos:</strong></p>
+                        <ol>
+                            <li>Conecta el colector del transistor a través de la resistencia de 220Ω al positivo de la batería.</li>
+                            <li>Conecta el emisor al negativo de la batería.</li>
+                            <li>Conecta el LED entre el colector y el emisor.</li>
+                            <li>Conecta la resistencia de 10kΩ entre la base y un cable que actuará como interruptor.</li>
+                            <li>Cuando toques el cable de interruptor al positivo, el LED se encenderá.</li>
+                        </ol>
+                        <p><strong>Explicación:</strong> El transistor actúa como interruptor controlado por corriente. Una pequeña corriente en la base controla una corriente mayor entre colector y emisor.</p>
+                    `;
+                    break;
+                case 'sensor':
+                    details = `
+                        <h3>Sensor de Luz</h3>
+                        <p><strong>Materiales necesarios:</strong></p>
+                        <ul>
+                            <li>1 Fotorresistencia (LDR)</li>
+                            <li>1 Transistor NPN</li>
+                            <li>1 LED</li>
+                            <li>1 Resistencia de 220Ω</li>
+                            <li>1 Resistencia de 10kΩ</li>
+                            <li>1 Potenciómetro de 10kΩ</li>
+                            <li>1 Batería de 9V</li>
+                            <li>Cables de conexión</li>
+                            <li>Protoboard</li>
+                        </ul>
+                        <p><strong>Pasos:</strong></p>
+                        <ol>
+                            <li>Crea un divisor de voltaje con la LDR y el potenciómetro entre positivo y negativo.</li>
+                            <li>Conecta el punto medio del divisor a la base del transistor.</li>
+                            <li>Conecta el colector a través de la resistencia de 220Ω y el LED al positivo.</li>
+                            <li>Conecta el emisor al negativo.</li>
+                            <li>Ajusta el potenciómetro hasta que el LED se encienda en la oscuridad y se apague con luz.</li>
+                        </ol>
+                        <p><strong>Explicación:</strong> La LDR cambia su resistencia con la luz. En oscuridad tiene alta resistencia, lo que permite voltaje suficiente en la base para activar el transistor.</p>
+                    `;
+                    break;
+            }
+            
+            alert(details.replace(/<[^>]*>/g, '')); // Versión simplificada para el ejemplo
+        }
+        
+        // Comprobar cuestionario
+        function checkQuiz() {
+            const answers = {
+                q1: 'q1a',
+                q2: 'q2c',
+                q3: 'q3a'
+            };
+            
+            let score = 0;
+            
+            for (const question in answers) {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.id === answers[question]) {
+                    score++;
+                }
+            }
+            
+            const result = document.getElementById('quizResult');
+            result.textContent = `Obtuviste ${score} de 3 respuestas correctas.`;
+            result.style.color = score >= 2 ? 'green' : 'red';
+        }
+    </script>
+</body>
+</html>
