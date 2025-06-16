@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dominando los Bucles en Java</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons (Correct script for vanilla JS) -->
+    <script src="https://unpkg.com/lucide-icons@latest/dist/lucide.min.js"></script>
+
+    <!-- Tone.js for audio synthesis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+
+    <style>
+        /* Custom styles for a vibrant, modern look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a2e; /* Deep blue background */
+            color: #e0e0e0;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #f72585, #7209b7, #3a0ca3, #4361ee, #4cc9f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(76, 201, 240, 0.5);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #4361ee, #7209b7);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(114, 9, 183, 0.7);
+        }
+        .code-block {
+            background-color: #1e1e1e;
+            border-left: 4px solid #f72585;
+        }
+        details > summary {
+            cursor: pointer;
+            list-style: none; /* Hide the default marker */
+        }
+        details > summary::-webkit-details-marker {
+            display: none; /* Hide the default marker in Chrome */
+        }
+        details[open] > summary .arrow {
+            transform: rotate(90deg);
+        }
+        .arrow {
+            transition: transform 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="text-center py-12 md:py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_bottom,white_50%,transparent_100%)]"></div>
+        <div class="relative z-10">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight gradient-text">
+                Dominando los Bucles en Java
+            </h1>
+            <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
+                Una guía interactiva para entender las estructuras repetitivas, desde lo básico hasta técnicas avanzadas.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 pb-20">
+
+        <!-- Multimedia Section -->
+        <section id="multimedia" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 gradient-text">Conceptos Clave en Acción</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <!-- Video Player -->
+                <div class="card rounded-xl p-4">
+                    <h3 class="font-bold text-xl mb-2 flex items-center"><i data-lucide="video" class="mr-2 h-6 w-6 text-cyan-400"></i>Explicación en Video</h3>
+                    <p class="text-sm text-gray-400 mb-4">Observa una explicación visual sobre cuándo y cómo usar cada bucle.</p>
+                    <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border-2 border-fuchsia-500/50">
+                        <!-- Reemplaza el src con tu video de YouTube -->
+                        <iframe src="https://www.youtube.com/embed/n3uA4zt3y4I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                    </div>
+                </div>
+                <!-- Audio Player -->
+                <div class="card rounded-xl p-4">
+                     <h3 class="font-bold text-xl mb-2 flex items-center"><i data-lucide="audio-lines" class="mr-2 h-6 w-6 text-fuchsia-500"></i>Podcast Rápido</h3>
+                     <p class="text-sm text-gray-400 mb-4">Escucha un resumen de 30 segundos sobre los errores más comunes.</p>
+                     <div id="audio-player" class="bg-gray-800/50 rounded-lg p-4 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center">
+                            <button id="play-button" class="bg-fuchsia-500 rounded-full h-12 w-12 flex items-center justify-center mr-4 focus:outline-none focus:ring-2 focus:ring-fuchsia-400">
+                                <i id="play-icon" data-lucide="play" class="text-white"></i>
+                            </button>
+                            <div>
+                                <p class="font-semibold text-white">Tips para Bucles</p>
+                                <p class="text-sm text-gray-400">00:30</p>
+                            </div>
+                        </div>
+                        <div id="waveform" class="flex items-center h-8 space-x-1">
+                            <div class="w-1 h-2 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.1s;"></div>
+                            <div class="w-1 h-4 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                            <div class="w-1 h-6 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
+                            <div class="w-1 h-4 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                            <div class="w-1 h-2 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- For Loop Section -->
+        <section id="for-loop" class="mb-16">
+            <div class="card rounded-xl overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold mb-4 gradient-text">1. El Bucle `for`</h2>
+                    <p class="mb-6 text-gray-300">Es ideal cuando sabes exactamente cuántas veces quieres que se repita una acción. Es el bucle más común para recorrer arrays o realizar un número fijo de iteraciones.</p>
+                    
+                    <h4 class="font-semibold text-lg mb-2 text-cyan-300">Sintaxis</h4>
+                    <pre class="code-block p-4 rounded-lg mb-6"><code class="language-java">for (inicialización; condición; actualización) {
+    // Código a repetir
+}</code></pre>
+
+                    <h4 class="font-semibold text-lg mb-2 text-cyan-300">Ejemplo Interactivo</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="for-limit" class="block text-sm font-medium mb-2">Repetir hasta el número:</label>
+                            <input type="number" id="for-limit" value="5" class="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+                            <button id="run-for" class="btn-primary w-full mt-3 text-white font-bold py-2 px-4 rounded-lg">Ejecutar</button>
+                        </div>
+                        <div>
+                             <label class="block text-sm font-medium mb-2">Resultado:</label>
+                             <div id="for-output" class="bg-black h-32 rounded-md p-3 font-mono text-sm overflow-y-auto border border-gray-700">Presiona "Ejecutar" para ver la magia...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- While Loop Section -->
+        <section id="while-loop" class="mb-16">
+            <div class="card rounded-xl overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold mb-4 gradient-text">2. El Bucle `while`</h2>
+                    <p class="mb-6 text-gray-300">Se ejecuta <span class="font-bold text-fuchsia-400">mientras</span> una condición sea verdadera. Es perfecto para situaciones donde no sabes cuántas iteraciones se necesitan, como esperar una entrada del usuario o procesar un archivo.</p>
+                    
+                    <h4 class="font-semibold text-lg mb-2 text-fuchsia-400">Sintaxis</h4>
+                    <pre class="code-block p-4 rounded-lg mb-6" style="border-color: #7209b7;"><code class="language-java">while (condición) {
+    // Código a repetir
+    // ¡Importante! Actualizar la variable de la condición aquí.
+}</code></pre>
+
+                    <h4 class="font-semibold text-lg mb-2 text-fuchsia-400">Ejemplo Interactivo: Cuenta Regresiva</h4>
+                     <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="while-start" class="block text-sm font-medium mb-2">Iniciar cuenta desde:</label>
+                            <input type="number" id="while-start" value="3" class="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:ring-2 focus:ring-fuchsia-400 focus:outline-none">
+                            <button id="run-while" class="btn-primary w-full mt-3 text-white font-bold py-2 px-4 rounded-lg">Iniciar</button>
+                        </div>
+                        <div>
+                             <label class="block text-sm font-medium mb-2">Resultado:</label>
+                             <div id="while-output" class="bg-black h-32 rounded-md p-3 font-mono text-sm overflow-y-auto border border-gray-700">Presiona "Iniciar" para el despegue...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Do-While Loop Section -->
+        <section id="do-while-loop" class="mb-16">
+            <div class="card rounded-xl overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold mb-4 gradient-text">3. El Bucle `do-while`</h2>
+                    <p class="mb-6 text-gray-300">Similar al `while`, pero con una diferencia clave: la condición se evalúa <span class="font-bold text-pink-500">después</span> de ejecutar el bloque de código. Esto garantiza que el código se ejecute <span class="font-bold text-pink-500">al menos una vez</span>.</p>
+                    
+                    <h4 class="font-semibold text-lg mb-2 text-pink-500">Sintaxis</h4>
+                    <pre class="code-block p-4 rounded-lg mb-6" style="border-color: #f72585;"><code class="language-java">do {
+    // Código a repetir
+} while (condición);</code></pre>
+
+                    <h4 class="font-semibold text-lg mb-2 text-pink-500">Ejemplo Interactivo: Adivina el número secreto</h4>
+                     <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">El número secreto es 7. Intenta adivinar:</label>
+                            <input type="number" id="dowhile-guess" placeholder="Ingresa un número" class="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:ring-2 focus:ring-pink-500 focus:outline-none">
+                            <button id="run-dowhile" class="btn-primary w-full mt-3 text-white font-bold py-2 px-4 rounded-lg">Verificar</gutton>
+                        </div>
+                        <div>
+                             <label class="block text-sm font-medium mb-2">Resultado:</label>
+                             <div id="dowhile-output" class="bg-black h-32 rounded-md p-3 font-mono text-sm overflow-y-auto border border-gray-700">El código se ejecutará al menos una vez...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Break & Continue -->
+        <section id="break-continue" class="mb-16">
+            <div class="card rounded-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold mb-4 gradient-text">Técnicas Avanzadas: `break` y `continue`</h2>
+                <p class="mb-6 text-gray-300">Estas dos sentencias te dan un control más fino sobre el flujo de tus bucles.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-cyan-300 mb-2 flex items-center"><i data-lucide="log-out" class="mr-2"></i>break</h3>
+                        <p class="mb-3">Termina la ejecución del bucle inmediatamente y el programa continúa en la siguiente línea de código después del bucle.</p>
+                        <pre class="code-block p-4 rounded-lg"><code class="language-java">// Imprime números hasta encontrar el 5
+for (int i = 1; i <= 10; i++) {
+    if (i == 5) {
+        break; // Detiene el bucle aquí
+    }
+    System.out.println(i); // Imprime 1, 2, 3, 4
+}</code></pre>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-fuchsia-400 mb-2 flex items-center"><i data-lucide="skip-forward" class="mr-2"></i>continue</h3>
+                        <p class="mb-3">Salta la iteración actual y pasa directamente a la siguiente. El bucle no termina, solo omite el resto del código en la iteración actual.</p>
+                        <pre class="code-block p-4 rounded-lg" style="border-color: #7209b7;"><code class="language-java">// Imprime solo números impares
+for (int i = 1; i <= 10; i++) {
+    if (i % 2 == 0) {
+        continue; // Salta los pares
+    }
+    System.out.println(i); // Imprime 1, 3, 5, 7, 9
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercises Section -->
+        <section id="exercises" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 gradient-text">¡Hora de Practicar!</h2>
+            <div class="space-y-4 max-w-4xl mx-auto">
+                <!-- Exercise 1 -->
+                <details class="card rounded-lg p-5">
+                    <summary class="font-semibold text-lg flex justify-between items-center">
+                        <span>1. Suma de los primeros 100 números</span>
+                        <i data-lucide="chevron-right" class="arrow"></i>
+                    </summary>
+                    <div class="mt-4 pt-4 border-t border-gray-700">
+                        <p class="mb-3">Usa un bucle `for` para calcular la suma de todos los números del 1 al 100.</p>
+                        <details class="bg-gray-800/50 rounded-lg p-3">
+                           <summary class="text-cyan-400 font-semibold">Mostrar Solución</summary>
+                           <pre class="code-block p-3 mt-2 rounded"><code class="language-java">int suma = 0;
+for (int i = 1; i <= 100; i++) {
+    suma += i;
+}
+System.out.println("La suma es: " + suma); // Resultado: 5050</code></pre>
+                        </details>
+                    </div>
+                </details>
+                 <!-- Exercise 2 -->
+                <details class="card rounded-lg p-5">
+                    <summary class="font-semibold text-lg flex justify-between items-center">
+                        <span>2. Tabla de multiplicar</span>
+                        <i data-lucide="chevron-right" class="arrow"></i>
+                    </summary>
+                    <div class="mt-4 pt-4 border-t border-gray-700">
+                        <p class="mb-3">Pide un número al usuario (simulado) y muestra su tabla de multiplicar del 1 al 10 usando un bucle `for`.</p>
+                        <details class="bg-gray-800/50 rounded-lg p-3">
+                           <summary class="text-cyan-400 font-semibold">Mostrar Solución</summary>
+                           <pre class="code-block p-3 mt-2 rounded"><code class="language-java">int numero = 7; // Número de ejemplo
+for (int i = 1; i <= 10; i++) {
+    System.out.println(numero + " x " + i + " = " + (numero * i));
+}</code></pre>
+                        </details>
+                    </div>
+                </details>
+                 <!-- Exercise 3 -->
+                <details class="card rounded-lg p-5">
+                    <summary class="font-semibold text-lg flex justify-between items-center">
+                        <span>3. Adivina la palabra secreta</span>
+                         <i data-lucide="chevron-right" class="arrow"></i>
+                    </summary>
+                    <div class="mt-4 pt-4 border-t border-gray-700">
+                        <p class="mb-3">Usa un bucle `while` para pedir al usuario que adivine una palabra secreta ("java"). El bucle no debe terminar hasta que el usuario acierte.</p>
+                        <details class="bg-gray-800/50 rounded-lg p-3">
+                           <summary class="text-cyan-400 font-semibold">Mostrar Solución</summary>
+                           <pre class="code-block p-3 mt-2 rounded"><code class="language-java">Scanner scanner = new Scanner(System.in);
+String palabraSecreta = "java";
+String intento = "";
+
+while (!intento.equalsIgnoreCase(palabraSecreta)) {
+    System.out.print("Adivina la palabra: ");
+    intento = scanner.nextLine();
+}
+System.out.println("¡Felicidades, has acertado!");</code></pre>
+                        </details>
+                    </div>
+                </details>
+            </div>
+        </section>
+        
+    </main>
+    
+    <footer class="text-center p-6 border-t border-white/10">
+        <p class="text-gray-400">Página creada con ❤️ para facilitar el aprendizaje de Java.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // --- Interactive Examples Logic ---
+
+        // For Loop
+        const runForBtn = document.getElementById('run-for');
+        const forLimitInput = document.getElementById('for-limit');
+        const forOutput = document.getElementById('for-output');
+
+        runForBtn.addEventListener('click', () => {
+            const limit = parseInt(forLimitInput.value) || 0;
+            forOutput.innerHTML = ''; // Clear previous output
+            if (limit > 50) {
+                 forOutput.innerHTML = '<span class="text-red-400">Error: Límite muy alto. Usa un número menor a 50.</span>';
+                 return;
+            }
+            for (let i = 1; i <= limit; i++) {
+                const line = document.createElement('p');
+                line.textContent = `Iteración número: ${i}`;
+                forOutput.appendChild(line);
+            }
+            forOutput.scrollTop = forOutput.scrollHeight;
+        });
+
+        // While Loop
+        const runWhileBtn = document.getElementById('run-while');
+        const whileStartInput = document.getElementById('while-start');
+        const whileOutput = document.getElementById('while-output');
+
+        runWhileBtn.addEventListener('click', () => {
+            let start = parseInt(whileStartInput.value) || 0;
+            whileOutput.innerHTML = '';
+            if (start > 20) {
+                 whileOutput.innerHTML = '<span class="text-red-400">Error: Número muy alto. Usa un número menor a 20.</span>';
+                 return;
+            }
+
+            const intervalId = setInterval(() => {
+                if (start >= 0) {
+                    const line = document.createElement('p');
+                    line.textContent = start > 0 ? `Despegue en: ${start}...` : '🚀 ¡Despegue!';
+                    whileOutput.appendChild(line);
+                    whileOutput.scrollTop = whileOutput.scrollHeight;
+                    start--;
+                } else {
+                    clearInterval(intervalId);
+                }
+            }, 500);
+        });
+
+        // Do-While Loop
+        const runDoWhileBtn = document.getElementById('run-dowhile');
+        const doWhileGuessInput = document.getElementById('dowhile-guess');
+        const doWhileOutput = document.getElementById('dowhile-output');
+        const secretNumber = 7;
+        let doWhileAttempts = 0;
+
+        runDoWhileBtn.addEventListener('click', () => {
+            const guess = parseInt(doWhileGuessInput.value);
+            doWhileAttempts++;
+            doWhileOutput.innerHTML = '';
+
+            const line = document.createElement('p');
+            if (isNaN(guess)) {
+                line.textContent = `Intento #${doWhileAttempts}: Por favor, ingresa un número.`;
+                line.className = 'text-yellow-400';
+            } else if (guess === secretNumber) {
+                line.textContent = `Intento #${doWhileAttempts}: ¡Correcto! Adivinaste el número ${secretNumber}.`;
+                line.className = 'text-green-400';
+                 doWhileAttempts = 0; // Reset for next game
+            } else {
+                line.textContent = `Intento #${doWhileAttempts}: Incorrecto. El número ${guess} no es. Sigue intentando.`;
+                line.className = 'text-red-400';
+            }
+            doWhileOutput.appendChild(line);
+            doWhileGuessInput.value = '';
+        });
+
+        // --- Audio Player Logic ---
+        const playButton = document.getElementById('play-button');
+        const playIcon = document.getElementById('play-icon');
+        let isPlaying = false;
+        
+        // Create a synth with Tone.js
+        const synth = new Tone.Synth().toDestination();
+
+        playButton.addEventListener('click', () => {
+            if (isPlaying) {
+                // Logic to stop audio would go here if we had a real file
+                isPlaying = false;
+                playIcon.setAttribute('data-lucide', 'play');
+                lucide.createIcons(); // Re-render icon
+            } else {
+                // Simulate playing a sound
+                isPlaying = true;
+                playIcon.setAttribute('data-lucide', 'pause');
+                lucide.createIcons();
+
+                // Play a sequence of notes to simulate audio
+                const now = Tone.now();
+                synth.triggerAttackRelease("C4", "8n", now);
+                synth.triggerAttackRelease("E4", "8n", now + 0.2);
+                synth.triggerAttackRelease("G4", "8n", now + 0.4);
+
+                // Revert icon back to 'play' after a short duration
+                setTimeout(() => {
+                    isPlaying = false;
+                    playIcon.setAttribute('data-lucide', 'play');
+                    lucide.createIcons();
+                }, 600);
+            }
+        });
+        
+    </script>
+</body>
+</html>
