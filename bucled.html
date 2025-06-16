@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende Estructuras Repetitivas en Java</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6200ea;
+            --secondary: #03dac6;
+            --accent: #ff4081;
+            --light: #f5f5f7;
+            --dark: #121212;
+            --gradient: linear-gradient(135deg, #6200ea 0%, #03dac6 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+        
+        nav a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .media-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .video-container, .audio-container {
+            flex: 1 1 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        video, audio {
+            width: 100%;
+            display: block;
+        }
+        
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'Java';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 0 0 0 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem 0;
+        }
+        
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+        }
+        
+        .exercise {
+            background-color: #f0f8ff;
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .exercise h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .interactive-element {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background-color: #eee;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .tab:first-child {
+            border-radius: 8px 0 0 0;
+        }
+        
+        .tab:last-child {
+            border-radius: 0 8px 0 0;
+        }
+        
+        .tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .social-icons {
+            margin: 1rem 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .media-container {
+                flex-direction: column;
+            }
+        }
+        
+        /* Efectos especiales */
+        .highlight {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .highlight::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 10px;
+            background-color: var(--secondary);
+            z-index: -1;
+            opacity: 0.3;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Quiz styles */
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-options {
+            margin: 1rem 0;
+        }
+        
+        .quiz-option {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.8rem;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .quiz-option.selected {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .quiz-feedback {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .correct {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .incorrect {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        /* Simulador de código */
+        .code-editor {
+            background-color: #282c34;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        
+        .editor-header {
+            background-color: #1e1e1e;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .editor-dots {
+            display: flex;
+            margin-right: 1rem;
+        }
+        
+        .editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        
+        .editor-dot.red {
+            background-color: #ff5f56;
+        }
+        
+        .editor-dot.yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .editor-dot.green {
+            background-color: #27c93f;
+        }
+        
+        .editor-title {
+            color: #9da5b4;
+            font-size: 0.9rem;
+        }
+        
+        .editor-content {
+            padding: 1rem;
+        }
+        
+        textarea.code-area {
+            width: 100%;
+            min-height: 200px;
+            background-color: transparent;
+            border: none;
+            color: #abb2bf;
+            font-family: 'Courier New', Courier, monospace;
+            resize: vertical;
+            outline: none;
+        }
+        
+        .run-btn {
+            background-color: var(--accent);
+            margin-top: 0.5rem;
+        }
+        
+        .output-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 0 0 8px 8px;
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><span class="highlight">Estructuras Repetitivas</span> en Java</h1>
+            <p>Aprende los fundamentos de los bucles en Java de forma interactiva</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#while">While</a></li>
+            <li><a href="#dowhile">Do-While</a></li>
+            <li><a href="#for">For</a></li>
+            <li><a href="#ejercicios">Ejercicios</a></li>
+        </ul>
+    </nav>
+    
+    <main class="container">
+        <section id="introduccion">
+            <div class="card">
+                <h2>¿Qué son las estructuras repetitivas?</h2>
+                <p>Las estructuras repetitivas, también conocidas como bucles o loops, son fundamentales en programación. Permiten ejecutar un bloque de código múltiples veces mientras se cumpla una condición determinada.</p>
+                
+                <div class="media-container">
+                    <div class="video-container">
+                        <video controls poster="https://i.ytimg.com/vi/6djggrlkHY8/maxresdefault.jpg">
+                            <source src="https://example.com/video-bucles.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                    </div>
+                    <div class="audio-container">
+                        <audio controls>
+                            <source src="https://example.com/audio-intro-bucles.mp3" type="audio/mpeg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                        <p>Escucha esta introducción a los bucles en Java</p>
+                    </div>
+                </div>
+                
+                <p>En Java existen tres tipos principales de estructuras repetitivas:</p>
+                <ul>
+                    <li><strong>while</strong> - Ejecuta un bloque mientras se cumpla una condición</li>
+                    <li><strong>do-while</strong> - Similar al while, pero garantiza al menos una ejecución</li>
+                    <li><strong>for</strong> - Ideal cuando sabemos exactamente cuántas veces se debe repetir</li>
+                </ul>
+                
+                <div class="interactive-element">
+                    <h3>¿Por qué son importantes los bucles?</h3>
+                    <p>Imagina que necesitas imprimir los números del 1 al 100. Sin bucles, tendrías que escribir 100 líneas de código. Con bucles, puedes hacerlo en solo 3 líneas:</p>
+                    
+                    <div class="code-block">
+                        for(int i = 1; i <= 100; i++) {
+                            System.out.println(i);
+                        }
+                    </div>
+                    
+                    <button class="btn" id="showExampleBtn">Ver ejemplo en acción</button>
+                    <div id="exampleOutput" class="output-container" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="while">
+            <div class="card">
+                <h2>Estructura <span class="highlight">while</span></h2>
+                <p>El bucle <code>while</code> ejecuta un bloque de código mientras una condición sea verdadera.</p>
+                
+                <div class="code-block">
+                    while (condición) {
+                        // Código a ejecutar
+                    }
+                </div>
+                
+                <h3>Características del while:</h3>
+                <ul>
+                    <li>Primero evalúa la condición, luego ejecuta el código</li>
+                    <li>Si la condición es falsa desde el principio, el código no se ejecuta</li>
+                    <li>Debes asegurarte de que en algún momento la condición sea falsa para evitar bucles infinitos</li>
+                </ul>
+                
+                <div class="media-container">
+                    <div style="flex: 1 1 400px;">
+                        <img src="https://www.tutorialspoint.com/java/images/java_while_loop.jpg" alt="Diagrama de flujo while" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <p>Diagrama de flujo de la estructura while</p>
+                    </div>
+                    <div style="flex: 1 1 400px;">
+                        <h3>Ejemplo práctico</h3>
+                        <div class="code-block">
+                            int contador = 1;
+                            while (contador <= 5) {
+                                System.out.println("Iteración número: " + contador);
+                                contador++; // Incrementamos el contador
+                            }
+                        </div>
+                        <button class="btn" id="runWhileExample">Ejecutar ejemplo</button>
+                        <div id="whileOutput" class="output-container"></div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Ejercicio: Contador descendente</h4>
+                    <p>Escribe un programa que use un bucle <code>while</code> para imprimir los números del 10 al 1 en orden descendente.</p>
+                    
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-dots">
+                                <div class="editor-dot red"></div>
+                                <div class="editor-dot yellow"></div>
+                                <div class="editor-dot green"></div>
+                            </div>
+                            <div class="editor-title">ContadorDescendente.java</div>
+                        </div>
+                        <div class="editor-content">
+                            <textarea class="code-area" id="whileExerciseCode">public class ContadorDescendente {
+    public static void main(String[] args) {
+        // Escribe tu código aquí
+        
+    }
+}</textarea>
+                        </div>
+                        <button class="btn run-btn" id="runWhileExercise">Ejecutar</button>
+                        <div id="whileExerciseOutput" class="output-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="dowhile">
+            <div class="card">
+                <h2>Estructura <span class="highlight">do-while</span></h2>
+                <p>El bucle <code>do-while</code> es similar al <code>while</code>, pero con una diferencia clave: el código se ejecuta al menos una vez antes de verificar la condición.</p>
+                
+                <div class="code-block">
+                    do {
+                        // Código a ejecutar
+                    } while (condición);
+                </div>
+                
+                <h3>Características del do-while:</h3>
+                <ul>
+                    <li>El bloque de código se ejecuta primero, luego se evalúa la condición</li>
+                    <li>Garantiza al menos una ejecución del bloque de código</li>
+                    <li>Útil cuando necesitas ejecutar el código al menos una vez, como en menús interactivos</li>
+                </ul>
+                
+                <div class="interactive-element">
+                    <div class="tab-container">
+                        <button class="tab active" onclick="openTab(event, 'doWhileExample')">Ejemplo</button>
+                        <button class="tab" onclick="openTab(event, 'doWhileFlow')">Diagrama</button>
+                        <button class="tab" onclick="openTab(event, 'doWhileQuiz')">Quiz</button>
+                    </div>
+                    
+                    <div id="doWhileExample" class="tab-content active">
+                        <div class="code-block">
+                            int numero;
+                            do {
+                                System.out.print("Ingresa un número entre 1 y 10: ");
+                                numero = scanner.nextInt();
+                            } while (numero < 1 || numero > 10);
+                            System.out.println("Correcto! Elegiste: " + numero);
+                        </div>
+                        <button class="btn" id="simulateDoWhile">Simular entrada</button>
+                        <div id="doWhileSimulation" class="output-container">Presiona "Simular entrada" para ver cómo funciona</div>
+                    </div>
+                    
+                    <div id="doWhileFlow" class="tab-content">
+                        <img src="https://www.tutorialspoint.com/cplusplus/images/cpp_do_while_loop.jpg" alt="Diagrama de flujo do-while" style="width: 100%; border-radius: 8px;">
+                        <p>El flujo del do-while siempre ejecuta el bloque al menos una vez antes de verificar la condición.</p>
+                    </div>
+                    
+                    <div id="doWhileQuiz" class="tab-content">
+                        <div class="quiz-question">
+                            <p>¿Cuál es la principal diferencia entre while y do-while?</p>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="selectOption(this)">El while evalúa la condición después de ejecutar el bloque</div>
+                                <div class="quiz-option" onclick="selectOption(this)">El do-while siempre ejecuta el bloque al menos una vez</div>
+                                <div class="quiz-option" onclick="selectOption(this)">El do-while no puede tener condiciones complejas</div>
+                                <div class="quiz-option" onclick="selectOption(this)">No hay diferencia, son exactamente iguales</div>
+                            </div>
+                            <button class="btn" onclick="checkAnswer(1)">Verificar respuesta</button>
+                            <div id="quizFeedback1" class="quiz-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Ejercicio: Adivina el número</h4>
+                    <p>Crea un programa que pida al usuario adivinar un número secreto (por ejemplo, 7) usando un bucle <code>do-while</code>. El bucle debe continuar hasta que el usuario adivine correctamente.</p>
+                    
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-dots">
+                                <div class="editor-dot red"></div>
+                                <div class="editor-dot yellow"></div>
+                                <div class="editor-dot green"></div>
+                            </div>
+                            <div class="editor-title">AdivinaNumero.java</div>
+                        </div>
+                        <div class="editor-content">
+                            <textarea class="code-area" id="doWhileExerciseCode">import java.util.Scanner;
+
+public class AdivinaNumero {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        final int NUMERO_SECRETO = 7;
+        int intento;
+        
+        // Escribe tu código aquí
+        
+    }
+}</textarea>
+                        </div>
+                        <button class="btn run-btn" id="runDoWhileExercise">Ejecutar</button>
+                        <div id="doWhileExerciseOutput" class="output-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="for">
+            <div class="card">
+                <h2>Estructura <span class="highlight">for</span></h2>
+                <p>El bucle <code>for</code> es ideal cuando sabemos exactamente cuántas veces queremos que se ejecute un bloque de código.</p>
+                
+                <div class="code-block">
+                    for (inicialización; condición; actualización) {
+                        // Código a ejecutar
+                    }
+                </div>
+                
+                <h3>Partes del bucle for:</h3>
+                <ul>
+                    <li><strong>Inicialización:</strong> Se ejecuta una vez al inicio del bucle</li>
+                    <li><strong>Condición:</strong> Se evalúa antes de cada iteración</li>
+                    <li><strong>Actualización:</strong> Se ejecuta al final de cada iteración</li>
+                </ul>
+                
+                <div class="media-container">
+                    <div style="flex: 1 1 400px;">
+                        <h3>Ejemplo básico</h3>
+                        <div class="code-block">
+                            for (int i = 0; i < 5; i++) {
+                                System.out.println("Iteración: " + i);
+                            }
+                        </div>
+                        <button class="btn" id="runForExample">Ejecutar ejemplo</button>
+                        <div id="forOutput" class="output-container"></div>
+                    </div>
+                    <div style="flex: 1 1 400px;">
+                        <h3>For mejorado (for-each)</h3>
+                        <p>Java ofrece una versión simplificada para recorrer arrays y colecciones:</p>
+                        <div class="code-block">
+                            String[] frutas = {"Manzana", "Banana", "Cereza"};
+                            for (String fruta : frutas) {
+                                System.out.println(fruta);
+                            }
+                        </div>
+                        <button class="btn" id="runForEachExample">Ejecutar ejemplo</button>
+                        <div id="forEachOutput" class="output-container"></div>
+                    </div>
+                </div>
+                
+                <div class="interactive-element">
+                    <h3>Simulador de bucles for</h3>
+                    <p>Modifica los parámetros del bucle for y observa cómo cambia el resultado:</p>
+                    
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <div>
+                            <label for="initValue">Valor inicial:</label>
+                            <input type="number" id="initValue" value="0" min="0" max="100" class="code-area" style="width: 60px; padding: 0.5rem;">
+                        </div>
+                        <div>
+                            <label for="conditionValue">Condición (i &lt;):</label>
+                            <input type="number" id="conditionValue" value="5" min="1" max="100" class="code-area" style="width: 60px; padding: 0.5rem;">
+                        </div>
+                        <div>
+                            <label for="updateValue">Incremento:</label>
+                            <input type="number" id="updateValue" value="1" min="1" max="10" class="code-area" style="width: 60px; padding: 0.5rem;">
+                        </div>
+                    </div>
+                    
+                    <div class="code-block" id="dynamicForCode">
+                        for (int i = 0; i < 5; i++) {
+                            System.out.println("Iteración: " + i);
+                        }
+                    </div>
+                    
+                    <button class="btn" id="updateForLoop">Actualizar y ejecutar</button>
+                    <div id="dynamicForOutput" class="output-container"></div>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Ejercicio: Tabla de multiplicar</h4>
+                    <p>Escribe un programa que muestre la tabla de multiplicar del 1 al 10 para un número ingresado por el usuario, usando un bucle <code>for</code>.</p>
+                    
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-dots">
+                                <div class="editor-dot red"></div>
+                                <div class="editor-dot yellow"></div>
+                                <div class="editor-dot green"></div>
+                            </div>
+                            <div class="editor-title">TablaMultiplicar.java</div>
+                        </div>
+                        <div class="editor-content">
+                            <textarea class="code-area" id="forExerciseCode">import java.util.Scanner;
+
+public class TablaMultiplicar {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingresa un número: ");
+        int numero = scanner.nextInt();
+        
+        // Escribe tu código aquí
+        
+    }
+}</textarea>
+                        </div>
+                        <button class="btn run-btn" id="runForExercise">Ejecutar</button>
+                        <div id="forExerciseOutput" class="output-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="ejercicios">
+            <div class="card">
+                <h2>Ejercicios <span class="highlight">prácticos</span></h2>
+                <p>Ahora que has aprendido sobre los diferentes tipos de bucles en Java, es hora de poner en práctica tus conocimientos con estos ejercicios.</p>
+                
+                <div class="exercise">
+                    <h4>Ejercicio 1: Suma de números</h4>
+                    <p>Escribe un programa que use un bucle para sumar todos los números desde 1 hasta un número ingresado por el usuario.</p>
+                    <p><strong>Ejemplo:</strong> Si el usuario ingresa 5, el programa debe calcular 1 + 2 + 3 + 4 + 5 = 15</p>
+                    
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-dots">
+                                <div class="editor-dot red"></div>
+                                <div class="editor-dot yellow"></div>
+                                <div class="editor-dot green"></div>
+                            </div>
+                            <div class="editor-title">SumaNumeros.java</div>
+                        </div>
+                        <div class="editor-content">
+                            <textarea class="code-area" id="exercise1Code">import java.util.Scanner;
+
+public class SumaNumeros {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingresa un número: ");
+        int numero = scanner.nextInt();
+        
+        // Escribe tu código aquí
+        
+    }
+}</textarea>
+                        </div>
+                        <button class="btn run-btn" id="runExercise1">Ejecutar</button>
+                        <div id="exercise1Output" class="output-container"></div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Ejercicio 2: Números primos</h4>
+                    <p>Crea un programa que determine si un número ingresado por el usuario es primo o no, usando un bucle.</p>
+                    <p><strong>Recuerda:</strong> Un número primo es aquel que solo es divisible por 1 y por sí mismo.</p>
+                    
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-dots">
+                                <div class="editor-dot red"></div>
+                                <div class="editor-dot yellow"></div>
+                                <div class="editor-dot green"></div>
+                            </div>
+                            <div class="editor-title">NumeroPrimo.java</div>
+                        </div>
+                        <div class="editor-content">
+                            <textarea class="code-area" id="exercise2Code">import java.util.Scanner;
+
+public class NumeroPrimo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingresa un número: ");
+        int numero = scanner.nextInt();
+        
+        // Escribe tu código aquí
+        
+    }
+}</textarea>
+                        </div>
+                        <button class="btn run-btn" id="runExercise2">Ejecutar</button>
+                        <div id="exercise2Output" class="output-container"></div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Ejercicio 3: Patrón de asteriscos</h4>
+                    <p>Escribe un programa que muestre el siguiente patrón usando bucles anidados:</p>
+                    <div class="code-block">
+                        *
+                        **
+                        ***
+                        ****
+                        *****
+                    </div>
+                    
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-dots">
+                                <div class="editor-dot red"></div>
+                                <div class="editor-dot yellow"></div>
+                                <div class="editor-dot green"></div>
+                            </div>
+                            <div class="editor-title">PatronAsteriscos.java</div>
+                        </div>
+                        <div class="editor-content">
+                            <textarea class="code-area" id="exercise3Code">public class PatronAsteriscos {
+    public static void main(String[] args) {
+        
+        // Escribe tu código aquí
+        
+    }
+}</textarea>
+                        </div>
+                        <button class="btn run-btn" id="runExercise3">Ejecutar</button>
+                        <div id="exercise3Output" class="output-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <h3>Aprende Estructuras Repetitivas en Java</h3>
+            <p>Recurso educativo interactivo para estudiantes de programación</p>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <i class="fab fa-youtube"></i>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <p>&copy; 2023 Aprende Java. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Funcionalidad para las pestañas
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            const tabs = document.getElementsByClassName("tab");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        // Simulador de bucle for
+        document.getElementById('updateForLoop').addEventListener('click', function() {
+            const initValue = document.getElementById('initValue').value;
+            const conditionValue = document.getElementById('conditionValue').value;
+            const updateValue = document.getElementById('updateValue').value;
+            
+            // Actualizar el código mostrado
+            const forCode = `for (int i = ${initValue}; i < ${conditionValue}; i += ${updateValue}) {
+    System.out.println("Iteración: " + i);
+}`;
+            document.getElementById('dynamicForCode').textContent = forCode;
+            
+            // Simular la salida
+            let output = '';
+            for (let i = parseInt(initValue); i < parseInt(conditionValue); i += parseInt(updateValue)) {
+                output += `Iteración: ${i}\n`;
+            }
+            document.getElementById('dynamicForOutput').textContent = output;
+        });
+        
+        // Ejecutar ejemplos
+        document.getElementById('runWhileExample').addEventListener('click', function() {
+            let output = '';
+            let contador = 1;
+            while (contador <= 5) {
+                output += `Iteración número: ${contador}\n`;
+                contador++;
+            }
+            document.getElementById('whileOutput').textContent = output;
+        });
+        
+        document.getElementById('runForExample').addEventListener('click', function() {
+            let output = '';
+            for (let i = 0; i < 5; i++) {
+                output += `Iteración: ${i}\n`;
+            }
+            document.getElementById('forOutput').textContent = output;
+        });
+        
+        document.getElementById('runForEachExample').addEventListener('click', function() {
+            const frutas = ["Manzana", "Banana", "Cereza"];
+            let output = '';
+            for (const fruta of frutas) {
+                output += `${fruta}\n`;
+            }
+            document.getElementById('forEachOutput').textContent = output;
+        });
+        
+        document.getElementById('showExampleBtn').addEventListener('click', function() {
+            let output = '';
+            for (let i = 1; i <= 100; i++) {
+                output += `${i}\n`;
+                if (i % 20 === 0) output += '\n'; // Saltos para mejor visualización
+            }
+            const outputElement = document.getElementById('exampleOutput');
+            outputElement.textContent = output;
+            outputElement.style.display = 'block';
+        });
+        
+        // Simulación de do-while
+        document.getElementById('simulateDoWhile').addEventListener('click', function() {
+            const simulationElement = document.getElementById('doWhileSimulation');
+            simulationElement.innerHTML = 'Ingresa un número entre 1 y 10: 15<br>' +
+                                        'Ingresa un número entre 1 y 10: 0<br>' +
+                                        'Ingresa un número entre 1 y 10: 7<br>' +
+                                        'Correcto! Elegiste: 7';
+        });
+        
+        // Funcionalidad del quiz
+        function selectOption(element) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+        
+        function checkAnswer(questionNum) {
+            const feedbackElement = document.getElementById(`quizFeedback${questionNum}`);
+            const selectedOption = document.querySelector(`#doWhileQuiz .quiz-option.selected`);
+            
+            if (!selectedOption) {
+                feedbackElement.textContent = 'Por favor selecciona una opción';
+                feedbackElement.className = 'quiz-feedback incorrect';
+                feedbackElement.style.display = 'block';
+                return;
+            }
+            
+            const answerText = selectedOption.textContent;
+            
+            if (questionNum === 1 && answerText.includes("siempre ejecuta el bloque al menos una vez")) {
+                feedbackElement.textContent = '¡Correcto! El do-while siempre ejecuta el bloque al menos una vez antes de verificar la condición.';
+                feedbackElement.className = 'quiz-feedback correct';
+            } else {
+                feedbackElement.textContent = 'Incorrecto. La respuesta correcta es: "El do-while siempre ejecuta el bloque al menos una vez".';
+                feedbackElement.className = 'quiz-feedback incorrect';
+            }
+            
+            feedbackElement.style.display = 'block';
+        }
+        
+        // Simuladores de código para los ejercicios (simplificado)
+        function setupCodeRunner(buttonId, codeAreaId, outputId, solutionChecker) {
+            document.getElementById(buttonId).addEventListener('click', function() {
+                const code = document.getElementById(codeAreaId).value;
+                // En una implementación real, aquí usarías un compilador/interpretador de Java
+                // Para este ejemplo, simularemos algunas respuestas esperadas
+                try {
+                    const output = solutionChecker(code);
+                    document.getElementById(outputId).textContent = output;
+                } catch (e) {
+                    document.getElementById(outputId).textContent = 'Error: ' + e.message;
+                }
+            });
+        }
+        
+        // Verificadores de soluciones (simplificados)
+        function checkWhileExercise(code) {
+            if (!code.includes('while')) {
+                throw new Error('Debes usar un bucle while');
+            }
+            
+            // Verificación muy básica
+            if (code.includes('10') && code.includes('1') && code.includes('--')) {
+                return "10\n9\n8\n7\n6\n5\n4\n3\n2\n1";
+            }
+            throw new Error('El código no produce la salida esperada. Debe imprimir números del 10 al 1.');
+        }
+        
+        function checkDoWhileExercise(code) {
+            if (!code.includes('do') && !code.includes('while')) {
+                throw new Error('Debes usar un bucle do-while');
+            }
+            
+            if (code.includes('NUMERO_SECRETO') && code.includes('!=')) {
+                return "Ingresa un número: 5\nIncorrecto, intenta de nuevo.\nIngresa un número: 7\n¡Correcto! El número secreto era 7.";
+            }
+            throw new Error('El código no implementa correctamente el juego de adivinanza.');
+        }
+        
+        function checkForExercise(code) {
+            if (!code.includes('for')) {
+                throw new Error('Debes usar un bucle for');
+            }
+            
+            if (code.includes('numero * i')) {
+                return "Ingresa un número: 5\n5 x 1 = 5\n5 x 2 = 10\n5 x 3 = 15\n5 x 4 = 20\n5 x 5 = 25\n5 x 6 = 30\n5 x 7 = 35\n5 x 8 = 40\n5 x 9 = 45\n5 x 10 = 50";
+            }
+            throw new Error('El código no muestra correctamente la tabla de multiplicar.');
+        }
+        
+        function checkExercise1(code) {
+            if (code.includes('suma') && (code.includes('while') || code.includes('for'))) {
+                return "Ingresa un número: 5\nLa suma es: 15";
+            }
+            throw new Error('El código no calcula correctamente la suma de números.');
+        }
+        
+        function checkExercise2(code) {
+            if (code.includes('primo') && (code.includes('%') || code.includes('divisible'))) {
+                return "Ingresa un número: 7\n7 es un número primo.";
+            }
+            throw new Error('El código no determina correctamente si un número es primo.');
+        }
+        
+        function checkExercise3(code) {
+            if (code.includes('for') && code.includes('*')) {
+                return "*\n**\n***\n****\n*****";
+            }
+            throw new Error('El código no muestra el patrón de asteriscos correctamente.');
+        }
+        
+        // Configurar los ejecutores de código
+        setupCodeRunner('runWhileExercise', 'whileExerciseCode', 'whileExerciseOutput', checkWhileExercise);
+        setupCodeRunner('runDoWhileExercise', 'doWhileExerciseCode', 'doWhileExerciseOutput', checkDoWhileExercise);
+        setupCodeRunner('runForExercise', 'forExerciseCode', 'forExerciseOutput', checkForExercise);
+        setupCodeRunner('runExercise1', 'exercise1Code', 'exercise1Output', checkExercise1);
+        setupCodeRunner('runExercise2', 'exercise2Code', 'exercise2Output', checkExercise2);
+        setupCodeRunner('runExercise3', 'exercise3Code', 'exercise3Output', checkExercise3);
+        
+        // Efecto de scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
