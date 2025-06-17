@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acumuladores y Contadores en Java</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #ff7e5f;
+            --accent: #2ecc71;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #3a5683);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            color: var(--secondary);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-highlight {
+            border-left: 5px solid var(--accent);
+        }
+        
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+            tab-size: 4;
+        }
+        
+        .keyword {
+            color: #c678dd;
+        }
+        
+        .type {
+            color: #e5c07b;
+        }
+        
+        .var {
+            color: #e06c75;
+        }
+        
+        .num {
+            color: #d19a66;
+        }
+        
+        .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+        
+        .example-container {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .example {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .visualization {
+            background: #f0f4f8;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .visualization-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 4px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            font-size: 0.8rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .exercise {
+            background: #e8f4fd;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: #ff6a45;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--dark);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        @media (max-width: 768px) {
+            .example-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Acumuladores y Contadores en Java</h1>
+            <p>Domina el uso de estas herramientas esenciales para trabajar con bucles</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section id="introduccion">
+            <div class="card">
+                <h2>¿Qué son acumuladores y contadores?</h2>
+                <p>Cuando trabajamos con bucles en Java (como <code>for</code>, <code>while</code> o <code>do-while</code>), a menudo necesitamos llevar un registro de ciertos valores durante las iteraciones. Aquí es donde entran en juego los <strong>acumuladores</strong> y <strong>contadores</strong>.</p>
+                
+                <div class="visualization">
+                    <h3>Imagina que estás en un supermercado:</h3>
+                    <div class="visualization-step">
+                        <div class="step-number">1</div>
+                        <div>El <strong>contador</strong> sería como el número de productos que llevas en tu carrito</div>
+                    </div>
+                    <div class="visualization-step">
+                        <div class="step-number">2</div>
+                        <div>El <strong>acumulador</strong> sería como el total de dinero que vas gastando</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contadores">
+            <div class="card card-highlight">
+                <h2>Contadores</h2>
+                <p>Un contador es una variable que incrementa o decrementa su valor en una cantidad constante (generalmente 1) con cada iteración del bucle.</p>
+                
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Se usa para contar ocurrencias o iteraciones</li>
+                    <li>Normalmente se incrementa en 1 (pero puede ser otro valor)</li>
+                    <li>Se inicializa generalmente en 0 o 1 según el caso</li>
+                </ul>
+                
+                <div class="example-container">
+                    <div class="example">
+                        <h4>Ejemplo básico:</h4>
+                        <div class="code-block">
+                            <span class="keyword">int</span> <span class="var">contador</span> = <span class="num">0</span>; <span class="comment">// Inicialización</span><br>
+                            <span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="num">10</span>; <span class="var">i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="var">contador</span>++; <span class="comment">// Incremento</span><br>
+                            }<br>
+                            System.out.println(<span class="var">contador</span>); <span class="comment">// Muestra 10</span>
+                        </div>
+                    </div>
+                    <div class="example">
+                        <h4>Ejemplo práctico:</h4>
+                        <div class="code-block">
+                            <span class="comment">// Contar números pares del 1 al 100</span><br>
+                            <span class="keyword">int</span> <span class="var">pares</span> = <span class="num">0</span>;<br>
+                            <span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">num</span> = <span class="num">1</span>; <span class="var">num</span> &lt;= <span class="num">100</span>; <span class="var">num</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="var">num</span> % <span class="num">2</span> == <span class="num">0</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">pares</span>++;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }<br>
+                            System.out.println(<span class="var">pares</span>); <span class="comment">// Muestra 50</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="acumuladores">
+            <div class="card card-highlight">
+                <h2>Acumuladores</h2>
+                <p>Un acumulador es una variable que va sumando (o restando, multiplicando, etc.) valores variables durante las iteraciones del bucle.</p>
+                
+                <h3>Características principales:</h3>
+                <ul>
+                    <li>Se usa para acumular valores (sumas, productos, etc.)</li>
+                    <li>El valor que se suma puede variar en cada iteración</li>
+                    <li>Se inicializa generalmente en 0 (para sumas) o 1 (para productos)</li>
+                </ul>
+                
+                <div class="example-container">
+                    <div class="example">
+                        <h4>Ejemplo básico:</h4>
+                        <div class="code-block">
+                            <span class="keyword">int</span> <span class="var">suma</span> = <span class="num">0</span>; <span class="comment">// Inicialización</span><br>
+                            <span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = <span class="num">1</span>; <span class="var">i</span> &lt;= <span class="num">5</span>; <span class="var">i</span>++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="var">suma</span> += <span class="var">i</span>; <span class="comment">// Acumulación</span><br>
+                            }<br>
+                            System.out.println(<span class="var">suma</span>); <span class="comment">// Muestra 15 (1+2+3+4+5)</span>
+                        </div>
+                    </div>
+                    <div class="example">
+                        <h4>Ejemplo práctico:</h4>
+                        <div class="code-block">
+                            <span class="comment">// Calcular el promedio de notas</span><br>
+                            <span class="keyword">double</span> <span class="var">sumaNotas</span> = <span class="num">0.0</span>;<br>
+                            <span class="keyword">int</span>[] <span class="var">notas</span> = {<span class="num">85</span>, <span class="num">90</span>, <span class="num">78</span>, <span class="num">92</span>, <span class="num">88</span>};<br>
+                            <span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">nota</span> : <span class="var">notas</span>) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="var">sumaNotas</span> += <span class="var">nota</span>;<br>
+                            }<br>
+                            <span class="keyword">double</span> <span class="var">promedio</span> = <span class="var">sumaNotas</span> / <span class="var">notas</span>.length;<br>
+                            System.out.println(<span class="var">promedio</span>); <span class="comment">// Muestra el promedio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="comparacion">
+            <div class="card">
+                <h2>Comparación entre contadores y acumuladores</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Contador</th>
+                            <th>Acumulador</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Propósito</td>
+                            <td>Contar ocurrencias</td>
+                            <td>Acumular valores</td>
+                        </tr>
+                        <tr>
+                            <td>Incremento</td>
+                            <td>Valor constante (generalmente 1)</td>
+                            <td>Valor variable</td>
+                        </tr>
+                        <tr>
+                            <td>Inicialización típica</td>
+                            <td>0 o 1</td>
+                            <td>0 (sumas), 1 (productos)</td>
+                        </tr>
+                        <tr>
+                            <td>Operación típica</td>
+                            <td>++ o --</td>
+                            <td>+=, -=, *=, /=</td>
+                        </tr>
+                        <tr>
+                            <td>Ejemplo de uso</td>
+                            <td>Contar estudiantes aprobados</td>
+                            <td>Sumar edades para calcular promedio</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section id="errores-comunes">
+            <div class="card">
+                <h2>Errores comunes y cómo evitarlos</h2>
+                
+                <div class="visualization">
+                    <h3>¡Cuidado con estos errores!</h3>
+                    
+                    <div class="visualization-step">
+                        <div class="step-number">!</div>
+                        <div><strong>Olvidar inicializar</strong> la variable (puede contener basura)</div>
+                    </div>
+                    <div class="visualization-step">
+                        <div class="step-number">!</div>
+                        <div>Inicializar con un valor incorrecto (ej. suma=1 para acumular)</div>
+                    </div>
+                    <div class="visualization-step">
+                        <div class="step-number">!</div>
+                        <div>Poner la inicialización <strong>dentro</strong> del bucle (se reinicia en cada iteración)</div>
+                    </div>
+                    <div class="visualization-step">
+                        <div class="step-number">!</div>
+                        <div>Confundir cuando usar cada uno (contar vs acumular)</div>
+                    </div>
+                </div>
+                
+                <h3>Ejemplo de error común:</h3>
+                <div class="code-block">
+                    <span class="comment">// ERROR: suma se reinicia en cada iteración</span><br>
+                    <span class="keyword">for</span> (<span class="keyword">int</span> <span class="var">i</span> = <span class="num">1</span>; <span class="var">i</span> &lt;= <span class="num">5</span>; <span class="var">i</span>++) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span> <span class="var">suma</span> = <span class="num">0</span>; <span class="comment">// MAL: inicialización dentro del bucle</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="var">suma</span> += <span class="var">i</span>;<br>
+                    }<br>
+                    <span class="comment">// suma no estará accesible aquí y se pierde en cada iteración</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="ejercicios">
+            <div class="card">
+                <h2>¡Practiquemos!</h2>
+                
+                <div class="exercise">
+                    <h3>Ejercicio 1: Contador de vocales</h3>
+                    <p>Escribe un programa que cuente cuántas vocales tiene una palabra ingresada por el usuario.</p>
+                    <div class="code-block">
+                        <span class="comment">// Pista: usa un contador y un bucle for</span><br>
+                        <span class="keyword">String</span> <span class="var">palabra</span> = <span class="var">scanner</span>.nextLine().toLowerCase();<br>
+                        <span class="keyword">int</span> <span class="var">vocales</span> = <span class="num">0</span>;<br>
+                        <span class="comment">// Completa el código aquí</span>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h3>Ejercicio 2: Acumulador de factorial</h3>
+                    <p>Calcula el factorial de un número usando un acumulador. Recuerda que n! = 1 × 2 × 3 × ... × n.</p>
+                    <div class="code-block">
+                        <span class="keyword">int</span> <span class="var">numero</span> = <span class="num">5</span>; <span class="comment">// Prueba con otros valores</span><br>
+                        <span class="keyword">long</span> <span class="var">factorial</span> = <span class="num">1</span>; <span class="comment">// ¿Por qué no se inicializa en 0?</span><br>
+                        <span class="comment">// Completa el código aquí</span>
+                    </div>
+                </div>
+                
+                <button class="btn">Ver soluciones (pero intenta primero!)</button>
+            </div>
+        </section>
+        
+        <section id="resumen">
+            <div class="card">
+                <h2>Resumen clave</h2>
+                
+                <div class="visualization">
+                    <div class="visualization-step">
+                        <div class="step-number">✓</div>
+                        <div><strong>Contadores</strong> sirven para contar (incremento/decremento constante)</div>
+                    </div>
+                    <div class="visualization-step">
+                        <div class="step-number">✓</div>
+                        <div><strong>Acumuladores</strong> sirven para sumar valores (incremento variable)</div>
+                    </div>
+                    <div class="visualization-step">
+                        <div class="step-number">✓</div>
+                        <div>Ambos deben inicializarse <strong>antes</strong> del bucle</div>
+                    </div>
+                    <div class="visualization-step">
+                        <div class="step-number">✓</div>
+                        <div>El valor inicial depende del caso de uso (0, 1 u otro)</div>
+                    </div>
+                    <div class="visualization-step">
+                        <div class="step-number">✓</div>
+                        <div>Son herramientas fundamentales para trabajar con bucles</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Aprendiendo Java - Acumuladores y Contadores</p>
+            <p>Recurso educativo creado para estudiantes de programación</p>
+        </div>
+    </footer>
+</body>
+</html>
