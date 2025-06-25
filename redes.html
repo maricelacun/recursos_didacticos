@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redes Informáticas: Conectando el Mundo</title>
+    <style>
+        /* CSS - Estilos coloridos y atractivos */
+        :root {
+            --color-primario: #8A2BE2;
+            --color-secundario: #FFA500;
+            --color-fondo: #E6F7FF;
+            --color-texto: #333;
+            --color-destacado: #FF6B6B;
+            --color-verde: #4CAF50;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            line-height: 1.6;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600;700&display=swap');
+        
+        h1, h2, h3 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--color-primario);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 5px solid var(--color-destacado);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 10px;
+            background-color: #000;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--color-primario);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #e6f7ff;
+        }
+        
+        .infografia {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--color-secundario);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .pregunta {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid var(--color-secundario);
+        }
+        
+        button, .btn {
+            background-color: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        button:hover, .btn:hover {
+            background-color: var(--color-primario);
+            transform: scale(1.05);
+        }
+        
+        .timeline-game {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: move;
+            border: 2px dashed #ccc;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .timeline-item:hover {
+            border-color: var(--color-secundario);
+        }
+        
+        .quiz-container {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .quiz-question {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .quiz-option {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #ddd;
+        }
+        
+        .quiz-option:hover {
+            background-color: #e6f7ff;
+            border-color: var(--color-primario);
+        }
+        
+        .quiz-option.correct {
+            background-color: #d4edda;
+            border-color: var(--color-verde);
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        #certificate {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 5px double var(--color-primario);
+        }
+        
+        footer {
+            background-color: var(--color-primario);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🌐 Redes Informáticas: Conectando el Mundo</h1>
+            <p>¡Aprende qué son las redes, cómo funcionan y su importancia en el mundo digital!</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section id="introduccion">
+            <h2>📌 ¿Qué son las redes informáticas?</h2>
+            <p>Las redes informáticas son sistemas de comunicación que conectan dispositivos para compartir información y recursos. Imagínalas como carreteras digitales que permiten a las computadoras, teléfonos y otros dispositivos "hablar" entre sí.</p>
+            
+            <div class="video-container">
+                <!-- Video de YouTube sobre redes informáticas -->
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/AVXkJVW5d0w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="pregunta">
+                <h3>🤔 Pregunta rápida:</h3>
+                <p>¿Qué dispositivos de tu casa están conectados a una red?</p>
+                <input type="text" id="dispositivos-casa" placeholder="Ej: celular, computadora, smart TV...">
+                <button onclick="guardarRespuesta()">Enviar respuesta</button>
+                <p id="respuesta-guardada"></p>
+            </div>
+        </section>
+        
+        <section id="tipos-redes">
+            <h2>📊 Tipos de Redes</h2>
+            <p>Existen diferentes tipos de redes según su alcance y función:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo de Red</th>
+                        <th>Alcance</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>PAN</strong> (Red de Área Personal)</td>
+                        <td>Personal (1-10 metros)</td>
+                        <td>Bluetooth (auriculares y celular)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LAN</strong> (Red de Área Local)</td>
+                        <td>Local (edificio o casa)</td>
+                        <td>Red de tu escuela o hogar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MAN</strong> (Red de Área Metropolitana)</td>
+                        <td>Ciudad</td>
+                        <td>Red de una universidad grande</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WAN</strong> (Red de Área Amplia)</td>
+                        <td>Global (países)</td>
+                        <td>Internet</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="pregunta">
+                <h3>✏️ Actividad:</h3>
+                <p>Dibuja en tu cuaderno cómo sería la red de tu colegio (¿LAN? ¿Wi-Fi? ¿Cables?).</p>
+                <button onclick="mostrarEjemploRed()">Ver ejemplo</button>
+                <div id="ejemplo-red" class="hidden">
+                    <img src="https://cdn.pixabay.com/photo/2017/06/20/22/14/network-2426820_640.png" alt="Ejemplo de red escolar" style="max-width: 100%; border-radius: 10px; margin-top: 10px;">
+                </div>
+            </div>
+        </section>
+        
+        <section id="historia-internet">
+            <h2>🕰️ Historia del Internet</h2>
+            
+            <div class="infografia">
+                <h3>📜 Línea del tiempo interactiva</h3>
+                <p>Ordena estos eventos históricos en el orden correcto:</p>
+                
+                <div class="timeline-game" id="timeline-game">
+                    <div class="timeline-item" draggable="true" data-year="1969">1969: Nace ARPANET, la primera red de computadoras</div>
+                    <div class="timeline-item" draggable="true" data-year="1971">1971: Se envía el primer correo electrónico</div>
+                    <div class="timeline-item" draggable="true" data-year="1983">1983: Se adopta el protocolo TCP/IP</div>
+                    <div class="timeline-item" draggable="true" data-year="1991">1991: Tim Berners-Lee crea la World Wide Web (WWW)</div>
+                    <div class="timeline-item" draggable="true" data-year="1998">1998: Fundación de Google</div>
+                </div>
+                
+                <button onclick="verificarOrden()">Verificar orden</button>
+                <p id="resultado-timeline"></p>
+            </div>
+            
+            <h3>📌 Datos curiosos:</h3>
+            <ul>
+                <li>El primer mensaje enviado por ARPANET fue "LO" (intentaban escribir "LOGIN" pero el sistema se cayó).</li>
+                <li>La primera página web aún está disponible: <a href="http://info.cern.ch" target="_blank">info.cern.ch</a></li>
+                <li>En 1995 solo el 1% de la población mundial usaba Internet. ¡Hoy es más del 60%!</li>
+            </ul>
+        </section>
+        
+        <section id="funcionamiento-internet">
+            <h2>🔍 ¿Cómo funciona Internet?</h2>
+            
+            <div class="infografia">
+                <h3>📦 Analogía: El sistema postal de Internet</h3>
+                <p>Imagina que Internet es una gran oficina postal:</p>
+                <ul>
+                    <li><strong>Tu computadora</strong> = Carta ✉️</li>
+                    <li><strong>Router</strong> = Oficina postal 🏣</li>
+                    <li><strong>Servidores</strong> = Destinatarios 🏢</li>
+                </ul>
+                
+                <img src="https://cdn.pixabay.com/photo/2016/11/29/08/41/internet-1869039_640.jpg" alt="Funcionamiento de Internet" style="max-width: 100%; border-radius: 10px; margin: 15px 0;">
+                
+                <button onclick="mostrarAnimacion()">Ver animación interactiva</button>
+                <div id="animacion-internet" class="hidden">
+                    <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <div style="width: 50px; height: 50px; background-color: var(--color-secundario); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto;">PC</div>
+                            <p>Computadora</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="width: 50px; height: 50px; background-color: var(--color-primario); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto;">R</div>
+                            <p>Router</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="width: 50px; height: 50px; background-color: var(--color-destacado); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto;">S</div>
+                            <p>Servidor</p>
+                        </div>
+                    </div>
+                    <div id="paquete-animado" style="width: 30px; height: 30px; background-color: var(--color-verde); border-radius: 5px; position: relative; margin: 0 auto;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="preguntas-reflexion">
+            <h2>❓ Preguntas de Reflexión</h2>
+            
+            <div class="pregunta">
+                <p>1️⃣ ¿Qué pasaría si no existieran las redes informáticas?</p>
+                <textarea rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+            </div>
+            
+            <div class="pregunta">
+                <p>2️⃣ ¿Por qué es importante la seguridad en redes?</p>
+                <textarea rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+            </div>
+            
+            <div class="pregunta">
+                <p>3️⃣ ¿Cómo crees que será Internet en 10 años?</p>
+                <textarea rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd;"></textarea>
+            </div>
+            
+            <button onclick="enviarReflexiones()">Enviar respuestas</button>
+        </section>
+        
+        <section id="quiz">
+            <h2>🎮 Quiz: ¿Cuánto sabes de redes?</h2>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <p>1. ¿Qué protocolo se usa principalmente para enviar correos electrónicos?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'b')">a) HTTP</div>
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'b')">b) SMTP</div>
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'b')">c) FTP</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>2. ¿Cuál de estos NO es un dispositivo de red?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'c')">a) Router</div>
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'c')">b) Switch</div>
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'c')">c) Teclado</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>3. ¿Qué significa la sigla "LAN"?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'a')">a) Local Area Network</div>
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'a')">b) Large Access Network</div>
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'a')">c) Linked Area Nodes</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <p>4. ¿Qué tipo de cable se usa comúnmente en redes Ethernet?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'b')">a) Cable coaxial</div>
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'b')">b) Cable UTP</div>
+                        <div class="quiz-option" onclick="verificarRespuesta(this, 'b')">c) Cable HDMI</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="calcularResultado()">Terminar quiz</button>
+            <div id="resultado-quiz" class="hidden"></div>
+        </section>
+        
+        <div id="certificate" class="hidden">
+            <h2>🎉 ¡Felicidades!</h2>
+            <p>Has completado el curso introductorio sobre Redes Informáticas</p>
+            <div style="border: 2px solid var(--color-primario); padding: 20px; margin: 20px 0; border-radius: 10px;">
+                <h3 style="color: var(--color-primario);">Certificado de Participación</h3>
+                <p>Otorgado a: <span id="nombre-estudiante">[Nombre del Estudiante]</span></p>
+                <p>Por haber completado satisfactoriamente el curso "Redes Informáticas: Conectando el Mundo"</p>
+                <p style="font-style: italic;">Fecha: <span id="fecha-certificado"></span></p>
+            </div>
+            <button onclick="imprimirCertificado()">Imprimir certificado</button>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Redes Informáticas Educativas - Todos los derechos reservados</p>
+            <p>Desarrollado para estudiantes curiosos y futuros expertos en tecnología</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript para la interactividad
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar elementos arrastrables para la línea de tiempo
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            let draggedItem = null;
+            
+            timelineItems.forEach(item => {
+                item.addEventListener('dragstart', function() {
+                    draggedItem = this;
+                    setTimeout(() => this.style.opacity = '0.4', 0);
+                });
+                
+                item.addEventListener('dragend', function() {
+                    setTimeout(() => this.style.opacity = '1', 0);
+                    draggedItem = null;
+                });
+                
+                item.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                });
+                
+                item.addEventListener('dragenter', function(e) {
+                    e.preventDefault();
+                    this.style.backgroundColor = '#e6f7ff';
+                });
+                
+                item.addEventListener('dragleave', function() {
+                    this.style.backgroundColor = 'white';
+                });
+                
+                item.addEventListener('drop', function() {
+                    this.style.backgroundColor = 'white';
+                    if (draggedItem !== this) {
+                        const timelineGame = document.getElementById('timeline-game');
+                        const items = Array.from(timelineGame.children);
+                        const draggedIndex = items.indexOf(draggedItem);
+                        const targetIndex = items.indexOf(this);
+                        
+                        if (draggedIndex < targetIndex) {
+                            timelineGame.insertBefore(draggedItem, this.nextSibling);
+                        } else {
+                            timelineGame.insertBefore(draggedItem, this);
+                        }
+                    }
+                });
+            });
+        });
+        
+        function guardarRespuesta() {
+            const respuesta = document.getElementById('dispositivos-casa').value;
+            if (respuesta.trim() !== '') {
+                document.getElementById('respuesta-guardada').textContent = `✅ Respuesta guardada: ${respuesta}`;
+                document.getElementById('respuesta-guardada').style.color = 'var(--color-verde)';
+            } else {
+                document.getElementById('respuesta-guardada').textContent = 'Por favor, escribe tu respuesta';
+                document.getElementById('respuesta-guardada').style.color = 'var(--color-destacado)';
+            }
+        }
+        
+        function mostrarEjemploRed() {
+            const ejemplo = document.getElementById('ejemplo-red');
+            if (ejemplo.classList.contains('hidden')) {
+                ejemplo.classList.remove('hidden');
+            } else {
+                ejemplo.classList.add('hidden');
+            }
+        }
+        
+        function verificarOrden() {
+            const timelineGame = document.getElementById('timeline-game');
+            const items = Array.from(timelineGame.children);
+            const correctOrder = ['1969', '1971', '1983', '1991', '1998'];
+            let isCorrect = true;
+            
+            items.forEach((item, index) => {
+                if (item.getAttribute('data-year') !== correctOrder[index]) {
+                    isCorrect = false;
+                }
+            });
+            
+            const resultado = document.getElementById('resultado-timeline');
+            if (isCorrect) {
+                resultado.textContent = '¡Correcto! Has ordenado bien la historia de Internet.';
+                resultado.style.color = 'var(--color-verde)';
+            } else {
+                resultado.textContent = '¡Casi! Revisa el orden de los eventos e inténtalo de nuevo.';
+                resultado.style.color = 'var(--color-destacado)';
+            }
+        }
+        
+        function mostrarAnimacion() {
+            const animacion = document.getElementById('animacion-internet');
+            if (animacion.classList.contains('hidden')) {
+                animacion.classList.remove('hidden');
+                animarPaquete();
+            } else {
+                animacion.classList.add('hidden');
+            }
+        }
+        
+        function animarPaquete() {
+            const paquete = document.getElementById('paquete-animado');
+            const animacion = document.getElementById('animacion-internet');
+            
+            if (animacion.classList.contains('hidden')) return;
+            
+            // Reset position
+            paquete.style.left = '0';
+            paquete.style.top = '0';
+            
+            // Animación de ida (PC -> Router -> Servidor)
+            setTimeout(() => {
+                paquete.style.transition = 'left 1.5s ease-in-out';
+                paquete.style.left = 'calc(50% - 15px)';
+                
+                setTimeout(() => {
+                    paquete.style.transition = 'left 1.5s ease-in-out, top 0.5s ease-in-out';
+                    paquete.style.left = 'calc(100% - 60px)';
+                    
+                    // Animación de vuelta (Servidor -> Router -> PC)
+                    setTimeout(() => {
+                        paquete.style.transition = 'left 1.5s ease-in-out';
+                        paquete.style.left = 'calc(50% - 15px)';
+                        
+                        setTimeout(() => {
+                            paquete.style.transition = 'left 1.5s ease-in-out';
+                            paquete.style.left = '0';
+                            
+                            // Repetir animación
+                            setTimeout(animarPaquete, 1000);
+                        }, 1500);
+                    }, 1500);
+                }, 1500);
+            }, 500);
+        }
+        
+        function enviarReflexiones() {
+            alert('¡Tus reflexiones han sido enviadas! El profesor las revisará pronto.');
+        }
+        
+        function verificarRespuesta(elemento, respuestaCorrecta) {
+            // Remover clases de respuesta previa
+            const opciones = elemento.parentElement.querySelectorAll('.quiz-option');
+            opciones.forEach(opcion => {
+                opcion.classList.remove('correct', 'incorrect');
+            });
+            
+            // Verificar respuesta
+            if (elemento.textContent.trim().charAt(0) === respuestaCorrecta) {
+                elemento.classList.add('correct');
+            } else {
+                elemento.classList.add('incorrect');
+                // Encontrar la respuesta correcta y marcarla
+                opciones.forEach(opcion => {
+                    if (opcion.textContent.trim().charAt(0) === respuestaCorrecta) {
+                        opcion.classList.add('correct');
+                    }
+                });
+            }
+        }
+        
+        function calcularResultado() {
+            const correctas = document.querySelectorAll('.quiz-option.correct:not(.incorrect)').length / 2;
+            const totalPreguntas = document.querySelectorAll('.quiz-question').length;
+            const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+            
+            const resultado = document.getElementById('resultado-quiz');
+            resultado.classList.remove('hidden');
+            
+            let mensaje = '';
+            if (porcentaje >= 80) {
+                mensaje = `🎉 ¡Excelente! Obtuviste ${porcentaje}% (${correctas} de ${totalPreguntas} correctas)`;
+            } else if (porcentaje >= 50) {
+                mensaje = `👍 Buen trabajo! Obtuviste ${porcentaje}% (${correctas} de ${totalPreguntas} correctas)`;
+            } else {
+                mensaje = `💡 Sigue practicando. Obtuviste ${porcentaje}% (${correctas} de ${totalPreguntas} correctas)`;
+            }
+            
+            resultado.innerHTML = `
+                <h3>Resultado del Quiz</h3>
+                <p>${mensaje}</p>
+                <button onclick="mostrarCertificado()">Obtener certificado</button>
+            `;
+        }
+        
+        function mostrarCertificado() {
+            const nombre = prompt("Por favor, ingresa tu nombre para el certificado:");
+            if (nombre) {
+                document.getElementById('nombre-estudiante').textContent = nombre;
+                
+                const hoy = new Date();
+                const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('fecha-certificado').textContent = hoy.toLocaleDateString('es-ES', opciones);
+                
+                document.getElementById('certificate').classList.remove('hidden');
+                window.scrollTo({
+                    top: document.getElementById('certificate').offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        function imprimirCertificado() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
