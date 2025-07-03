@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorando el Mundo de las Redes</title>
+    <!-- Carga de Tailwind CSS para estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados para la fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f8ff; /* Un azul muy claro para el fondo general */
+        }
+        /* Colores vivos definidos con variables CSS para fácil manejo */
+        :root {
+            --color-primary-blue: #2563eb; /* Azul vibrante */
+            --color-secondary-yellow: #facc15; /* Amarillo vibrante */
+            --color-text-dark: #1f2937; /* Gris oscuro para el texto */
+            --color-background-light: #e0f2fe; /* Azul claro para secciones */
+        }
+
+        /* Aplicación de colores a elementos específicos */
+        .bg-primary-blue { background-color: var(--color-primary-blue); }
+        .text-primary-blue { color: var(--color-primary-blue); }
+        .bg-secondary-yellow { background-color: var(--color-secondary-yellow); }
+        .text-secondary-yellow { color: var(--color-secondary-yellow); }
+        .text-dark { color: var(--color-text-dark); }
+        .bg-background-light { background-color: var(--color-background-light); }
+
+        /* Estilos para el scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="text-dark">
+    <!-- Encabezado de la página -->
+    <header class="bg-primary-blue text-white p-4 shadow-lg rounded-b-xl">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-3xl font-bold mb-2 md:mb-0">
+                <span class="text-secondary-yellow">Explorando</span> el Mundo de las Redes
+            </h1>
+            <!-- Barra de navegación -->
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#inicio" class="hover:text-secondary-yellow transition duration-300">Inicio</a></li>
+                    <li><a href="#tipos-red" class="hover:text-secondary-yellow transition duration-300">Tipos de Red</a></li>
+                    <li><a href="#topologias-red" class="hover:text-secondary-yellow transition duration-300">Topologías de Red</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal de la página -->
+    <main class="container mx-auto p-6 space-y-12">
+
+        <!-- Sección de Inicio -->
+        <section id="inicio" class="bg-white p-8 rounded-xl shadow-md text-center">
+            <h2 class="text-4xl font-extrabold text-primary-blue mb-6">
+                ¡Bienvenido al Fascinante Mundo de las Redes!
+            </h2>
+            <p class="text-lg mb-6 leading-relaxed">
+                ¿Alguna vez te has preguntado cómo se conectan los dispositivos entre sí para que puedas navegar por internet, enviar mensajes o ver videos?
+                Las redes informáticas son la columna vertebral de nuestra era digital, permitiendo la comunicación y el intercambio de información a nivel global.
+            </p>
+            <p class="text-lg mb-8 leading-relaxed">
+                En esta página, desglosaremos los conceptos esenciales de las redes, desde sus diferentes tipos según su alcance, hasta las diversas formas en que los dispositivos pueden conectarse entre sí. ¡Prepárate para conectar los puntos!
+            </p>
+            <!-- Placeholder para imagen de bienvenida -->
+            <img src="https://placehold.co/800x400/2563eb/facc15?text=Red+Global+Estilizada" alt="Imagen de una red global estilizada" class="w-full h-auto rounded-lg shadow-lg mx-auto max-w-2xl">
+            <p class="text-sm text-gray-500 mt-2">
+                [Imagen de una red global estilizada, con nodos en azul y conexiones en amarillo.]
+            </p>
+        </section>
+
+        <!-- Sección de Tipos de Red -->
+        <section id="tipos-red" class="bg-background-light p-8 rounded-xl shadow-md">
+            <h2 class="text-4xl font-extrabold text-primary-blue mb-8 text-center">
+                Tipos de Red: ¡Conoce las Diferencias!
+            </h2>
+            <p class="text-lg mb-8 leading-relaxed">
+                Las redes se clasifican según su tamaño, alcance geográfico y la forma en que se administran. Entender estas categorías te ayudará a comprender cómo funcionan las conexiones a diferentes escalas.
+            </p>
+
+            <!-- Tipo de Red: LAN -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-sm border border-primary-blue">
+                <h3 class="text-3xl font-bold text-secondary-yellow mb-4">1. LAN (Local Area Network - Red de Área Local)</h3>
+                <p class="mb-4 leading-relaxed">
+                    Una LAN es una red que conecta dispositivos dentro de un área geográfica pequeña y limitada, como una casa, una oficina, un edificio o un campus universitario. Se caracterizan por su alta velocidad y baja latencia.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ejemplos:</strong> La red de tu casa que conecta tu computadora, teléfono y smart TV al router; la red de una oficina que conecta todas las computadoras de los empleados.
+                </p>
+                <!-- Placeholder para imagen LAN -->
+                <img src="https://placehold.co/600x300/2563eb/facc15?text=Red+LAN+en+Oficina" alt="Imagen de una red LAN en una oficina" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Imagen ilustrativa de una oficina o casa con varios dispositivos conectados a un router. Considera buscar un video corto animado en YouTube sobre "Qué es una red LAN".]
+                </p>
+            </div>
+
+            <!-- Tipo de Red: WAN -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-sm border border-primary-blue">
+                <h3 class="text-3xl font-bold text-secondary-yellow mb-4">2. WAN (Wide Area Network - Red de Área Amplia)</h3>
+                <p class="mb-4 leading-relaxed">
+                    Una WAN abarca una gran área geográfica, como una ciudad, un país o incluso continentes. Conecta múltiples LANs y puede utilizar líneas telefónicas, cables de fibra óptica o enlaces satelitales. Su velocidad suele ser menor que la de una LAN.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ejemplos:</strong> Internet es el ejemplo más grande y conocido de una WAN; las redes corporativas que conectan las sucursales de una empresa en diferentes ciudades.
+                </p>
+                <!-- Placeholder para imagen WAN -->
+                <img src="https://placehold.co/600x300/2563eb/facc15?text=Red+WAN+Global" alt="Imagen de una red WAN global" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Imagen de un mapa mundial con líneas conectando ciudades para representar una WAN.]
+                </p>
+            </div>
+
+            <!-- Tipo de Red: MAN -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-sm border border-primary-blue">
+                <h3 class="text-3xl font-bold text-secondary-yellow mb-4">3. MAN (Metropolitan Area Network - Red de Área Metropolitana)</h3>
+                <p class="mb-4 leading-relaxed">
+                    Una MAN es una red que se extiende por un área metropolitana, como una ciudad o un gran campus universitario. Es más grande que una LAN pero más pequeña que una WAN. A menudo, las MANs son propiedad de un solo proveedor de servicios, pero pueden ser utilizadas por múltiples organizaciones.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ejemplos:</strong> Las redes de televisión por cable que conectan hogares en una ciudad; la red que interconecta diferentes edificios gubernamentales dentro de una capital.
+                </p>
+                <!-- Placeholder para imagen MAN -->
+                <img src="https://placehold.co/600x300/2563eb/facc15?text=Red+MAN+Ciudad" alt="Imagen de una red MAN en una ciudad" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Diagrama simple de una ciudad con un círculo resaltando el área cubierta por la MAN.]
+                </p>
+            </div>
+
+            <!-- Tipo de Red: PAN -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-sm border border-primary-blue">
+                <h3 class="text-3xl font-bold text-secondary-yellow mb-4">4. PAN (Personal Area Network - Red de Área Personal)</h3>
+                <p class="mb-4 leading-relaxed">
+                    Una PAN es una red de muy corto alcance, diseñada para conectar dispositivos personales alrededor de un individuo. Su alcance suele ser de unos pocos metros.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ejemplos:</strong> La conexión Bluetooth entre tu teléfono y tus auriculares inalámbricos; la conexión de un teclado o mouse inalámbrico a tu computadora.
+                </p>
+                <!-- Placeholder para imagen PAN -->
+                <img src="https://placehold.co/600x300/2563eb/facc15?text=Red+PAN+Personal" alt="Imagen de una red PAN personal" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Imagen o infografía mostrando un smartphone conectado a unos auriculares y un smartwatch.]
+                </p>
+            </div>
+
+            <!-- Tipo de Red: CAN -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-sm border border-primary-blue">
+                <h3 class="text-3xl font-bold text-secondary-yellow mb-4">5. CAN (Campus Area Network - Red de Área de Campus)</h3>
+                <p class="mb-4 leading-relaxed">
+                    Una CAN es una red que interconecta múltiples LANs dentro de un área geográfica limitada, como un campus universitario, un parque industrial o una base militar. Es más grande que una LAN, pero más pequeña que una MAN.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ejemplos:</strong> La red de una universidad que conecta los diferentes edificios académicos, bibliotecas y residencias estudiantiles.
+                </p>
+                <!-- Placeholder para imagen CAN -->
+                <img src="https://placehold.co/600x300/2563eb/facc15?text=Red+CAN+Campus" alt="Imagen de una red CAN en un campus" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Mapa simple de un campus con los edificios marcados y líneas que los conectan.]
+                </p>
+            </div>
+
+            <!-- Tabla Resumen de Tipos de Red -->
+            <div class="mt-12">
+                <h3 class="text-3xl font-bold text-primary-blue mb-6 text-center">Tabla Resumen: Tipos de Red</h3>
+                <div class="overflow-x-auto rounded-lg shadow-lg">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-primary-blue text-white">
+                                <th class="py-3 px-4 text-left">Tipo de Red</th>
+                                <th class="py-3 px-4 text-left">Alcance</th>
+                                <th class="py-3 px-4 text-left">Velocidad Típica</th>
+                                <th class="py-3 px-4 text-left">Ejemplos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200 hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">PAN</td>
+                                <td class="py-3 px-4">Muy corto (metros)</td>
+                                <td class="py-3 px-4">Baja a Media</td>
+                                <td class="py-3 px-4">Bluetooth, USB</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">LAN</td>
+                                <td class="py-3 px-4">Corto (edificio, campus)</td>
+                                <td class="py-3 px-4">Alta</td>
+                                <td class="py-3 px-4">Hogar, oficina pequeña</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">CAN</td>
+                                <td class="py-3 px-4">Medio (campus grande)</td>
+                                <td class="py-3 px-4">Alta</td>
+                                <td class="py-3 px-4">Universidad, parque industrial</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">MAN</td>
+                                <td class="py-3 px-4">Medio-Largo (ciudad)</td>
+                                <td class="py-3 px-4">Media</td>
+                                <td class="py-3 px-4">Red de TV por cable de una ciudad</td>
+                            </tr>
+                            <tr class="hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">WAN</td>
+                                <td class="py-3 px-4">Largo (países, global)</td>
+                                <td class="py-3 px-4">Baja a Media</td>
+                                <td class="py-3 px-4">Internet, redes corporativas globales</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Topologías de Red -->
+        <section id="topologias-red" class="bg-white p-8 rounded-xl shadow-md">
+            <h2 class="text-4xl font-extrabold text-primary-blue mb-8 text-center">
+                Topologías de Red: ¡Cómo se Conectan los Dispositivos!
+            </h2>
+            <p class="text-lg mb-8 leading-relaxed">
+                La topología de red se refiere a la disposición física o lógica de los nodos (dispositivos) y los enlaces (cables o conexiones inalámbricas) en una red. Esencialmente, es el "mapa" de cómo están conectados los elementos de la red.
+            </p>
+
+            <!-- Topología: Bus -->
+            <div class="mb-10 p-6 bg-background-light rounded-lg shadow-sm border border-secondary-yellow">
+                <h3 class="text-3xl font-bold text-primary-blue mb-4">1. Topología de Bus</h3>
+                <p class="mb-4 leading-relaxed">
+                    En una topología de bus, todos los dispositivos están conectados a un único cable central, llamado bus o troncal. Los datos viajan a lo largo de este cable y son vistos por todos los dispositivos.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ventajas:</strong> Simple de instalar, requiere menos cable.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Desventajas:</strong> Un fallo en el cable central detiene toda la red; difícil de solucionar problemas; rendimiento disminuye con más dispositivos.
+                </p>
+                <!-- Placeholder para imagen Bus -->
+                <img src="https://placehold.co/600x250/facc15/2563eb?text=Topologia+de+Bus" alt="Diagrama de topología de bus" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Diagrama claro de una topología de bus (línea central en azul, dispositivos en amarillo).]
+                </p>
+            </div>
+
+            <!-- Topología: Anillo -->
+            <div class="mb-10 p-6 bg-background-light rounded-lg shadow-sm border border-secondary-yellow">
+                <h3 class="text-3xl font-bold text-primary-blue mb-4">2. Topología de Anillo (Ring)</h3>
+                <p class="mb-4 leading-relaxed">
+                    En esta topología, los dispositivos están conectados en un círculo cerrado, formando un anillo. Cada dispositivo está conectado a sus dos vecinos, y los datos viajan en una dirección específica alrededor del anillo.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ventajas:</strong> Rendimiento consistente bajo cargas de red elevadas; cada dispositivo actúa como repetidor.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Desventajas:</strong> Un fallo en un solo dispositivo o cable puede romper todo el anillo; añadir o quitar dispositivos es disruptivo.
+                </p>
+                <!-- Placeholder para imagen Anillo -->
+                <img src="https://placehold.co/600x250/facc15/2563eb?text=Topologia+de+Anillo" alt="Diagrama de topología de anillo" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Diagrama claro de una topología de anillo.]
+                </p>
+            </div>
+
+            <!-- Topología: Estrella -->
+            <div class="mb-10 p-6 bg-background-light rounded-lg shadow-sm border border-secondary-yellow">
+                <h3 class="text-3xl font-bold text-primary-blue mb-4">3. Topología de Estrella (Star)</h3>
+                <p class="mb-4 leading-relaxed">
+                    La topología de estrella es una de las más comunes. Todos los dispositivos están conectados individualmente a un punto central, que suele ser un hub, switch o router.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ventajas:</strong> Fácil de instalar y gestionar; un fallo en un cable o dispositivo no afecta al resto de la red; fácil de añadir o quitar dispositivos.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Desventajas:</strong> El punto central es un punto único de fallo; requiere más cable que la topología de bus.
+                </p>
+                <!-- Placeholder para imagen Estrella -->
+                <img src="https://placehold.co/600x250/facc15/2563eb?text=Topologia+de+Estrella" alt="Diagrama de topología de estrella" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Diagrama claro de una topología de estrella. Considera buscar un video animado en YouTube sobre "Cómo funciona la topología estrella".]
+                </p>
+            </div>
+
+            <!-- Topología: Malla -->
+            <div class="mb-10 p-6 bg-background-light rounded-lg shadow-sm border border-secondary-yellow">
+                <h3 class="text-3xl font-bold text-primary-blue mb-4">4. Topología de Malla (Mesh)</h3>
+                <p class="mb-4 leading-relaxed">
+                    En una topología de malla completa, cada dispositivo está conectado directamente a todos los demás dispositivos de la red. Esto crea múltiples rutas para los datos. En una malla parcial, solo algunos dispositivos están interconectados.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ventajas:</strong> Muy robusta y tolerante a fallos (si una ruta falla, hay otras); alto rendimiento; seguridad.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Desventajas:</strong> Muy costosa y compleja de implementar debido a la gran cantidad de cables y conexiones; difícil de gestionar.
+                </p>
+                <!-- Placeholder para imagen Malla -->
+                <img src="https://placehold.co/600x250/facc15/2563eb?text=Topologia+de+Malla" alt="Diagrama de topología de malla" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Diagrama claro de una topología de malla con todas las conexiones.]
+                </p>
+            </div>
+
+            <!-- Topología: Híbrida -->
+            <div class="mb-10 p-6 bg-background-light rounded-lg shadow-sm border border-secondary-yellow">
+                <h3 class="text-3xl font-bold text-primary-blue mb-4">5. Topología Híbrida</h3>
+                <p class="mb-4 leading-relaxed">
+                    Una topología híbrida es una combinación de dos o más topologías de red diferentes. Esto permite a las organizaciones aprovechar las ventajas de varias topologías para satisfacer sus necesidades específicas.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ejemplos:</strong> Una red que utiliza una topología de estrella en cada departamento, pero los departamentos están conectados entre sí mediante una topología de bus o anillo.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Ventajas:</strong> Flexibilidad; escalabilidad; puede optimizarse para necesidades específicas.
+                </p>
+                <p class="mb-4 leading-relaxed">
+                    <strong>Desventajas:</strong> Complejidad en el diseño y la gestión; puede ser costosa.
+                </p>
+                <!-- Placeholder para imagen Híbrida -->
+                <img src="https://placehold.co/600x250/facc15/2563eb?text=Topologia+Hibrida" alt="Diagrama de topología híbrida" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-xl">
+                <p class="text-sm text-gray-500 mt-2">
+                    [Diagrama que combine elementos de dos o más topologías (ej. estrellas conectadas por un bus).]
+                </p>
+            </div>
+
+            <!-- Tabla Resumen de Topologías de Red -->
+            <div class="mt-12">
+                <h3 class="text-3xl font-bold text-primary-blue mb-6 text-center">Tabla Resumen: Topologías de Red</h3>
+                <div class="overflow-x-auto rounded-lg shadow-lg">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-primary-blue text-white">
+                                <th class="py-3 px-4 text-left">Topología</th>
+                                <th class="py-3 px-4 text-left">Descripción</th>
+                                <th class="py-3 px-4 text-left">Ventajas</th>
+                                <th class="py-3 px-4 text-left">Desventajas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200 hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">Bus</td>
+                                <td class="py-3 px-4">Todos a un cable central.</td>
+                                <td class="py-3 px-4">Simple, menos cable.</td>
+                                <td class="py-3 px-4">Fallo central, difícil diagnóstico.</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">Anillo</td>
+                                <td class="py-3 px-4">Dispositivos en círculo.</td>
+                                <td class="py-3 px-4">Rendimiento consistente.</td>
+                                <td class="py-3 px-4">Fallo único rompe anillo.</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">Estrella</td>
+                                <td class="py-3 px-4">Todos a un punto central.</td>
+                                <td class="py-3 px-4">Fácil de gestionar, robusta a fallos individuales.</td>
+                                <td class="py-3 px-4">Punto central de fallo.</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">Malla</td>
+                                <td class="py-3 px-4">Múltiples conexiones directas.</td>
+                                <td class="py-3 px-4">Muy robusta, alta tolerancia a fallos.</td>
+                                <td class="py-3 px-4">Muy costosa, compleja.</td>
+                            </tr>
+                            <tr class="hover:bg-blue-50">
+                                <td class="py-3 px-4 font-semibold">Híbrida</td>
+                                <td class="py-3 px-4">Combinación de topologías.</td>
+                                <td class="py-3 px-4">Flexibilidad, escalabilidad.</td>
+                                <td class="py-3 px-4">Complejidad, costo.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-primary-blue text-white p-4 mt-12 text-center rounded-t-xl">
+        <div class="container mx-auto">
+            <p>&copy; 2025 Explorando Redes. Todos los derechos reservados.</p>
+            <p class="text-sm mt-2">Página educativa creada con fines de aprendizaje.</p>
+        </div>
+    </footer>
+</body>
+</html>
